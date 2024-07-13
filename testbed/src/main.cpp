@@ -1,15 +1,14 @@
-#include <core/log/logger.h>
+#include <core/window/window.h>
+#include <iostream>
 
 int main()
 {
-    using namespace Hydro;
+    Hydro::win::Window window(1280, 720, "Hydro Application");    
 
-    LOG_FATAL("Test: 1");
-    LOG_ERROR("Test: 2");
-    LOG_WARN("Test: 3");
-    LOG_INFO("Test: 4");
-    LOG_DEBUG("Test: 5");
-    LOG_TRACE("Test: 6");
+    while(true)
+    {
+        std::cout << "Running" << std::endl;
+    }
 
     return 0;
 }

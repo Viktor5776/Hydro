@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/engine/src/**",
-                "${VULKAN_SDK}/include"
+                "${VULKAN_SDK}/include",
+                "${workspaceFolder}/engine/third/SDL/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -21,7 +22,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/engine/src/**",
-                "${VULKAN_SDK}/include"
+                "${VULKAN_SDK}/include",
+                "${workspaceFolder}/engine/third/SDL/include"
             ],
             "defines": [
                 "_DEBUG",

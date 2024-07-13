@@ -1,13 +1,15 @@
-#include <core/logger.h>
+#include <core/log/logger.h>
 
 int main()
 {
-    HFATAL("Test: %d", 1);
-    HERROR("Test: %d", 2);
-    HWARN("Test: %d", 3);
-    HINFO("Test: %d", 4);
-    HDEBUG("Test: %d", 5);
-    HTRACE("Test: %d", 6);
+    using namespace Hydro;
+
+    LOG_FATAL("Test: 1");
+    LOG_ERROR("Test: 2");
+    LOG_WARN("Test: 3");
+    LOG_INFO("Test: 4");
+    LOG_DEBUG("Test: 5");
+    LOG_TRACE("Test: 6");
 
     return 0;
 }

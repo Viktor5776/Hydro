@@ -4,14 +4,14 @@
 
 struct SDL_Window;
 
-namespace Hydro::win
+namespace Hydro::app
 {
     class HAPI Window
     {
     public:
-        Window( int width = 1280, int height = 720, const std::string& title = "Hydro Application" );
+        Window( int width, int height, const std::string& title );
         ~Window();
     private:
-        SDL_Window* m_window;
+        SDL_Window* pWindow;
     };
 }

@@ -2,13 +2,13 @@
 #include "window.h"
 #include "../log/logger.h"
 
-namespace Hydro::win
+namespace Hydro::app
 {
     Window::Window( int width, int height, const std::string& title )
     {
-        m_window = SDL_CreateWindow( title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN );
+        pWindow = SDL_CreateWindow( title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN );
 
-        if( m_window == nullptr )
+        if( pWindow == nullptr )
         {
             LOG_FATAL( "Failed to create window: " + std::string( SDL_GetError() ) );
         }
@@ -16,7 +16,7 @@ namespace Hydro::win
 
     Window::~Window()
     {
-        SDL_DestroyWindow( m_window );
+        SDL_DestroyWindow( pWindow );
         SDL_Quit();
     }
 }

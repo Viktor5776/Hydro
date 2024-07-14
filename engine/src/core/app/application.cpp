@@ -1,12 +1,19 @@
 #include "application.h"
 #include <SDL2/SDL.h>
 
+#include <vulkan/vulkan.h>
+#include <iostream>
+
 namespace Hydro::app
 {
     Application::Application( int width, int height, const std::string& title )
         : 
         window( width, height, title )
     {
+        uint32_t extensionCount = 0;
+        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+
+        std::cout << extensionCount << " extensions supported\n";
     }
 
     void Application::Run()

@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/engine/src/**",
                 "${VULKAN_SDK}/include",
-                "${workspaceFolder}/engine/third/SDL/include"
+                "${workspaceFolder}/engine/third/SDL/include",
+                "${workspaceFolder}/engine/third"
             ],
             "defines": [
                 "_DEBUG",
@@ -23,7 +24,8 @@
             "includePath": [
                 "${workspaceFolder}/engine/src/**",
                 "${VULKAN_SDK}/include",
-                "${workspaceFolder}/engine/third/SDL/include"
+                "${workspaceFolder}/engine/third/SDL/include",
+                "${workspaceFolder}/engine/third"
             ],
             "defines": [
                 "_DEBUG",

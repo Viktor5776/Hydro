@@ -1,49 +1,18 @@
 #include "app.h"
-
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
 #include <iostream>
 
 App::App()
 {
-    //Initialize game here
+    glm::mat4 matrix(1.0f);
+    glm::vec4 vector(1.0f);
+    glm::vec4 result = matrix * vector;
+    std::cout << result.x << ", " << result.y << ", " << result.z << ", " << result.w << std::endl;
 }
 
 void App::Update()
 {
-    auto pos = mouse.GetPos();
-    std::string title;
-    title.append( "Mouse Position: " );
-    title.append( std::to_string( pos.x ) );
-    title.append( ", " );
-    title.append( std::to_string( pos.y ) );
-    window.SetTitle( title );
-
-    //Test mouse input
-    if( mouse.LeftIsDown() )
-    {
-        std::cout << "Left mouse button is down" << std::endl;
-    }
-    if( mouse.LeftIsUp() )
-    {
-        std::cout << "Left mouse button is up" << std::endl;
-    }
-
-    if( mouse.RightIsDown() )
-    {
-        std::cout << "Right mouse button is down" << std::endl;
-    }
-    if( mouse.RightIsUp() )
-    {
-        std::cout << "Right mouse button is up" << std::endl;
-    }
-
-    if( mouse.MiddleIsDown() )
-    {
-        std::cout << "Middle mouse button is down" << std::endl;
-    }
-    if( mouse.MiddleIsUp() )
-    {
-        std::cout << "Middle mouse button is up" << std::endl;
-    }
     
 }
 

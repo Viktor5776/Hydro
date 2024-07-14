@@ -12,7 +12,7 @@ echo "Files:" %cppFilenames%
 
 SET assembly=engine
 SET compilerFlags=-g -shared -Wvarargs -Wall -Werror -std=c++23
-SET includeFlags=-Isrc -I%VULKAN_SDK%/Include -Ithird/SDL/include
+SET includeFlags=-Isrc -I%VULKAN_SDK%/Include -Ithird/SDL/include -Ithird
 SET linkerFlags=-luser32 -lvulkan-1 -L%VULKAN_SDK%/Lib -Lthird/SDL/lib/x64 -lSDL2main -lSDL2 -lmsvcrtd 
 SET defines=-D_DEBUG -DHEXPORT -D_CRT_SECURE_NO_WARNINGS
 

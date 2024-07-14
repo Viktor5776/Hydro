@@ -27,15 +27,18 @@ namespace Hydro::app
                     case SDL_KEYUP:
                         keyboard.HandleEvent( event );
                         break;
+                    case SDL_MOUSEBUTTONDOWN:
+                    case SDL_MOUSEBUTTONUP:
+                    case SDL_MOUSEMOTION:
+                        mouse.HandelEvent( event );
+                        break;
                 }
-                
-                
-                //TODO: Handle events mouse input
             }
             
             Update();
             Render();
             keyboard.EndFrame();
+            mouse.EndFrame();
         }
     }
 }

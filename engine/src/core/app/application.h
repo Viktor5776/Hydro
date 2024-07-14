@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "window.h"
 #include "keyboard.h"
+#include "mouse.h"
 #include <string>
 
 
@@ -19,5 +20,6 @@ namespace Hydro::app
     protected:
         Window window;
         Keyboard keyboard;
+        Mouse mouse;
     };
 }

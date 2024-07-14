@@ -11,6 +11,7 @@ namespace Hydro::app
     public:
         Window( int width, int height, const std::string& title );
         ~Window();
+        void SetTitle( const std::string& title );
     private:
         SDL_Window* pWindow;
     };

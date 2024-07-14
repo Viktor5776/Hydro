@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-
 App::App()
 {
     //Initialize game here
@@ -10,66 +9,47 @@ App::App()
 
 void App::Update()
 {
-    if( keyboard.KeyIsDown( Hydro::app::KeyCode::ESCAPE))
+    auto pos = mouse.GetPos();
+    std::string title;
+    title.append( "Mouse Position: " );
+    title.append( std::to_string( pos.x ) );
+    title.append( ", " );
+    title.append( std::to_string( pos.y ) );
+    window.SetTitle( title );
+
+    //Test mouse input
+    if( mouse.LeftIsDown() )
     {
-        std::cout << "Escape" << std::endl;
+        std::cout << "Left mouse button is down" << std::endl;
+    }
+    if( mouse.LeftIsUp() )
+    {
+        std::cout << "Left mouse button is up" << std::endl;
     }
 
-    if( keyboard.GetKey( Hydro::app::KeyCode::SPACE))
+    if( mouse.RightIsDown() )
     {
-        std::cout << "Space" << std::endl;
+        std::cout << "Right mouse button is down" << std::endl;
+    }
+    if( mouse.RightIsUp() )
+    {
+        std::cout << "Right mouse button is up" << std::endl;
     }
 
-    if( keyboard.KeyIsDown( Hydro::app::KeyCode::CAPSLOCK))
+    if( mouse.MiddleIsDown() )
     {
-        std::cout << "Caps" << std::endl;
+        std::cout << "Middle mouse button is down" << std::endl;
     }
-
-    if( keyboard.KeyIsDown( Hydro::app::KeyCode::F8))
+    if( mouse.MiddleIsUp() )
     {
-        std::cout << "F8" << std::endl;
-    }
-
-    if( keyboard.KeyIsDown( Hydro::app::KeyCode::LCTRL))
-    {
-        std::cout << "Left Control" << std::endl;
-    }
-
-    if( keyboard.KeyIsDown( Hydro::app::KeyCode::RCTRL))
-    {
-        std::cout << "Right Control" << std::endl;
-    }
-
-    if( keyboard.KeyIsDown( Hydro::app::KeyCode::LALT))
-    {
-        std::cout << "Left Alt" << std::endl;
-    }
-
-    if( keyboard.KeyIsDown( Hydro::app::KeyCode::RALT))
-    {
-        std::cout << "Right Alt" << std::endl;
-    }
-
-    if( keyboard.KeyIsDown( Hydro::app::KeyCode::LSHIFT))
-    {
-        std::cout << "Left Shift" << std::endl;
+        std::cout << "Middle mouse button is up" << std::endl;
     }
     
-    if( keyboard.KeyIsDown( Hydro::app::KeyCode::RSHIFT))
-    {
-        std::cout << "Right Shift" << std::endl;
-    }
-
-    if( keyboard.KeyIsDown('W'))
-    {
-        std::cout << "W" << std::endl;
-    
-    }
 }
 
 void App::Render()
 {
-    //Implement Graphics rendering here
+    //Implement Graphics rendering here 
 }
 
 Hydro::app::Application* CreateApplication()

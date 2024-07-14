@@ -19,4 +19,9 @@ namespace Hydro::app
         SDL_DestroyWindow( pWindow );
         SDL_Quit();
     }
+
+    void Window::SetTitle( const std::string& title )
+    {
+        SDL_SetWindowTitle( pWindow, title.c_str() );
+    }
 }

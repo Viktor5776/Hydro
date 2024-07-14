@@ -12,22 +12,30 @@ namespace Hydro::app
     void Application::Run()
     {
         bool running = true;
-        SDL_Event event;
-
+        
         while( running )
         {
+            SDL_Event event;
             while( SDL_PollEvent( &event ) )
             {
-                if( event.type == SDL_QUIT )
+                switch( event.type )
                 {
-                    running = false;
+                    case SDL_QUIT:
+                        running = false;
+                        break;
+                    case SDL_KEYDOWN:
+                    case SDL_KEYUP:
+                        keyboard.HandleEvent( event );
+                        break;
                 }
                 
-                //TODO: Handle more events for keybord input and mouse input)
+                
+                //TODO: Handle events mouse input
             }
-
+            
             Update();
             Render();
+            keyboard.EndFrame();
         }
     }
 }

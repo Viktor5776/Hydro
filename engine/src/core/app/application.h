@@ -1,6 +1,7 @@
 #pragma once
 #include "defines.h"
 #include "window.h"
+#include "keyboard.h"
 #include <string>
 
 
@@ -17,5 +18,6 @@ namespace Hydro::app
         virtual void Render() = 0;
     protected:
         Window window;
+        Keyboard keyboard;
     };
 }

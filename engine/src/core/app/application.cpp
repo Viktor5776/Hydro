@@ -10,10 +10,6 @@ namespace Hydro::app
         : 
         window( width, height, title )
     {
-        uint32_t extensionCount = 0;
-        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-
-        std::cout << extensionCount << " extensions supported\n";
     }
 
     void Application::Run()

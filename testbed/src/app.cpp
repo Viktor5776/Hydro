@@ -2,13 +2,11 @@
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 #include <iostream>
+#include <core/gfx/GraphicsFactory.h>
 
 App::App()
 {
-    glm::mat4 matrix(1.0f);
-    glm::vec4 vector(1.0f);
-    glm::vec4 result = matrix * vector;
-    std::cout << result.x << ", " << result.y << ", " << result.z << ", " << result.w << std::endl;
+    pGraphics = CREATE_VULKAN_GRAPHICS;
 }
 
 void App::Update()
@@ -19,6 +17,7 @@ void App::Update()
 void App::Render()
 {
     //Implement Graphics rendering here 
+    pGraphics->Render();
 }
 
 Hydro::app::Application* CreateApplication()

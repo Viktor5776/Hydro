@@ -3,7 +3,9 @@
 #include "window.h"
 #include "keyboard.h"
 #include "mouse.h"
+#include "../gfx/IGraphics.h"
 #include <string>
+#include <memory>
 
 
 namespace Hydro::app
@@ -21,5 +23,6 @@ namespace Hydro::app
         Window window;
         Keyboard keyboard;
         Mouse mouse;
+        std::unique_ptr<gfx::IGraphics> pGraphics;
     };
 }

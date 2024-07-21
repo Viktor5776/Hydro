@@ -133,6 +133,8 @@
         "iomanip": "cpp",
         "queue": "cpp",
         "ranges": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "cstdarg": "cpp",
+        "functional": "cpp"
     }
 }

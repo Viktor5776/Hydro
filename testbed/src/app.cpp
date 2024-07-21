@@ -5,13 +5,15 @@
 #include <core/gfx/GraphicsFactory.h>
 
 App::App()
+    :
+    Application( WIDTH, HEIGHT, "Testbed" )
 {
-    pGraphics = CREATE_VULKAN_GRAPHICS;
+    pGraphics = CREATE_VULKAN_GRAPHICS( window );
 }
 
 void App::Update()
 {
-    
+
 }
 
 void App::Render()

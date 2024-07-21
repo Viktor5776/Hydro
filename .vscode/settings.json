@@ -135,6 +135,11 @@
         "ranges": "cpp",
         "xhash": "cpp",
         "cstdarg": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "condition_variable": "cpp",
+        "coroutine": "cpp",
+        "resumable": "cpp",
+        "future": "cpp",
+        "semaphore": "cpp"
     }
 }

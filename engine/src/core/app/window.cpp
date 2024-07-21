@@ -6,7 +6,13 @@ namespace Hydro::app
 {
     Window::Window( int width, int height, const std::string& title )
     {
-        pWindow = SDL_CreateWindow( title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN );
+        if( SDL_Init( SDL_INIT_VIDEO ) != 0)
+        {
+            LOG_FATAL( "Failed to initialize SDL: " + std::string( SDL_GetError() ) );
+        }
+
+        //TODO: Change the Vulkan flag to only be used when using Vulkan backend
+        pWindow = SDL_CreateWindow( title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_VULKAN );
 
         if( pWindow == nullptr )
         {

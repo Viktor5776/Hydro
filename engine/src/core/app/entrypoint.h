@@ -1,6 +1,7 @@
 #pragma once
 #include "application.h"
 #include <iostream>
+#include <stdexcept>
 
 extern Hydro::app::Application* CreateApplication();
 

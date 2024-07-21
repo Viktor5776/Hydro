@@ -11,7 +11,7 @@ FOR /R %%f in (*.cpp) do (
 echo "Files:" %cppFilenames%
 
 SET assembly=testbed
-SET compilerFlags=-g -std=c++23 -v
+SET compilerFlags=-g -std=c++23
 REM -Wall -Werror
 SET includeFlags=-Isrc -I../engine/src/ -I../engine/third
 SET linkerFlags=-L../bin/ -lengine.lib -lmsvcrtd 

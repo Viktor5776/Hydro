@@ -4,18 +4,25 @@
 #include <SDL2/SDL_vulkan.h>
 #include <memory>
 
-#include <vector>
-
 namespace Hydro::gfx
 {
     VulkanGraphics::VulkanGraphics( app::Window& window )
     {
         pWindow = window.GetWindow();
         CreateInstance();
+
+        #ifdef _DEBUG
+            std::cout << "Debug Build Created" << std::endl;
+        #else
+            std::cout << "Release Build Created" << std::endl;
+        #endif
+        
+
     }
 
     VulkanGraphics::~VulkanGraphics()
     {
+        //NOTE: everything created with the instance need to be destoryed before the instance is destroyed
         vkDestroyInstance(instance, nullptr);
     }
 

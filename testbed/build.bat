@@ -8,14 +8,30 @@ FOR /R %%f in (*.cpp) do (
     SET cppFilenames=!cppFilenames! %%f
 )
 
-echo "Files:" %cppFilenames%
+echo "Files:" !cppFilenames!
 
 SET assembly=testbed
-SET compilerFlags=-g -std=c++23
-REM -Wall -Werror
-SET includeFlags=-Isrc -I../engine/src/ -I../engine/third
-SET linkerFlags=-L../bin/ -lengine.lib -lmsvcrtd 
-SET defines=-D_DEBUG -DHIMPORT
+SET compilerFlags=-Wall -Werror -std=c++23
+SET includeFlags=-Isrc -I..\engine\src -I..\engine\third
+SET linkerFlags=-lengine -lmsvcrtd
+SET defines=-DHIMPORT
 
-ECHO "Building %assembly%%..."
-clang++ %cppFilenames% %compilerFlags% -o ../bin/%assembly%.exe %defines% %includeFlags% %linkerFlags%
+IF "%1" == "release" (
+    SET compilerFlags=!compilerFlags! -O3
+    SET outputPath=..\bin\release
+    SET linkerFlags=!linkerFlags! -L..\bin\release
+    ECHO "Building release version of !assembly!..."
+) ELSE (
+    SET compilerFlags=!compilerFlags! -g
+    SET outputPath=..\bin\debug
+    SET linkerFlags=!linkerFlags! -L..\bin\debug
+    SET defines=!defines! -D_DEBUG
+    ECHO "Building debug version of !assembly!..."
+)
+
+REM Create the output directory if it does not exist
+IF NOT EXIST "!outputPath!" (
+    mkdir "!outputPath!"
+)
+
+clang++ !cppFilenames! !compilerFlags! -o "!outputPath!\%assembly%.exe" !defines! %includeFlags% !linkerFlags!

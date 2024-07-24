@@ -5,25 +5,26 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(Windows) Launch",
+            "name": "(Windows) Debug Launch",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/testbed.exe",
+            "program": "${workspaceFolder}/bin/debug/testbed.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/bin/",
+            "cwd": "${workspaceFolder}/bin/debug",
             "environment": [],
             "console":"newExternalWindow",
         },
         {
-            "name": "(Linux) Launch",
-            "type": "cppdbg",
+            "name": "(Windows) Release Launch",
+            "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/testbed",
+            "program": "${workspaceFolder}/bin/release/testbed.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/bin/",
+            "cwd": "${workspaceFolder}/bin/release",
             "environment": [],
+            "console":"newExternalWindow",
         }
     ]
 }

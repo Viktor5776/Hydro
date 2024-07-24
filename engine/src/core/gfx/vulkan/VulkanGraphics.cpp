@@ -10,14 +10,9 @@ namespace Hydro::gfx
     {
         pWindow = window.GetWindow();
         CreateInstance();
-
         #ifdef _DEBUG
-            std::cout << "Debug Build Created" << std::endl;
-        #else
-            std::cout << "Release Build Created" << std::endl;
+            debugMessenger = std::make_unique<VulkanDebuger>(instance);
         #endif
-        
-
     }
 
     VulkanGraphics::~VulkanGraphics()
@@ -28,11 +23,19 @@ namespace Hydro::gfx
 
     void VulkanGraphics::Render()
     {
+        
     }
 
     //Private
     void VulkanGraphics::CreateInstance()
     {
+        #ifdef _DEBUG
+            if( !VulkanDebuger::CheckValidationLayerSupport() )
+            {
+                throw std::runtime_error("Validation layers requested, but not available!");
+            }
+        #endif
+
         VkApplicationInfo appInfo = {};
         appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
         appInfo.pApplicationName = "Testbed";
@@ -50,16 +53,28 @@ namespace Hydro::gfx
         {
             throw std::runtime_error("Failed to get required instance extensions");
         }
-
-        auto sdlExtensions = std::unique_ptr<const char*[]>(new const char*[sdlExtensionCount]);
-        if (!SDL_Vulkan_GetInstanceExtensions(pWindow, &sdlExtensionCount, sdlExtensions.get())) 
+        std::vector<const char*> sdlExtensions(sdlExtensionCount);
+        
+        if (!SDL_Vulkan_GetInstanceExtensions(pWindow, &sdlExtensionCount, sdlExtensions.data())) 
         {
             throw std::runtime_error("Failed to get required instance extensions");
         }
 
+        #ifdef _DEBUG
+            sdlExtensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+            sdlExtensionCount += 1;
+        #endif
+
         createInfo.enabledExtensionCount = sdlExtensionCount;
-        createInfo.ppEnabledExtensionNames = sdlExtensions.get();
-        createInfo.enabledLayerCount = 0;
+        createInfo.ppEnabledExtensionNames = sdlExtensions.data();
+
+        #ifdef _DEBUG
+            auto validationLayers = VulkanDebuger::GetValidationLayers();
+            createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+            createInfo.ppEnabledLayerNames = validationLayers.data();
+        #else
+            createInfo.enabledLayerCount = 0;
+        #endif
 
         if( vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS )
         {

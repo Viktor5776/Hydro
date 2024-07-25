@@ -140,6 +140,7 @@
         "coroutine": "cpp",
         "resumable": "cpp",
         "future": "cpp",
-        "semaphore": "cpp"
+        "semaphore": "cpp",
+        "random": "cpp"
     }
 }

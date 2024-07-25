@@ -11,6 +11,7 @@ int main()
     {
         auto app = CreateApplication();
         app->Run();
+        delete app;
     }
     catch( const std::exception& e )
     {
@@ -18,5 +19,7 @@ int main()
         system("pause");
         return 1;
     }
+
     return 0;
 }
+

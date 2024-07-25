@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <memory>
 #include "VulkanDebuger.h"
+#include "VulkanInstance.h"
 
 namespace Hydro::gfx
 {
@@ -14,13 +15,11 @@ namespace Hydro::gfx
         ~VulkanGraphics() override;
         void Render() override;
     private:
-        void CreateInstance();
-    private:
         SDL_Window* pWindow;
-        VkInstance instance; //TODO: Make this into its own class to and make it a shared pointer so it will be destoryed when no one is using it
 
         #ifdef _DEBUG
             std::unique_ptr<VulkanDebuger> debugMessenger;
         #endif
+        std::shared_ptr<VulkanInstance> instance;
     };
 }

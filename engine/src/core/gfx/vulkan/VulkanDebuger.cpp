@@ -4,7 +4,7 @@
 
 namespace Hydro::gfx
 {
-    VulkanDebuger::VulkanDebuger( VkInstance instance )
+    VulkanDebuger::VulkanDebuger( std::shared_ptr<VulkanInstance> instance )
         :
         instance(instance)
     {
@@ -24,10 +24,10 @@ namespace Hydro::gfx
         createInfo.pfnUserCallback = DebugCallback;
         createInfo.pUserData = nullptr;
 
-        auto func = (PFN_vkCreateDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+        auto func = (PFN_vkCreateDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance->GetInstance(), "vkCreateDebugUtilsMessengerEXT");
         if (func != nullptr) 
         {
-            if( func(instance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS )
+            if( func(instance->GetInstance(), &createInfo, nullptr, &debugMessenger) != VK_SUCCESS )
             {
                 throw std::runtime_error("Failed to set up debug messenger");
             }
@@ -40,9 +40,9 @@ namespace Hydro::gfx
 
     VulkanDebuger::~VulkanDebuger()
     {
-        auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+        auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance->GetInstance(), "vkDestroyDebugUtilsMessengerEXT");
         if (func != nullptr) {
-            func(instance, debugMessenger, nullptr);
+            func(instance->GetInstance(), debugMessenger, nullptr);
         }
     }
 

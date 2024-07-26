@@ -5,6 +5,7 @@
 #include <memory>
 #include "VulkanDebuger.h"
 #include "VulkanInstance.h"
+#include "VulkanPhysicalDevice.h"
 
 namespace Hydro::gfx
 {
@@ -16,10 +17,12 @@ namespace Hydro::gfx
         void Render() override;
     private:
         SDL_Window* pWindow;
+        std::shared_ptr<VulkanInstance> instance;
+        std::unique_ptr<VulkanPhysicalDevice> physicalDevice;
+
 
         #ifdef _DEBUG
             std::unique_ptr<VulkanDebuger> debugMessenger;
         #endif
-        std::shared_ptr<VulkanInstance> instance;
     };
 }

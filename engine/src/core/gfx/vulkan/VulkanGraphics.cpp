@@ -8,6 +8,7 @@ namespace Hydro::gfx
     {
         pWindow = window.GetWindow();
         instance = std::make_shared<VulkanInstance>(pWindow);
+        physicalDevice = std::make_unique<VulkanPhysicalDevice>(instance->GetInstance());
 
         #ifdef _DEBUG
             debugMessenger = std::make_unique<VulkanDebuger>(instance);

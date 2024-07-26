@@ -4,8 +4,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_vulkan.h>
 
-#include "../../log/logger.h"
-
 namespace Hydro::gfx
 {
     VulkanInstance::VulkanInstance( SDL_Window* pWindow )
@@ -65,7 +63,6 @@ namespace Hydro::gfx
 
     VulkanInstance::~VulkanInstance()
     {
-        LOG_INFO("Destroying Vulkan instance");
         vkDestroyInstance(instance, nullptr);
     }
 

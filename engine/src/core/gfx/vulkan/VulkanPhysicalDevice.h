@@ -21,9 +21,10 @@ namespace Hydro::gfx
     public:
         VulkanPhysicalDevice( VkInstance instance );
         VkPhysicalDevice GetPhysicalDevice() const;
+        QueueFamilyIndices FindQueueFamilies();
     private:
-        bool IsDeviceSuitable( VkPhysicalDevice device );
         QueueFamilyIndices FindQueueFamilies( VkPhysicalDevice device );
+        bool IsDeviceSuitable( VkPhysicalDevice device );
     private:
         VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
     };

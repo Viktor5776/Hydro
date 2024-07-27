@@ -47,6 +47,11 @@ namespace Hydro::gfx
         return indices.isComplete();
     }
 
+    QueueFamilyIndices VulkanPhysicalDevice::FindQueueFamilies()
+    {
+        return FindQueueFamilies( physicalDevice );
+    }
+
     QueueFamilyIndices VulkanPhysicalDevice::FindQueueFamilies( VkPhysicalDevice device )
     {
         QueueFamilyIndices indices;

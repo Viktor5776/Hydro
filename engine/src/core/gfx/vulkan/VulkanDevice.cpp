@@ -27,9 +27,11 @@ namespace Hydro::gfx
         createInfo.pEnabledFeatures = &deviceFeatures;
 
         createInfo.enabledExtensionCount = 0;
+        
         #ifdef _DEBUG
-            createInfo.enabledLayerCount = static_cast<uint32_t>(VulkanDebuger::GetValidationLayers().size());
-            createInfo.ppEnabledLayerNames = VulkanDebuger::GetValidationLayers().data();
+            auto validationLayers = VulkanDebuger::GetValidationLayers();
+            createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+            createInfo.ppEnabledLayerNames = validationLayers.data();
         #else
             createInfo.enabledLayerCount = 0;
         #endif

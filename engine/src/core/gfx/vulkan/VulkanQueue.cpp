@@ -2,7 +2,7 @@
 
 namespace Hydro::gfx
 {
-    VulkanQueue::VulkanQueue( VulkanDevice device, uint32_t queueIndex )
+    VulkanQueue::VulkanQueue( VulkanDevice& device, uint32_t queueIndex )
     {
         vkGetDeviceQueue( device.GetDevice(), device.GetQueueFamilyIndex(), queueIndex, &queue );
     }

@@ -41,10 +41,9 @@ namespace Hydro::gfx
 
         #ifdef _DEBUG
             sdlExtensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-            sdlExtensionCount += 1;
         #endif
 
-        createInfo.enabledExtensionCount = sdlExtensionCount;
+        createInfo.enabledExtensionCount = static_cast<uint32_t>(sdlExtensions.size());
         createInfo.ppEnabledExtensionNames = sdlExtensions.data();
 
         #ifdef _DEBUG

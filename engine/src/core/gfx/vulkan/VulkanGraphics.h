@@ -8,7 +8,7 @@
 #include "VulkanPhysicalDevice.h"
 #include "VulkanDevice.h"
 #include "VulkanQueue.h"
-
+#include "VulkanSurface.h"
 
 namespace Hydro::gfx
 {
@@ -22,8 +22,9 @@ namespace Hydro::gfx
         SDL_Window* pWindow;
         std::shared_ptr<VulkanInstance> instance;
         std::unique_ptr<VulkanPhysicalDevice> physicalDevice;
-        std::unique_ptr<VulkanDevice> device;
         std::unique_ptr<VulkanQueue> graphicsQueue;
+        std::unique_ptr<VulkanDevice> device;
+        std::unique_ptr<VulkanSurface> surface;
 
         #ifdef _DEBUG
             std::unique_ptr<VulkanDebuger> debugMessenger;

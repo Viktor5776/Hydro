@@ -7,7 +7,7 @@ namespace Hydro::gfx
     class VulkanQueue
     {
     public:
-        VulkanQueue( VulkanDevice device, uint32_t queueIndex );
+        VulkanQueue( VulkanDevice& device, uint32_t queueIndex );
         VkQueue GetQueue() const;
     private:
         VkQueue queue;

@@ -10,9 +10,9 @@ namespace Hydro::gfx
         VulkanDevice( VulkanPhysicalDevice& physicalDevice );
         ~VulkanDevice();
         VkDevice GetDevice() const;
-        uint32_t GetQueueFamilyIndex() const;
+        QueueFamilyIndices GetQueueFamilyIndex() const;
     private:
         VkDevice device;
-        uint32_t queueFamilyIndex;
+        QueueFamilyIndices queueFamilyIndices;
     };
 }

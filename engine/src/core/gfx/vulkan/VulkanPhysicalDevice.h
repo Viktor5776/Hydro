@@ -1,31 +1,20 @@
 #pragma once
 #include <vulkan/vulkan.h>
-
-
-#include <optional>
+#include "VulkanQueue.h"
 
 namespace Hydro::gfx
 {
-    //NOTE: Queue shold probebly have its own file/class
-    struct QueueFamilyIndices
-    {
-        std::optional<uint32_t> graphicsFamily;
-
-        bool isComplete() {
-            return graphicsFamily.has_value();
-        }
-    };
 
     class VulkanPhysicalDevice
     {
     public:
-        VulkanPhysicalDevice( VkInstance instance );
+        VulkanPhysicalDevice( VkInstance instance, VkSurfaceKHR surface );
         VkPhysicalDevice GetPhysicalDevice() const;
         QueueFamilyIndices FindQueueFamilies();
     private:
-        QueueFamilyIndices FindQueueFamilies( VkPhysicalDevice device );
         bool IsDeviceSuitable( VkPhysicalDevice device );
     private:
+        VkSurfaceKHR surface = VK_NULL_HANDLE;
         VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
     };
 }

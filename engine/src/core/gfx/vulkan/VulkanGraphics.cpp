@@ -8,10 +8,11 @@ namespace Hydro::gfx
     {
         pWindow = window.GetWindow();
         instance = std::make_shared<VulkanInstance>(pWindow);
-        physicalDevice = std::make_unique<VulkanPhysicalDevice>(instance->GetInstance());
-        device = std::make_unique<VulkanDevice>(*physicalDevice);
-        graphicsQueue = std::make_unique<VulkanQueue>(*device, 0);
         surface = std::make_unique<VulkanSurface>(instance, pWindow);
+        physicalDevice = std::make_unique<VulkanPhysicalDevice>(instance->GetInstance(), surface->GetSurface());
+        device = std::make_unique<VulkanDevice>(*physicalDevice);
+        graphicsQueue = std::make_unique<VulkanQueue>(*device, 0, 0);
+        presentQueue = std::make_unique<VulkanQueue>(*device, 0, 1);
 
         #ifdef _DEBUG
             debugMessenger = std::make_unique<VulkanDebuger>(instance);

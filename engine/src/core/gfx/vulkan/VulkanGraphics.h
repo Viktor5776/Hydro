@@ -21,10 +21,11 @@ namespace Hydro::gfx
     private:
         SDL_Window* pWindow;
         std::shared_ptr<VulkanInstance> instance;
-        std::unique_ptr<VulkanPhysicalDevice> physicalDevice;
-        std::unique_ptr<VulkanQueue> graphicsQueue;
-        std::unique_ptr<VulkanDevice> device;
         std::unique_ptr<VulkanSurface> surface;
+        std::unique_ptr<VulkanPhysicalDevice> physicalDevice;
+        std::unique_ptr<VulkanDevice> device;
+        std::unique_ptr<VulkanQueue> graphicsQueue;
+        std::unique_ptr<VulkanQueue> presentQueue;
 
         #ifdef _DEBUG
             std::unique_ptr<VulkanDebuger> debugMessenger;

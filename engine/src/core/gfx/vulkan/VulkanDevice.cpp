@@ -35,7 +35,9 @@ namespace Hydro::gfx
         createInfo.pQueueCreateInfos = queueCreateInfos.data();
         createInfo.pEnabledFeatures = &deviceFeatures;
 
-        createInfo.enabledExtensionCount = 0;
+        auto deviceExtensions = VulkanPhysicalDevice::GetDeviceExtensions();
+        createInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
+        createInfo.ppEnabledExtensionNames = deviceExtensions.data();
         
         #ifdef _DEBUG
             auto validationLayers = VulkanDebuger::GetValidationLayers();

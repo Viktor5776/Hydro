@@ -9,6 +9,7 @@
 #include "VulkanDevice.h"
 #include "VulkanQueue.h"
 #include "VulkanSurface.h"
+#include "VulkanSwapChain.h"
 
 namespace Hydro::gfx
 {
@@ -23,9 +24,10 @@ namespace Hydro::gfx
         std::shared_ptr<VulkanInstance> instance;
         std::unique_ptr<VulkanSurface> surface;
         std::unique_ptr<VulkanPhysicalDevice> physicalDevice;
-        std::unique_ptr<VulkanDevice> device;
+        std::shared_ptr<VulkanDevice> device;
         std::unique_ptr<VulkanQueue> graphicsQueue;
         std::unique_ptr<VulkanQueue> presentQueue;
+        std::unique_ptr<VulkanSwapChain> swapChain;
 
         #ifdef _DEBUG
             std::unique_ptr<VulkanDebuger> debugMessenger;

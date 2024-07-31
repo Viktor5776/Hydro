@@ -1,6 +1,7 @@
 #include "VulkanPhysicalDevice.h"
-#include <vector>
 #include <stdexcept>
+#include <set>
+#include "VulkanSwapChain.h"
 
 namespace Hydro::gfx
 {
@@ -40,12 +41,45 @@ namespace Hydro::gfx
         return physicalDevice; 
     }
 
+    const std::vector<const char*> VulkanPhysicalDevice::GetDeviceExtensions()
+    {
+        return { VK_KHR_SWAPCHAIN_EXTENSION_NAME };
+    }
+
     bool VulkanPhysicalDevice::IsDeviceSuitable( VkPhysicalDevice device )
     {
         //NOTE: May want to use a score system to determine the best device
         QueueFamilyIndices indices = Hydro::gfx::FindQueueFamilies(device, surface);
 
-        return indices.isComplete();
+        bool extensionsSupported = CheckDeviceExtensionSupport(device);
+
+        bool swapChainAdequate = false;
+        if( extensionsSupported )
+        {
+            SwapChainSupportDetails swapChainSupport = Hydro::gfx::QuerySwapChainSupport(device, surface);
+            swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
+        }
+
+        return indices.isComplete() && extensionsSupported && swapChainAdequate;
+    }
+
+    bool VulkanPhysicalDevice::CheckDeviceExtensionSupport( VkPhysicalDevice device )
+    {
+        uint32_t extensionCount;
+        vkEnumerateDeviceExtensionProperties( device, nullptr, &extensionCount, nullptr );
+
+        std::vector<VkExtensionProperties> availableExtensions( extensionCount );
+        vkEnumerateDeviceExtensionProperties( device, nullptr, &extensionCount, availableExtensions.data() );
+
+        auto requiredExtensions = GetDeviceExtensions();
+        std::set<std::string> requiredExtensionsSet( requiredExtensions.begin(), requiredExtensions.end() );
+
+        for( const auto& extension : availableExtensions )
+        {
+            requiredExtensionsSet.erase( extension.extensionName );
+        }
+
+        return requiredExtensionsSet.empty();
     }
 
     QueueFamilyIndices VulkanPhysicalDevice::FindQueueFamilies()

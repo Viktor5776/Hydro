@@ -33,6 +33,7 @@ namespace Hydro::gfx
         std::shared_ptr<VulkanDevice> device;
         VkSwapchainKHR swapChain;
         std::vector<VkImage> swapChainImages;
+        std::vector<VkImageView> swapChainImageViews;
         VkFormat swapChainImageFormat;
         VkExtent2D swapChainExtent;
     };

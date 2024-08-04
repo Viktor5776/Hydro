@@ -8,8 +8,6 @@ FOR /R %%f in (*.cpp) do (
     SET cppFilenames=!cppFilenames! %%f
 )
 
-echo "Files:" !cppFilenames!
-
 SET assembly=testbed
 SET compilerFlags=-Wall -Werror -std=c++23
 SET includeFlags=-Isrc -I..\engine\src -I..\engine\third
@@ -34,4 +32,4 @@ IF NOT EXIST "!outputPath!" (
     mkdir "!outputPath!"
 )
 
-clang++ !cppFilenames! !compilerFlags! -o "!outputPath!\%assembly%.exe" !defines! %includeFlags% !linkerFlags!
+clang++ !cppFilenames! !compilerFlags! -o "!outputPath!\%assembly%.exe" !defines! %includeFlags% !linkerFlags! -Wl,/IGNORE:4098

@@ -8,8 +8,6 @@ FOR /R %%f in (*.cpp) do (
     SET cppFilenames=!cppFilenames! %%f
 )
 
-echo "Files:" !cppFilenames!
-
 SET assembly=engine
 SET compilerFlags=-shared -Wall -Werror -std=c++23
 SET includeFlags=-Isrc -I%VULKAN_SDK%\Include -Ithird\SDL\include -Ithird
@@ -32,4 +30,26 @@ IF NOT EXIST "!outputPath!" (
     mkdir !outputPath!
 )
 
-clang++ !cppFilenames! !compilerFlags! -o !outputPath!\%assembly%.dll !defines! %includeFlags% %linkerFlags%
+clang++ !cppFilenames! !compilerFlags! -o !outputPath!\%assembly%.dll !defines! %includeFlags% %linkerFlags% -Wl,/IGNORE:4098
+
+REM  Shaders compilation
+echo "Compiling Vulkan Shaders..."
+
+REM Maybe need to find a better way of getting the shader files
+SET vulkanShaderPath=src\core\gfx\vulkan\shaders
+REM May need to add specific folder for each API
+SET shaderOutputPath=!outputPath!\shaders
+
+IF NOT EXIST "!shaderOutputPath!" (
+    mkdir !shaderOutputPath!
+)
+
+FOR /R %%f in (!vulkanShaderPath!\*.vert) do (
+    %VULKAN_SDK%\Bin\glslc.exe %%f -o !shaderOutputPath!\%%~nf.spv
+)
+
+FOR /R %%f in (!vulkanShaderPath!\*.frag) do (
+    %VULKAN_SDK%\Bin\glslc.exe %%f -o !shaderOutputPath!\%%~nf.spv
+)
+
+echo "Finshed Compiling Vulkan Shaders."

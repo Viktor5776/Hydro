@@ -14,7 +14,8 @@ namespace Hydro::gfx
         graphicsQueue = std::make_unique<VulkanQueue>(*device, 0, 0);
         presentQueue = std::make_unique<VulkanQueue>(*device, 0, 1);
         swapChain = std::make_unique<VulkanSwapChain>(device, *physicalDevice, *surface, pWindow);
-        graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device);
+        renderPass = std::make_unique<VulkanRenderPass>(device, swapChain->GetSwapChainImageFormat());
+        graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, *swapChain, *renderPass);
 
         #ifdef _DEBUG
             debugMessenger = std::make_unique<VulkanDebuger>(instance);

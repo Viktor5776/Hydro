@@ -180,4 +180,14 @@ namespace Hydro::gfx
             return actualExtent;
         }
     }
+
+    VkExtent2D VulkanSwapChain::GetSwapChainExtent() const
+    {
+        return swapChainExtent;
+    }
+
+    VkFormat VulkanSwapChain::GetSwapChainImageFormat() const
+    {
+        return swapChainImageFormat;
+    }
 }

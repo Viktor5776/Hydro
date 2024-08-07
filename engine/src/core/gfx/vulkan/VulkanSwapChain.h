@@ -29,6 +29,8 @@ namespace Hydro::gfx
         VulkanSwapChain( std::shared_ptr<VulkanDevice> device, VulkanPhysicalDevice& physicalDevice, VulkanSurface& surface, SDL_Window* window );
         ~VulkanSwapChain();
         VkSwapchainKHR GetSwapChain() const;
+        VkExtent2D GetSwapChainExtent() const;
+        VkFormat GetSwapChainImageFormat() const;
     private:
         std::shared_ptr<VulkanDevice> device;
         VkSwapchainKHR swapChain;

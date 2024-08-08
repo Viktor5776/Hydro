@@ -190,4 +190,9 @@ namespace Hydro::gfx
     {
         return swapChainImageFormat;
     }
+
+    std::vector<VkImageView>&  VulkanSwapChain::GetSwapChainImageViews()
+    {
+        return swapChainImageViews;
+    }
 }

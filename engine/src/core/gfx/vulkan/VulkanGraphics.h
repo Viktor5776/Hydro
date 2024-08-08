@@ -12,6 +12,8 @@
 #include "VulkanSwapChain.h"
 #include "VulkanGraphicsPipeline.h"
 #include "VulkanRenderPass.h"
+#include "VulkanFramebuffer.h"
+
 
 namespace Hydro::gfx
 {
@@ -32,6 +34,7 @@ namespace Hydro::gfx
         std::unique_ptr<VulkanSwapChain> swapChain;
         std::unique_ptr<VulkanRenderPass> renderPass;
         std::unique_ptr<VulkanGraphicsPipeline> graphicsPipeline;
+        std::unique_ptr<VulkanFramebuffer> swapChainFramebuffers;
 
         #ifdef _DEBUG
             std::unique_ptr<VulkanDebuger> debugMessenger;

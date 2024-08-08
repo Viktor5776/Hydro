@@ -8,6 +8,11 @@ namespace Hydro::gfx
     {
         pWindow = window.GetWindow();
         instance = std::make_shared<VulkanInstance>(pWindow);
+
+        #ifdef _DEBUG
+            debugMessenger = std::make_unique<VulkanDebuger>(instance);
+        #endif
+
         surface = std::make_unique<VulkanSurface>(instance, pWindow);
         physicalDevice = std::make_unique<VulkanPhysicalDevice>(instance->GetInstance(), surface->GetSurface());
         device = std::make_shared<VulkanDevice>(*physicalDevice);
@@ -16,15 +21,13 @@ namespace Hydro::gfx
         swapChain = std::make_unique<VulkanSwapChain>(device, *physicalDevice, *surface, pWindow);
         renderPass = std::make_unique<VulkanRenderPass>(device, swapChain->GetSwapChainImageFormat());
         graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, *swapChain, *renderPass);
+        swapChainFramebuffers = std::make_unique<VulkanFramebuffer>(device, *swapChain, *renderPass);
 
-        #ifdef _DEBUG
-            debugMessenger = std::make_unique<VulkanDebuger>(instance);
-        #endif
     }
 
     VulkanGraphics::~VulkanGraphics()
     {
-        std::cout << "VulkanGraphics destructor called!" << std::endl;
+        
     }
 
     void VulkanGraphics::Render()

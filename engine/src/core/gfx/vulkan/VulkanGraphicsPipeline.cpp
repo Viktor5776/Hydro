@@ -6,8 +6,9 @@
 
 namespace Hydro::gfx
 {
-    VulkanGraphicsPipeline::VulkanGraphicsPipeline( std::shared_ptr<VulkanDevice> device, VulkanSwapChain swapChain, VulkanRenderPass renderPass)
-        : device( device )
+    VulkanGraphicsPipeline::VulkanGraphicsPipeline( std::shared_ptr<VulkanDevice> device, VulkanSwapChain& swapChain, VulkanRenderPass& renderPass)
+        : 
+        device( device )
     {
         //HACK: Hardcoded shader filenames may want to pass a vector with VulkanShader that can give a VkPiplineShaderStageCreateInfo and use that instead
         VulkanShaderModule vertShader( device, "shaders/VertexTest.spv" );

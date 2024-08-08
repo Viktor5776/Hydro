@@ -31,6 +31,7 @@ namespace Hydro::gfx
         VkSwapchainKHR GetSwapChain() const;
         VkExtent2D GetSwapChainExtent() const;
         VkFormat GetSwapChainImageFormat() const;
+        std::vector<VkImageView>& GetSwapChainImageViews();
     private:
         std::shared_ptr<VulkanDevice> device;
         VkSwapchainKHR swapChain;

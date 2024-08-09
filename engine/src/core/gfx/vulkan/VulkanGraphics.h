@@ -13,7 +13,7 @@
 #include "VulkanGraphicsPipeline.h"
 #include "VulkanRenderPass.h"
 #include "VulkanFramebuffer.h"
-
+#include "VulkanCommandPool.h"
 
 namespace Hydro::gfx
 {
@@ -35,6 +35,9 @@ namespace Hydro::gfx
         std::unique_ptr<VulkanRenderPass> renderPass;
         std::unique_ptr<VulkanGraphicsPipeline> graphicsPipeline;
         std::unique_ptr<VulkanFramebuffer> swapChainFramebuffers;
+        std::unique_ptr<VulkanCommandPool> commandPool;
+
+        //May want to create a IoC container to manage this classes
 
         #ifdef _DEBUG
             std::unique_ptr<VulkanDebuger> debugMessenger;

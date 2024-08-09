@@ -22,6 +22,7 @@ namespace Hydro::gfx
         renderPass = std::make_unique<VulkanRenderPass>(device, swapChain->GetSwapChainImageFormat());
         graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, *swapChain, *renderPass);
         swapChainFramebuffers = std::make_unique<VulkanFramebuffer>(device, *swapChain, *renderPass);
+        commandPool = std::make_unique<VulkanCommandPool>(device, *physicalDevice);
 
     }
 

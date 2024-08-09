@@ -12,6 +12,7 @@ namespace Hydro::gfx
     public:
         VulkanGraphicsPipeline( std::shared_ptr<VulkanDevice> device, VulkanSwapChain& swapChain, VulkanRenderPass& renderPass );
         ~VulkanGraphicsPipeline();
+        VkPipeline GetGraphicsPipeline() const;
     private:
         std::shared_ptr<VulkanDevice> device;
         VkPipelineLayout pipelineLayout;

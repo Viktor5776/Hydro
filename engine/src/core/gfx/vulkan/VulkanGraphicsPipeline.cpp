@@ -150,4 +150,9 @@ namespace Hydro::gfx
         vkDestroyPipeline(device->GetDevice(), graphicsPipeline, nullptr);
         vkDestroyPipelineLayout(device->GetDevice(), pipelineLayout, nullptr);
     }
+
+    VkPipeline VulkanGraphicsPipeline::GetGraphicsPipeline() const
+    {
+        return graphicsPipeline;
+    }
 }

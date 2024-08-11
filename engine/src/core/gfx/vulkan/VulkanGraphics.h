@@ -14,6 +14,7 @@
 #include "VulkanRenderPass.h"
 #include "VulkanFramebuffer.h"
 #include "VulkanCommandPool.h"
+#include "VulkanCommandBuffer.h"
 
 namespace Hydro::gfx
 {
@@ -36,6 +37,12 @@ namespace Hydro::gfx
         std::unique_ptr<VulkanGraphicsPipeline> graphicsPipeline;
         std::unique_ptr<VulkanFramebuffer> swapChainFramebuffers;
         std::unique_ptr<VulkanCommandPool> commandPool;
+        std::unique_ptr<VulkanCommandBuffer> commandBuffer;
+
+        //TODO: Give these encapsulation
+        VkSemaphore imageAvailableSemaphore;
+        VkSemaphore renderFinishedSemaphore;
+        VkFence inFlightFence;
 
         //May want to create a IoC container to manage this classes
 

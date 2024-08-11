@@ -16,6 +16,7 @@ namespace Hydro::gfx
         VulkanCommandBuffer(std::shared_ptr<VulkanDevice> device, VulkanCommandPool& commandPool);
         void RecordCommandBuffer( VulkanRenderPass& renderPass, VulkanFramebuffer& frameBuffer, 
             VulkanSwapChain& swapChain, VulkanGraphicsPipeline& graphicsPipeline, uint32_t imageIndex );
+        VkCommandBuffer& GetCommandBuffer();
     private:
         std::shared_ptr<VulkanDevice> device;
         VkCommandBuffer commandBuffer;

@@ -70,4 +70,9 @@ namespace Hydro::gfx
             throw std::runtime_error("Failed to record command buffer!");
         }
     }
+
+    VkCommandBuffer& VulkanCommandBuffer::GetCommandBuffer()
+    {
+        return commandBuffer;
+    }
 }

@@ -13,6 +13,20 @@ App::App()
 
 void App::Update()
 {
+    //Frames per second
+    
+    float t = timer.Mark();
+    float fps = 1.0f / t;
+
+    acc += fps;
+
+    if( index++ > 5000 )
+    {
+        std::cout << "FPS: " << acc/50000 << std::endl;
+        std::cout << "Frame Time: " << 50000/acc << std::endl;
+        index = 0;
+        acc = 0.0f;
+    }
 
 }
 

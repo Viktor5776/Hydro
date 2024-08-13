@@ -6,6 +6,8 @@
 #include <limits>
 #include <algorithm>
 
+#include <iostream>
+
 namespace Hydro::gfx
 {
     VulkanSwapChain::VulkanSwapChain( std::shared_ptr<VulkanDevice> device, VulkanPhysicalDevice& physicalDevice, VulkanSurface& surface, SDL_Window* window )
@@ -96,6 +98,8 @@ namespace Hydro::gfx
 
     VulkanSwapChain::~VulkanSwapChain()
     {
+        std::cout << "Destroying swap chain" << std::endl;
+        
         for (auto imageView : swapChainImageViews) {
             vkDestroyImageView(device->GetDevice(), imageView, nullptr);
         }

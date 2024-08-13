@@ -12,7 +12,7 @@ namespace Hydro::app
         }
 
         //TODO: Change the Vulkan flag to only be used when using Vulkan backend
-        pWindow = SDL_CreateWindow( title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_VULKAN );
+        pWindow = SDL_CreateWindow( title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_VULKAN | SDL_WINDOW_RESIZABLE );
 
         if( pWindow == nullptr )
         {

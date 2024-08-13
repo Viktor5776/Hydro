@@ -1,6 +1,7 @@
 #include "VulkanGraphics.h"
 #include <iostream>
 #include <memory>
+#include <SDL2/SDL_vulkan.h>
 
 namespace Hydro::gfx
 {
@@ -69,13 +70,43 @@ namespace Hydro::gfx
         }
     }
 
+    bool VulkanGraphics::RecreateSwapChain()
+    {
+        bool minimized = false;
+        int windowFlags = SDL_GetWindowFlags(pWindow);
+        minimized = (windowFlags & SDL_WINDOW_MINIMIZED) != 0;
+        if( minimized )
+        {
+            return false;
+        }
+
+        vkDeviceWaitIdle(device->GetDevice());
+
+        swapChain.reset();
+        swapChain = std::make_unique<VulkanSwapChain>(device, *physicalDevice, *surface, pWindow);
+        graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, *swapChain, *renderPass);
+        swapChainFramebuffers = std::make_unique<VulkanFramebuffer>(device, *swapChain, *renderPass);
+        return true;
+    };
+
     void VulkanGraphics::Render()
     {
         vkWaitForFences(device->GetDevice(), 1, &inFlightFences[currentFrame], VK_TRUE, UINT64_MAX);
-        vkResetFences(device->GetDevice(), 1, &inFlightFences[currentFrame]);
 
-        uint32_t imageIndex;
-        vkAcquireNextImageKHR(device->GetDevice(), swapChain->GetSwapChain(), UINT64_MAX, imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, &imageIndex);
+        uint32_t imageIndex = 0;
+        VkResult result = vkAcquireNextImageKHR(device->GetDevice(), swapChain->GetSwapChain(), UINT64_MAX, imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, &imageIndex);
+
+        if (result == VK_ERROR_OUT_OF_DATE_KHR) 
+        {
+            RecreateSwapChain();
+            return;
+        } 
+        else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) 
+        {
+            throw std::runtime_error("failed to acquire swap chain image!");
+        }
+
+        vkResetFences(device->GetDevice(), 1, &inFlightFences[currentFrame]);
 
         vkResetCommandBuffer(commandBuffers->GetCommandBuffers()[currentFrame], 0);
 
@@ -114,7 +145,20 @@ namespace Hydro::gfx
         presentInfo.pImageIndices = &imageIndex;
         presentInfo.pResults = nullptr;
 
-        vkQueuePresentKHR(presentQueue->GetQueue(), &presentInfo);
+        result =  vkQueuePresentKHR(presentQueue->GetQueue(), &presentInfo);
+
+        //NOTE: Maybe want to handle resize explicitly from SDL in the future
+        if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR) 
+        {
+            if( !RecreateSwapChain() )
+            {
+                return;
+            }
+        } 
+        else if (result != VK_SUCCESS) 
+        {
+            throw std::runtime_error("failed to present swap chain image!");
+        }
 
         currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
     }

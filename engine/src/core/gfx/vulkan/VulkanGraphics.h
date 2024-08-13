@@ -24,6 +24,7 @@ namespace Hydro::gfx
         VulkanGraphics( app::Window& window );
         ~VulkanGraphics() override;
         void Render() override;
+        bool RecreateSwapChain();
     private:
         static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
         uint32_t currentFrame = 0;

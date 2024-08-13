@@ -25,6 +25,9 @@ namespace Hydro::gfx
         ~VulkanGraphics() override;
         void Render() override;
     private:
+        static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
+        uint32_t currentFrame = 0;
+
         SDL_Window* pWindow;
         std::shared_ptr<VulkanInstance> instance;
         std::unique_ptr<VulkanSurface> surface;
@@ -37,12 +40,12 @@ namespace Hydro::gfx
         std::unique_ptr<VulkanGraphicsPipeline> graphicsPipeline;
         std::unique_ptr<VulkanFramebuffer> swapChainFramebuffers;
         std::unique_ptr<VulkanCommandPool> commandPool;
-        std::unique_ptr<VulkanCommandBuffer> commandBuffer;
+        std::unique_ptr<VulkanCommandBuffer> commandBuffers;
 
         //TODO: Give these encapsulation
-        VkSemaphore imageAvailableSemaphore;
-        VkSemaphore renderFinishedSemaphore;
-        VkFence inFlightFence;
+        std::vector<VkSemaphore> imageAvailableSemaphores;
+        std::vector<VkSemaphore> renderFinishedSemaphores;
+        std::vector<VkFence> inFlightFences;
 
         //May want to create a IoC container to manage this classes
 

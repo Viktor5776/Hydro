@@ -24,6 +24,7 @@ namespace Hydro::gfx
         graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, *swapChain, *renderPass);
         swapChainFramebuffers = std::make_unique<VulkanFramebuffer>(device, *swapChain, *renderPass);
         commandPool = std::make_unique<VulkanCommandPool>(device, *physicalDevice);
+        vertexBuffer = std::make_unique<VulkanVertexBuffer>(device, *physicalDevice);
         commandBuffers = std::make_unique<VulkanCommandBuffer>(device, *commandPool, MAX_FRAMES_IN_FLIGHT);
 
         {
@@ -110,7 +111,7 @@ namespace Hydro::gfx
 
         vkResetCommandBuffer(commandBuffers->GetCommandBuffers()[currentFrame], 0);
 
-        commandBuffers->RecordCommandBuffer(*renderPass, *swapChainFramebuffers, *swapChain, *graphicsPipeline, imageIndex, currentFrame);
+        commandBuffers->RecordCommandBuffer(*renderPass, *swapChainFramebuffers, *swapChain, *graphicsPipeline, *vertexBuffer, imageIndex, currentFrame);
 
         VkSubmitInfo submitInfo = {};
         submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;

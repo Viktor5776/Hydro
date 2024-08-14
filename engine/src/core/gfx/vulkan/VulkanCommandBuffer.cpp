@@ -22,7 +22,7 @@ namespace Hydro::gfx
     }
 
     void VulkanCommandBuffer::RecordCommandBuffer( VulkanRenderPass& renderPass, VulkanFramebuffer& framebuffer, 
-        VulkanSwapChain& swapChain, VulkanGraphicsPipeline& graphicsPipeline, uint32_t imageIndex, uint32_t commandBufferIndex )
+        VulkanSwapChain& swapChain, VulkanGraphicsPipeline& graphicsPipeline, VulkanVertexBuffer& vertexBuffer, uint32_t imageIndex, uint32_t commandBufferIndex )
     {
         VkCommandBufferBeginInfo beginInfo = {};
         beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
@@ -63,7 +63,11 @@ namespace Hydro::gfx
         scissor.extent = swapChain.GetSwapChainExtent();
         vkCmdSetScissor(commandBuffers[commandBufferIndex], 0, 1, &scissor);
 
-        vkCmdDraw(commandBuffers[commandBufferIndex], 3, 1, 0, 0);
+        VkBuffer vertexBuffers[] = { vertexBuffer.GetVertexBuffer() };
+        VkDeviceSize offsets[] = {0};
+        vkCmdBindVertexBuffers(commandBuffers[commandBufferIndex], 0, 1, vertexBuffers, offsets);
+
+        vkCmdDraw(commandBuffers[commandBufferIndex], static_cast<uint32_t>(vertexBuffer.GetBufferSize()), 1, 0, 0);
 
         vkCmdEndRenderPass(commandBuffers[commandBufferIndex]);
 

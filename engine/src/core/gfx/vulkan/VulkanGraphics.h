@@ -15,6 +15,7 @@
 #include "VulkanFramebuffer.h"
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
+#include "VulkanVertexBuffer.h"
 
 namespace Hydro::gfx
 {
@@ -42,6 +43,7 @@ namespace Hydro::gfx
         std::unique_ptr<VulkanFramebuffer> swapChainFramebuffers;
         std::unique_ptr<VulkanCommandPool> commandPool;
         std::unique_ptr<VulkanCommandBuffer> commandBuffers;
+        std::unique_ptr<VulkanVertexBuffer> vertexBuffer;
 
         //TODO: Give these encapsulation
         std::vector<VkSemaphore> imageAvailableSemaphores;

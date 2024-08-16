@@ -63,7 +63,7 @@ namespace Hydro::gfx
         scissor.extent = swapChain.GetSwapChainExtent();
         vkCmdSetScissor(commandBuffers[commandBufferIndex], 0, 1, &scissor);
 
-        VkBuffer vertexBuffers[] = { vertexBuffer.GetVertexBuffer() };
+        VkBuffer vertexBuffers[] = { vertexBuffer.GetBuffer() };
         VkDeviceSize offsets[] = {0};
         vkCmdBindVertexBuffers(commandBuffers[commandBufferIndex], 0, 1, vertexBuffers, offsets);
 

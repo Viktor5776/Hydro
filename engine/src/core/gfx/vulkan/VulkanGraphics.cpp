@@ -24,7 +24,17 @@ namespace Hydro::gfx
         graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, *swapChain, *renderPass);
         swapChainFramebuffers = std::make_unique<VulkanFramebuffer>(device, *swapChain, *renderPass);
         commandPool = std::make_unique<VulkanCommandPool>(device, *physicalDevice);
-        vertexBuffer = std::make_unique<VulkanVertexBuffer>(device, *physicalDevice);
+
+        std::vector<VulkanVertex> vertices = {
+            {{-1.0f, -1.0f}, {1.0f, 0.0f, 0.0f}},
+            {{1.0f, -1.0f}, {1.0f, 1.0f, 0.0f}},
+            {{-1.0f, 1.0f}, {0.0f, 0.0f, 1.0f}},
+            {{1.0f, -1.0f}, {1.0f, 1.0f, 0.0f}},
+            {{1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}},
+            {{-1.0f, 1.0f}, {0.0f, 0.0f, 1.0f}}
+        };
+        vertexBuffer = std::make_unique<VulkanVertexBuffer>(device, *physicalDevice, commandPool->GetCommandPool(), graphicsQueue->GetQueue(), vertices);
+
         commandBuffers = std::make_unique<VulkanCommandBuffer>(device, *commandPool, MAX_FRAMES_IN_FLIGHT);
 
         {

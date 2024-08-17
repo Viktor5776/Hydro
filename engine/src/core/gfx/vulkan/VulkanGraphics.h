@@ -16,6 +16,8 @@
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
 #include "VulkanVertexBuffer.h"
+#include "VulkanVertexBuffer.h"
+#include "VulkanUniformBuffer.h"
 
 namespace Hydro::gfx
 {
@@ -27,7 +29,7 @@ namespace Hydro::gfx
         void Render() override;
         bool RecreateSwapChain();
     private:
-        static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
+        static constexpr uint16_t MAX_FRAMES_IN_FLIGHT = 2;
         uint32_t currentFrame = 0;
 
         SDL_Window* pWindow;
@@ -39,11 +41,13 @@ namespace Hydro::gfx
         std::unique_ptr<VulkanQueue> presentQueue;
         std::unique_ptr<VulkanSwapChain> swapChain;
         std::unique_ptr<VulkanRenderPass> renderPass;
+        std::unique_ptr<VulkanUniformBuffer> uniformBuffer;
         std::unique_ptr<VulkanGraphicsPipeline> graphicsPipeline;
         std::unique_ptr<VulkanFramebuffer> swapChainFramebuffers;
         std::unique_ptr<VulkanCommandPool> commandPool;
         std::unique_ptr<VulkanCommandBuffer> commandBuffers;
         std::unique_ptr<VulkanVertexBuffer> vertexBuffer;
+        std::unique_ptr<VulkanIndexBuffer> indexBuffer;
 
         //TODO: Give these encapsulation
         std::vector<VkSemaphore> imageAvailableSemaphores;

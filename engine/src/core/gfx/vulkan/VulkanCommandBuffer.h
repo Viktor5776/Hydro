@@ -9,6 +9,8 @@
 #include "VulkanFramebuffer.h"
 #include "VulkanGraphicsPipeline.h"
 #include "VulkanVertexBuffer.h"
+#include "VulkanIndexBuffer.h"
+#include "VulkanUniformBuffer.h"
 
 namespace Hydro::gfx
 {
@@ -17,8 +19,8 @@ namespace Hydro::gfx
     public:
         VulkanCommandBuffer(std::shared_ptr<VulkanDevice> device, VulkanCommandPool& commandPool, uint32_t commandBufferCount);
         void RecordCommandBuffer( VulkanRenderPass& renderPass, VulkanFramebuffer& frameBuffer, 
-            VulkanSwapChain& swapChain, VulkanGraphicsPipeline& graphicsPipeline, VulkanVertexBuffer& vertexBuffer,
-            uint32_t imageIndex, uint32_t commandBufferIndex );
+            VulkanSwapChain& swapChain, VulkanGraphicsPipeline& graphicsPipeline, VulkanVertexBuffer& vertexBuffer, 
+            VulkanIndexBuffer& indexBuffer, VulkanUniformBuffer& uniformBuffer, uint32_t imageIndex, uint32_t commandBufferIndex );
         std::vector<VkCommandBuffer>& GetCommandBuffers();
     private:
         std::shared_ptr<VulkanDevice> device;

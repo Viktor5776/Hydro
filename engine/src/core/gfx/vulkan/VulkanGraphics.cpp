@@ -3,6 +3,9 @@
 #include <memory>
 #include <SDL2/SDL_vulkan.h>
 
+#include <chrono>
+#include <glm/gtc/matrix_transform.hpp>
+
 namespace Hydro::gfx
 {
     VulkanGraphics::VulkanGraphics( app::Window& window )
@@ -21,19 +24,23 @@ namespace Hydro::gfx
         presentQueue = std::make_unique<VulkanQueue>(*device, 0, 1);
         swapChain = std::make_unique<VulkanSwapChain>(device, *physicalDevice, *surface, pWindow);
         renderPass = std::make_unique<VulkanRenderPass>(device, swapChain->GetSwapChainImageFormat());
-        graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, *swapChain, *renderPass);
+        uniformBuffer = std::make_unique<VulkanUniformBuffer>(device, *physicalDevice, MAX_FRAMES_IN_FLIGHT);
+        graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, *swapChain, *renderPass, *uniformBuffer);
         swapChainFramebuffers = std::make_unique<VulkanFramebuffer>(device, *swapChain, *renderPass);
         commandPool = std::make_unique<VulkanCommandPool>(device, *physicalDevice);
 
-        std::vector<VulkanVertex> vertices = {
-            {{-1.0f, -1.0f}, {1.0f, 0.0f, 0.0f}},
-            {{1.0f, -1.0f}, {1.0f, 1.0f, 0.0f}},
-            {{-1.0f, 1.0f}, {0.0f, 0.0f, 1.0f}},
-            {{1.0f, -1.0f}, {1.0f, 1.0f, 0.0f}},
-            {{1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}},
-            {{-1.0f, 1.0f}, {0.0f, 0.0f, 1.0f}}
+        const std::vector<VulkanVertex> vertices = {
+            {{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+            {{0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
+            {{0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
+            {{-0.5f, 0.5f}, {1.0f, 1.0f, 1.0f}}
         };
         vertexBuffer = std::make_unique<VulkanVertexBuffer>(device, *physicalDevice, commandPool->GetCommandPool(), graphicsQueue->GetQueue(), vertices);
+
+        const std::vector<uint32_t> indices = {
+            0, 1, 2, 2, 3, 0
+        };
+        indexBuffer = std::make_unique<VulkanIndexBuffer>(device, *physicalDevice, commandPool->GetCommandPool(), graphicsQueue->GetQueue(), indices);
 
         commandBuffers = std::make_unique<VulkanCommandBuffer>(device, *commandPool, MAX_FRAMES_IN_FLIGHT);
 
@@ -95,7 +102,7 @@ namespace Hydro::gfx
 
         swapChain.reset();
         swapChain = std::make_unique<VulkanSwapChain>(device, *physicalDevice, *surface, pWindow);
-        graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, *swapChain, *renderPass);
+        graphicsPipeline = std::make_unique<VulkanGraphicsPipeline>(device, *swapChain, *renderPass, *uniformBuffer);
         swapChainFramebuffers = std::make_unique<VulkanFramebuffer>(device, *swapChain, *renderPass);
         return true;
     };
@@ -121,7 +128,22 @@ namespace Hydro::gfx
 
         vkResetCommandBuffer(commandBuffers->GetCommandBuffers()[currentFrame], 0);
 
-        commandBuffers->RecordCommandBuffer(*renderPass, *swapChainFramebuffers, *swapChain, *graphicsPipeline, *vertexBuffer, imageIndex, currentFrame);
+        //Update Uniform Buffer
+        {
+            VulkanUniformBuffer::BufferData data = {};
+            static auto startTime = std::chrono::high_resolution_clock::now();
+            auto currentTime = std::chrono::high_resolution_clock::now();
+            float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+
+            data.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+            data.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+            data.proj = glm::perspective(glm::radians(45.0f), swapChain->GetSwapChainExtent().width / (float)swapChain->GetSwapChainExtent().height, 0.1f, 10.0f);
+            data.proj[1][1] *= -1;
+            uniformBuffer->UpdateUniformBuffer(currentFrame, data);
+        }
+
+        commandBuffers->RecordCommandBuffer(*renderPass, *swapChainFramebuffers, *swapChain, *graphicsPipeline, *vertexBuffer, *indexBuffer, *uniformBuffer, imageIndex, currentFrame);
+
 
         VkSubmitInfo submitInfo = {};
         submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;

@@ -1,5 +1,5 @@
 #pragma once
-#include "application.h"
+#include "Application.h"
 #include <iostream>
 #include <stdexcept>
 

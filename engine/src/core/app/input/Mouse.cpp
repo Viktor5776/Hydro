@@ -1,4 +1,4 @@
-#include "mouse.h"
+#include "Mouse.h"
 #include <SDL2/SDL.h>
 
 namespace Hydro::app

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "defines.h"
+#include "Defines.h"
 
 struct SDL_Window;
 

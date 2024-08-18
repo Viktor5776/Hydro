@@ -1,4 +1,4 @@
-#include "app.h"
+#include "App.h"
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 #include <iostream>
@@ -9,6 +9,7 @@ App::App()
     Application( WIDTH, HEIGHT, "Testbed" )
 {
     pGraphics = CREATE_VULKAN_GRAPHICS( window );
+
 }
 
 void App::Update()

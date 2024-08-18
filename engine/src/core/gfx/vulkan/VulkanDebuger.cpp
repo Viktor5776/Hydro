@@ -1,6 +1,6 @@
 #include "VulkanDebuger.h"
 #include <stdexcept>
-#include "../../log/logger.h"
+#include "../../log/Logger.h"
 
 namespace Hydro::gfx
 {

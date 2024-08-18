@@ -1,8 +1,8 @@
 #pragma once
-#include "defines.h"
-#include "window.h"
-#include "keyboard.h"
-#include "mouse.h"
+#include "Defines.h"
+#include "Window.h"
+#include "input/Keyboard.h"
+#include "input/Mouse.h"
 #include "../gfx/IGraphics.h"
 #include <string>
 #include <memory>

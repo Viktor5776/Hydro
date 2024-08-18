@@ -1,7 +1,7 @@
 #pragma once
 #include "IGraphics.h"
 #include <memory>
-#include "../app/window.h"
+#include "../app/Window.h"
 
 namespace Hydro::gfx
 {

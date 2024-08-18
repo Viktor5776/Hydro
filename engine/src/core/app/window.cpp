@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
-#include "window.h"
-#include "../log/logger.h"
+#include "Window.h"
+#include "../log/Logger.h"
 
 namespace Hydro::app
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "defines.h"
+#include "Defines.h"
 
 union SDL_Event;
 

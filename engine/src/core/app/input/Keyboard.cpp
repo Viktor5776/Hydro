@@ -1,4 +1,4 @@
-#include "keyboard.h"
+#include "Keyboard.h"
 #include <SDL2/SDL.h>
 
 namespace Hydro::app

@@ -1,6 +1,6 @@
 #pragma once
 #include <unordered_map>
-#include "defines.h"
+#include "Defines.h"
 
 union SDL_Event;
 

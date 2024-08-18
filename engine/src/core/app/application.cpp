@@ -1,8 +1,5 @@
-#include "application.h"
+#include "Application.h"
 #include <SDL2/SDL.h>
-
-#include <vulkan/vulkan.h>
-#include <iostream>
 
 namespace Hydro::app
 {

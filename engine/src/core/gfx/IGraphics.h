@@ -1,6 +1,6 @@
 #pragma once
-#include "defines.h"
-#include "../app/window.h"
+#include "Defines.h"
+#include "../app/Window.h"
 
 namespace Hydro::gfx
 {

@@ -4,7 +4,7 @@
 
 union SDL_Event;
 
-namespace Hydro::app
+namespace Hydro::Input
 {
     enum class KeyCode
     {

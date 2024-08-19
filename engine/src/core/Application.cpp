@@ -1,7 +1,7 @@
 #include "Application.h"
 #include <SDL2/SDL.h>
 
-namespace Hydro::app
+namespace Hydro
 {
     Application::Application( int width, int height, const std::string& title )
         : 

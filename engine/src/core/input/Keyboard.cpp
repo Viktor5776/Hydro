@@ -1,7 +1,7 @@
 #include "Keyboard.h"
 #include <SDL2/SDL.h>
 
-namespace Hydro::app
+namespace Hydro::Input
 { 
     void Keyboard::HandleEvent( const SDL_Event& event )
     {

@@ -8,7 +8,7 @@
 
 namespace Hydro::gfx
 {
-    VulkanGraphics::VulkanGraphics( app::Window& window )
+    VulkanGraphics::VulkanGraphics( Window& window )
     {
         pWindow = window.GetWindow();
         instance = std::make_shared<VulkanInstance>(pWindow);

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 
-extern Hydro::app::Application* CreateApplication();
+extern Hydro::Application* CreateApplication();
 
 int main()
 {

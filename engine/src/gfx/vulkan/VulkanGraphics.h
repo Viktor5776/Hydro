@@ -24,7 +24,7 @@ namespace Hydro::gfx
     class VulkanGraphics : public IGraphics
     {
     public:
-        VulkanGraphics( app::Window& window );
+        VulkanGraphics( Window& window );
         ~VulkanGraphics() override;
         void Render() override;
         bool RecreateSwapChain();

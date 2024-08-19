@@ -4,7 +4,7 @@
 
 struct SDL_Window;
 
-namespace Hydro::app
+namespace Hydro
 {
     class HAPI Window
     {

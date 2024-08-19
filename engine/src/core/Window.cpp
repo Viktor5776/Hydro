@@ -2,7 +2,7 @@
 #include "Window.h"
 #include "../log/Logger.h"
 
-namespace Hydro::app
+namespace Hydro
 {
     Window::Window( int width, int height, const std::string& title )
     {

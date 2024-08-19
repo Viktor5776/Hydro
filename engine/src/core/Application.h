@@ -8,7 +8,7 @@
 #include <memory>
 
 
-namespace Hydro::app
+namespace Hydro
 {
     class HAPI Application
     {
@@ -21,8 +21,8 @@ namespace Hydro::app
         virtual void Render() = 0;
     protected:
         Window window;
-        Keyboard keyboard;
-        Mouse mouse;
+        Input::Keyboard keyboard;
+        Input::Mouse mouse;
         std::unique_ptr<gfx::IGraphics> pGraphics;
     };
 }

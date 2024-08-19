@@ -1,7 +1,7 @@
 #pragma once
 #include "IGraphics.h"
 #include <memory>
-#include "../app/Window.h"
+#include "../core/Window.h"
 
 namespace Hydro::gfx
 {
@@ -14,7 +14,7 @@ namespace Hydro::gfx
         };
 
         //NOTE: May want to find a better way to pass parameters to the graphics API if there are diffrences between the APIs
-        static std::unique_ptr<IGraphics> CreateGraphics( GraphicsType type, app::Window& window );
+        static std::unique_ptr<IGraphics> CreateGraphics( GraphicsType type, Window& window );
     };
 
     #define CREATE_VULKAN_GRAPHICS( window ) Hydro::gfx::GraphicsFactory::CreateGraphics( Hydro::gfx::GraphicsFactory::GraphicsType::Vulkan, window )

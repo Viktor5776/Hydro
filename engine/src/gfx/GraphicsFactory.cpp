@@ -4,7 +4,7 @@
 
 namespace Hydro::gfx
 {
-    std::unique_ptr<IGraphics> GraphicsFactory::CreateGraphics( GraphicsType type, app::Window& window )
+    std::unique_ptr<IGraphics> GraphicsFactory::CreateGraphics( GraphicsType type, Window& window )
     {
         switch( type )
         {

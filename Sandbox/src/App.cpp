@@ -3,5 +3,5 @@
 
 int main()
 {
-	std::cout << TestFunction( 40, 2 ) << std::endl;
+	return BasicWindow();
 }

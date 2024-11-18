@@ -1,3 +1,6 @@
+vcpkgPath = "./vendor/vcpkg"
+vcpkgTriplet = os.istarget("windows") and "x64-windows" or "x64-linux"
+
 workspace "Hydro"
     architecture  "x64"
 
@@ -6,6 +9,7 @@ workspace "Hydro"
         "Debug",
         "Release"
     }
+
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -25,7 +29,18 @@ project "Engine"
 
     includedirs
     {
-        --path to downloaded libraries
+        "%{vcpkgPath}/installed/%{vcpkgTriplet}/include"
+    }
+
+    libdirs
+    {
+        "%{vcpkgPath}/installed/%{vcpkgTriplet}/lib"
+    }
+
+    links
+    {
+        -- Add the libraries you need here SDL2 glm etc
+        "SDL2"
     }
 
     filter "system:windows"
@@ -42,7 +57,7 @@ project "Engine"
         postbuildcommands
         {
             --copying the .dll file to the Sandbox project
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
         }
         
     filter "system:linux"
@@ -64,7 +79,10 @@ project "Engine"
       postbuildcommands
       {
           -- Copy the .so file to the Sandbox project (shared library for Linux)
-          ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+          ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
+
+          --copy library so to bin folder (propbly wrong but test in case)
+          ("{COPYFILE} %{prj.location}/vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL2.so %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox/SDL2.so")
       }
 
     filter "configurations:Debug"
@@ -95,12 +113,19 @@ project "Sandbox"
 
     includedirs
     {
-        "Engine/src"
+        "Engine/src",
+        "%{vcpkgPath}/installed/%{vcpkgTriplet}/include"
+    }
+
+    libdirs
+    {
+        "%{vcpkgPath}/installed/%{vcpkgTriplet}/lib"
     }
 
     links
     {
         "Engine"
+        --Add vcpkg libraries here if needed in sandbox
     }
 
     filter "system:windows"
@@ -112,6 +137,12 @@ project "Sandbox"
         {
           "_WIN32"
             --preprocessor definitions
+        }
+
+	postbuildcommands
+        {
+   	    --copy library dll to bin folder
+            "{COPYFILE} vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL2.dll bin/" .. outputdir .. "/Sandbox/SDL2.dll"        
         }
         
     filter "system:linux"

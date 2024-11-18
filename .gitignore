@@ -1,5 +1,6 @@
 bin/
 bin-int/
+vendor/vcpkg
 Makefile
 
 # Ignore Visual Studio temporary files, build results, and

@@ -114,10 +114,10 @@ project "Sandbox"
             --preprocessor definitions
         }
 
-	postbuildcommands
+	    postbuildcommands
         {
-   	    --copy library dll to bin folder
-            "{COPYFILE} vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL2.dll bin/" .. outputdir .. "/Sandbox/SDL2.dll"        
+   	      --copy library dll to bin folder
+            "{COPY} " .. "%{wks.location}vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL2.dll" .. " %{wks.location}bin/" .. outputdir .. "/Sandbox/"        
         }
 
     filter "configurations:Debug"

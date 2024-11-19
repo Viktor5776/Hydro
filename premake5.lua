@@ -59,31 +59,6 @@ project "Engine"
             --copying the .dll file to the Sandbox project
             ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
         }
-        
-    filter "system:linux"
-      cppdialect "C++20"
-      staticruntime "On"
-      toolset "clang"
-
-      defines
-      {
-          --preprocessor definitions for Linux
-      }
-
-      links
-      {
-          "pthread", -- Add threading library if needed
-          "dl" -- Dynamic linking library
-      }
-
-      postbuildcommands
-      {
-          -- Copy the .so file to the Sandbox project (shared library for Linux)
-          ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
-
-          --copy library so to bin folder (propbly wrong but test in case)
-          ("{COPYFILE} %{prj.location}/vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL2.so %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox/SDL2.so")
-      }
 
     filter "configurations:Debug"
         defines "HYDRO_DEBUG"
@@ -143,22 +118,6 @@ project "Sandbox"
         {
    	    --copy library dll to bin folder
             "{COPYFILE} vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL2.dll bin/" .. outputdir .. "/Sandbox/SDL2.dll"        
-        }
-        
-    filter "system:linux"
-        cppdialect "C++20"
-        staticruntime "On"
-        toolset "clang"
-
-        defines
-        {
-            --preprocessor definitions for Linux
-        }
-
-        links
-        {
-            "pthread", -- Add threading library if needed
-            "dl" -- Dynamic linking library
         }
 
     filter "configurations:Debug"

@@ -1,4 +1,4 @@
 #pragma once
 #include "../Defines.h"
 
-HAPI int BasicWindow();
+HAPI int Test();

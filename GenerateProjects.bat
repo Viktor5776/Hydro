@@ -10,6 +10,9 @@ cd vcpkg
 ::Can defenetly be done with prebuildcommands in premake file but can´t figure that out 
 ::so we do a quick fix here :D MAKE SURE BAT AND SH have same libraries or problems
 vcpkg.exe install sdl2 --triplet x64-windows
+vcpkg.exe install imgui --triplet x64-windows
+vcpkg.exe install glm --triplet x64-windows
+
 
 cd ../../
 

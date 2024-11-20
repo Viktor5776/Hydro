@@ -1,7 +1,7 @@
 #include <iostream>
-#include <Core/Test.h>
+#include <Core/Core.h>
 
 int main()
 {
-	return BasicWindow();
+	return Test();
 }

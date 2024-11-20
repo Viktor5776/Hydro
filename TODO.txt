@@ -1,0 +1,5 @@
+chil for a base but with SDL2 and GLM
+then work on getting kbd and mouse input system
+create the ecs, scene etc
+begin working on first "System" graphics
+when we can draw simple triangle we can probebly start working on editor

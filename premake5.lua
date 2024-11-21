@@ -14,7 +14,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 project "Engine"
     location "Engine"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -54,13 +54,6 @@ project "Engine"
             --preprocessor definitions
         }
 
-        postbuildcommands
-        {
-            --copying the .dll file to the Sandbox project
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Editor"),
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
-        }
-
     filter "configurations:Debug"
         defines "HYDRO_DEBUG"
         symbols "On"
@@ -68,9 +61,6 @@ project "Engine"
     filter "configurations:Realse"
         defines "HYDRO_RELEASE"
         optimize "On"
-
-    filter "kind:SharedLib"
-        defines { "ENGINE_EXPORT" }
     
 
 project "Editor"

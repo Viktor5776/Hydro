@@ -12,7 +12,7 @@ cd vcpkg
 vcpkg.exe install sdl2 --triplet x64-windows
 vcpkg.exe install imgui --triplet x64-windows
 vcpkg.exe install glm --triplet x64-windows
-
+vcpkg.exe install gtest --triplet x64-windows
 
 cd ../../
 

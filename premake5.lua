@@ -60,8 +60,7 @@ project "Engine"
 
     filter "configurations:Realse"
         defines "HYDRO_RELEASE"
-        optimize "On"
-    
+        optimize "On"     
 
 project "Editor"
     location "Editor"
@@ -92,7 +91,6 @@ project "Editor"
     {
         "Engine",
         "Imgui"
-        --Add vcpkg libraries here if needed in sandbox
     }
 
     filter "system:windows"
@@ -174,5 +172,63 @@ project "Sandbox"
         symbols "On"
 
     filter "configurations:Realse"
+        defines "HYDRO_RELEASE"
+        optimize "On"
+
+project "UnitTest"
+    location "UnitTest"
+    kind "ConsoleApp"
+    language "C++"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs
+    {
+        "Engine/src",
+        "%{vcpkgPath}/installed/%{vcpkgTriplet}/include"
+    }
+
+    libdirs
+    {
+        "%{vcpkgPath}/installed/%{vcpkgTriplet}/lib",
+        "%{vcpkgPath}/installed/%{vcpkgTriplet}/lib/manual-link"
+    }
+
+    links
+    {
+        "Engine",
+        "gtest",
+        "gtest_main"
+    }
+
+    filter "system:windows"
+        cppdialect "C++20"
+        staticruntime "On"
+        systemversion "latest"
+
+        defines
+        {
+            "PLATFORM_WINDOWS"
+        }
+
+        postbuildcommands
+        {
+            --copy library dll to bin folder
+            "{COPY} " .. "%{wks.location}vendor/vcpkg/installed/%{vcpkgTriplet}/bin/gtest.dll" .. " %{wks.location}bin/" .. outputdir .. "/UnitTest/",
+            "{COPY} " .. "%{wks.location}vendor/vcpkg/installed/%{vcpkgTriplet}/bin/gtest_main.dll" .. " %{wks.location}bin/" .. outputdir .. "/UnitTest/"
+        }
+
+    filter "configurations:Debug"
+        defines "HYDRO_DEBUG"
+        symbols "On"
+
+    filter "configurations:Release"
         defines "HYDRO_RELEASE"
         optimize "On"

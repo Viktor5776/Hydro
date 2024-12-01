@@ -38,9 +38,9 @@ namespace hydro::ioc
 			serviceMap_[typeid(T)] = gen;
 		}
 		template<Parameterized T>
-		std::shared_ptr<T> Resolve( typename T::SvcParams&& params = {} ) const
+		std::shared_ptr<T> Resolve( typename T::IocParams&& params = {} ) const
 		{
-			return Resolve_<T, ParameterizedGenerator<T>>( std::forward<typename T::SvcParams>( params ) );
+			return Resolve_<T, ParameterizedGenerator<T>>( std::forward<typename T::IocParams>( params ) );
 		}
 		template<NotParameterized T>
 		std::shared_ptr<T> Resolve() const

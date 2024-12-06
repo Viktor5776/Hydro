@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-namespace Infrastructure
+namespace Ioc
 {
 	struct Base
 	{

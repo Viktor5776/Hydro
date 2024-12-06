@@ -9,6 +9,7 @@ namespace hydro::log
 			.sourceFile_ = sourceFile,
 			.sourceFunctionName_ = sourceFunctionName,
 			.sourceLine_ = sourceLine,
+			.timestamp_ = std::chrono::system_clock::now()
 		}
 	{
 	}

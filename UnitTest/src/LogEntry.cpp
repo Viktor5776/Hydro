@@ -14,27 +14,28 @@ public:
 	{
 		entry_ = e;
 	}
+	void AttachDriver( std::shared_ptr<log::IDriver> ) override {}
 	log::Entry entry_;
 };
 
-namespace Infrastructure
+namespace Log
 {
-	TEST( LogTests, ShowOffFluent )
+	TEST( LogEntryTests, ShowOffFluent )
 	{
 		MockChannel chan;
 		hydrolog.level( log::Level::Info ).note( L"HI" ).chan( &chan );
 		EXPECT_EQ( L"HI"s, chan.entry_.note_ );
 		EXPECT_EQ( log::Level::Info, chan.entry_.level_ );
-		EXPECT_EQ( 25, chan.entry_.sourceLine_ );
+		EXPECT_EQ( 26, chan.entry_.sourceLine_ );
 	}
 
 	// testing simplified level/note
-	TEST( LogTests, SimplifiedLevelNote )
+	TEST( LogEntryTests, SimplifiedLevelNote )
 	{
 		MockChannel chan;
 		hydrolog.info( L"HI" ).chan( &chan );
 		EXPECT_EQ( L"HI"s, chan.entry_.note_ );
 		EXPECT_EQ( log::Level::Info, chan.entry_.level_ );
-		EXPECT_EQ( 35, chan.entry_.sourceLine_ );
+		EXPECT_EQ( 36, chan.entry_.sourceLine_ );
 	}
 }

@@ -63,3 +63,6 @@ bld/
 # /refs
 # *.ref
 # *.pch
+
+#Allow the log code to be pushed
+!Engine/src/Core/log/

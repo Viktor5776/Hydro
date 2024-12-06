@@ -1,22 +1,20 @@
 #include <iostream>
-#include <Core/ioc/Container.h>
+#include <Core/log/EntryBuilder.h>
+#include <Core/log/Channel.h>
+#include <Core/log/MsvcDebugDriver.h>
+#include <Core/log/TextFormatter.h>
 
-struct Base
-{
-	virtual int Test() { return 420; }
-	virtual ~Base() = default;
-};
+using namespace hydro;
 
-struct Derived : public Base
-{
-	int Test() override { return 42; }
-};
+#define hydrolog log::EntryBuilder{ __FILEW__, __FUNCTIONW__, __LINE__ }.chan( pChan.get() )
 
 int main()
 {
-	using namespace hydro;
+	std::unique_ptr<log::IChannel> pChan = std::make_unique<log::Channel>( std::vector<std::shared_ptr<log::IDriver>> {
+		std::make_shared<log::MsvcDebugDriver>(std::make_unique<log::TextFormatter>())
+	});
 
-	ioc::Get().Register<Base>( [] {return std::make_shared<Derived>(); } );
+	hydrolog.fatal( L"Hello there" );
 
-	std::cout << ioc::Get().Resolve<Base>()->Test() << std::endl;
+	return 0;
 }

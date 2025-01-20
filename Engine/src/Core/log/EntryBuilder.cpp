@@ -23,10 +23,10 @@ namespace hydro::log
 		level_ = level;
 		return *this;
 	}
-	EntryBuilder& EntryBuilder::trace( std::wstring note )
+	EntryBuilder& EntryBuilder::verbose( std::wstring note )
 	{
 		note_ = std::move( note );
-		level_ = Level::Trace;
+		level_ = Level::Verbose;
 		return *this;
 	}
 	EntryBuilder& EntryBuilder::debug( std::wstring note )
@@ -67,6 +67,11 @@ namespace hydro::log
 	EntryBuilder::~EntryBuilder()
 	{
 		if( pDest_ ) {
+			
+			if( (int)level_ <= (int)Level::Error ) {
+				trace_.emplace();
+			}
+
 			pDest_->Submit( *this );
 		}
 	}

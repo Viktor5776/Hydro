@@ -1,6 +1,8 @@
 #pragma once
 #include "Level.h"
 #include <chrono>
+#include <optional>
+#include "../utl/StackTrace.h"
 
 namespace hydro::log
 {
@@ -12,5 +14,6 @@ namespace hydro::log
 		const wchar_t* sourceFunctionName_ = nullptr;
 		int sourceLine_ = -1;
 		std::chrono::system_clock::time_point timestamp_;
+		std::optional<utl::StackTrace> trace_;
 	};
 }

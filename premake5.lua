@@ -40,7 +40,8 @@ project "Engine"
     {
         -- Add the libraries you need here SDL2 glm etc
         "SDL2",
-        "GLM"
+        "GLM",
+        "backward"
     }
 
     filter "system:windows"

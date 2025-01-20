@@ -13,5 +13,5 @@ namespace hydro::log
 		Debug,
 		Verbose,
 	};
-	std::wstring GetLevelName( Level );
+	std::wstring GetLevelName(Level);
 }

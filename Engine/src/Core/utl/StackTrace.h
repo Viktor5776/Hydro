@@ -13,10 +13,10 @@ namespace hydro::utl
 	{
 	public:
 		StackTrace();
-		StackTrace( const StackTrace& );
-		StackTrace& operator=( const StackTrace& );
+		StackTrace(const StackTrace&);
+		StackTrace& operator=(const StackTrace&);
 		~StackTrace();
-		std::wstring Print() const; 
+		std::wstring Print() const;
 	private:
 		std::unique_ptr<backward::StackTrace> pTrace;
 	};

@@ -23,13 +23,13 @@ namespace Ioc
 		{
 			std::string s;
 		};
-		ParameterizedClass( IocParams params ) : s{ std::move( params.s ) } {}
+		ParameterizedClass(IocParams params) : s{ std::move(params.s) } {}
 		std::string s;
 	};
 	struct Dependant
 	{
 		std::shared_ptr<Base> pDependency;
-		Dependant( std::shared_ptr<Base> pDependency_in ) : pDependency{ std::move( pDependency_in ) } {}
+		Dependant(std::shared_ptr<Base> pDependency_in) : pDependency{ std::move(pDependency_in) } {}
 	};
 
 	using namespace hydro;
@@ -54,37 +54,37 @@ namespace Ioc
 		std::unique_ptr<ioc::Singletons> pSing;
 	};
 
-	TEST_F( IocSingletonTests, PolymorphicResolveDirect )
+	TEST_F(IocSingletonTests, PolymorphicResolveDirect)
 	{
-		pSing->Register<Base>( [] {return std::make_shared<Derived>(); } );
-		EXPECT_EQ( 42, pSing->Resolve<Base>()->Test() );
+		pSing->Register<Base>([] {return std::make_shared<Derived>(); });
+		EXPECT_EQ(42, pSing->Resolve<Base>()->Test());
 	}
 	// registering a service with a derived implementation, and resolving derived
 	// indirect creation using ioc container
-	TEST_F( IocSingletonTests, PolymorphicResolveIndirect )
+	TEST_F(IocSingletonTests, PolymorphicResolveIndirect)
 	{
-		pIoc->Register<Base>( [] {return std::make_shared<Derived>(); } );
-		pSing->Register<Base>( [this] {return pIoc->Resolve<Base>(); } );
-		EXPECT_EQ( 42, pSing->Resolve<Base>()->Test() );
+		pIoc->Register<Base>([] {return std::make_shared<Derived>(); });
+		pSing->Register<Base>([this] {return pIoc->Resolve<Base>(); });
+		EXPECT_EQ(42, pSing->Resolve<Base>()->Test());
 	}
 	// trying to resolve a service without registering
-	TEST_F( IocSingletonTests, SimpleResolveFailure )
+	TEST_F(IocSingletonTests, SimpleResolveFailure)
 	{
-		EXPECT_THROW( pSing->Resolve<Base>(), std::runtime_error );
+		EXPECT_THROW(pSing->Resolve<Base>(), std::runtime_error);
 	}
 	// dependent resolve, where resolved instances of the same type are the object
-	TEST_F( IocSingletonTests, DependentResolve )
+	TEST_F(IocSingletonTests, DependentResolve)
 	{
-		pSing->Register<ParameterizedClass>( [] {
-			return std::make_shared<ParameterizedClass>( ParameterizedClass::IocParams{ .s = "first"s } );
-		} );
+		pSing->Register<ParameterizedClass>([] {
+			return std::make_shared<ParameterizedClass>(ParameterizedClass::IocParams{ .s = "first"s });
+		});
 		auto pFirst = pSing->Resolve<ParameterizedClass>();
 		auto pSecond = pSing->Resolve<ParameterizedClass>();
-		EXPECT_EQ( "first"s, pFirst->s );
-		EXPECT_EQ( "first"s, pSecond->s );
+		EXPECT_EQ("first"s, pFirst->s);
+		EXPECT_EQ("first"s, pSecond->s);
 		// changing one should affect the other
 		pFirst->s = "pube"s;
-		EXPECT_EQ( "pube"s, pFirst->s );
-		EXPECT_EQ( "pube"s, pSecond->s );
+		EXPECT_EQ("pube"s, pFirst->s);
+		EXPECT_EQ("pube"s, pSecond->s);
 	}
 }

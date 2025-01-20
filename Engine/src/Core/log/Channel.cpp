@@ -5,37 +5,34 @@
 namespace hydro::log
 {
 
-	Channel::Channel( std::vector<std::shared_ptr<IDriver>> driverPtrs )
+	Channel::Channel(std::vector<std::shared_ptr<IDriver>> driverPtrs)
 		:
-		driverPtrs_( std::move(driverPtrs) )
+		driverPtrs_(std::move(driverPtrs))
 	{}
 
 	Channel::~Channel()
 	{}
 
-	void Channel::Submit( Entry& entry )
+	void Channel::Submit(Entry& entry)
 	{
-		for( auto& pPolicy : policyPtrs_ )
-		{
-			if( !pPolicy->TransformFilter( entry ) )
-			{
+		for (auto& pPolicy : policyPtrs_) {
+			if (!pPolicy->TransformFilter(entry)) {
 				return;
 			}
 		}
-		for( auto& pDriver : driverPtrs_ )
-		{
-			pDriver->Submit( entry );
+		for (auto& pDriver : driverPtrs_) {
+			pDriver->Submit(entry);
 		}
 	}
 
-	void Channel::AttachDriver( std::shared_ptr<IDriver> pDriver )
+	void Channel::AttachDriver(std::shared_ptr<IDriver> pDriver)
 	{
-		driverPtrs_.push_back( std::move( pDriver ) );
+		driverPtrs_.push_back(std::move(pDriver));
 	}
 
-	void Channel::AttachPolicy( std::unique_ptr<IPolicy> pPolicy )
+	void Channel::AttachPolicy(std::unique_ptr<IPolicy> pPolicy)
 	{
-		policyPtrs_.push_back( std::move( pPolicy ) );
+		policyPtrs_.push_back(std::move(pPolicy));
 	}
 
 }

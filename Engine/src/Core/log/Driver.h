@@ -10,12 +10,12 @@ namespace hydro::log
 	{
 	public:
 		virtual ~IDriver() = default;
-		virtual void Submit( const Entry& ) = 0;
+		virtual void Submit(const Entry&) = 0;
 	};
 
 	class ITextDriver : public IDriver
 	{
 	public:
-		virtual void SetFormmater( std::unique_ptr<ITextFormatter> ) = 0;
+		virtual void SetFormmater(std::unique_ptr<ITextFormatter>) = 0;
 	};
 }

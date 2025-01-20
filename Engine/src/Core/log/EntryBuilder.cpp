@@ -3,7 +3,7 @@
 
 namespace hydro::log
 {
-	EntryBuilder::EntryBuilder( const wchar_t* sourceFile, const wchar_t* sourceFunctionName, int sourceLine )
+	EntryBuilder::EntryBuilder(const wchar_t* sourceFile, const wchar_t* sourceFunctionName, int sourceLine)
 		:
 		Entry{
 			.sourceFile_ = sourceFile,
@@ -11,68 +11,67 @@ namespace hydro::log
 			.sourceLine_ = sourceLine,
 			.timestamp_ = std::chrono::system_clock::now()
 		}
+	{}
+	EntryBuilder& EntryBuilder::note(std::wstring note)
 	{
-	}
-	EntryBuilder& EntryBuilder::note( std::wstring note )
-	{
-		note_ = std::move( note );
+		note_ = std::move(note);
 		return *this;
 	}
-	EntryBuilder& EntryBuilder::level( Level level )
+	EntryBuilder& EntryBuilder::level(Level level)
 	{
 		level_ = level;
 		return *this;
 	}
-	EntryBuilder& EntryBuilder::verbose( std::wstring note )
+	EntryBuilder& EntryBuilder::verbose(std::wstring note)
 	{
-		note_ = std::move( note );
+		note_ = std::move(note);
 		level_ = Level::Verbose;
 		return *this;
 	}
-	EntryBuilder& EntryBuilder::debug( std::wstring note )
+	EntryBuilder& EntryBuilder::debug(std::wstring note)
 	{
-		note_ = std::move( note );
+		note_ = std::move(note);
 		level_ = Level::Debug;
 		return *this;
 	}
-	EntryBuilder& EntryBuilder::info( std::wstring note )
+	EntryBuilder& EntryBuilder::info(std::wstring note)
 	{
-		note_ = std::move( note );
+		note_ = std::move(note);
 		level_ = Level::Info;
 		return *this;
 	}
-	EntryBuilder& EntryBuilder::warn( std::wstring note )
+	EntryBuilder& EntryBuilder::warn(std::wstring note)
 	{
-		note_ = std::move( note );
+		note_ = std::move(note);
 		level_ = Level::Warn;
 		return *this;
 	}
-	EntryBuilder& EntryBuilder::error( std::wstring note )
+	EntryBuilder& EntryBuilder::error(std::wstring note)
 	{
-		note_ = std::move( note );
+		note_ = std::move(note);
 		level_ = Level::Error;
 		return *this;
 	}
-	EntryBuilder& EntryBuilder::fatal( std::wstring note )
+	EntryBuilder& EntryBuilder::fatal(std::wstring note)
 	{
-		note_ = std::move( note );
+		note_ = std::move(note);
 		level_ = Level::Fatal;
 		return *this;
 	}
-	EntryBuilder& EntryBuilder::chan( IChannel* pChan )
+	EntryBuilder& EntryBuilder::chan(IChannel* pChan)
 	{
 		pDest_ = pChan;
 		return *this;
 	}
 	EntryBuilder::~EntryBuilder()
 	{
-		if( pDest_ ) {
-			
-			if( (int)level_ <= (int)Level::Error ) {
+		if (pDest_) {
+
+			if ((int)level_ <= (int)Level::Error) {
 				trace_.emplace();
 			}
 
-			pDest_->Submit( *this );
+			pDest_->Submit(*this);
 		}
 	}
 }

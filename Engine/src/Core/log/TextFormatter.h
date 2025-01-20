@@ -9,12 +9,12 @@ namespace hydro::log
 	{
 	public:
 		virtual ~ITextFormatter() = default;
-		virtual std::wstring Format( const Entry& ) = 0;
+		virtual std::wstring Format(const Entry&) = 0;
 	};
 
 	class TextFormatter : public ITextFormatter
 	{
 	public:
-		std::wstring Format( const Entry& e ) override;
+		std::wstring Format(const Entry& e) override;
 	};
 }

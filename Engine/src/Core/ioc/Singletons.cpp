@@ -2,9 +2,9 @@
 
 namespace hydro::ioc
 {
-    Singletons& Sing()
-    {
-        static Singletons sing;
-        return sing;
-    }
+	Singletons& Sing()
+	{
+		static Singletons sing;
+		return sing;
+	}
 }

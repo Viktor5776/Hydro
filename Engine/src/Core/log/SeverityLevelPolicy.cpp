@@ -4,12 +4,12 @@
 namespace hydro::log
 {
 
-	SeverityLevelPolicy::SeverityLevelPolicy( Level level )
+	SeverityLevelPolicy::SeverityLevelPolicy(Level level)
 		:
-		level_( level )
+		level_(level)
 	{}
 
-	bool SeverityLevelPolicy::TransformFilter( Entry& entry )
+	bool SeverityLevelPolicy::TransformFilter(Entry& entry)
 	{
 		return entry.level_ <= level_;
 	}

@@ -12,26 +12,25 @@ namespace hydro::utl
 		pTrace->load_here(64);
 	}
 
-	StackTrace::StackTrace( const StackTrace& src)
+	StackTrace::StackTrace(const StackTrace& src)
 		:
-		pTrace( std::make_unique<backward::StackTrace>(*pTrace) )
+		pTrace(std::make_unique<backward::StackTrace>(*pTrace))
 	{}
 
-	StackTrace& StackTrace::operator=( const StackTrace& src)
+	StackTrace& StackTrace::operator=(const StackTrace& src)
 	{
-		pTrace = std::make_unique<backward::StackTrace>( *pTrace );
+		pTrace = std::make_unique<backward::StackTrace>(*pTrace);
 		return *this;
 	}
 
 	StackTrace::~StackTrace()
-	{
-	}
+	{}
 
 	std::wstring StackTrace::Print() const
 	{
 		std::ostringstream oss;
 		backward::Printer printer;
-		printer.print( *pTrace, oss );
+		printer.print(*pTrace, oss);
 		return utl::ToWide(oss.str());
 	}
 

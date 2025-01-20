@@ -8,6 +8,6 @@ namespace hydro::log
 	{
 	public:
 		virtual ~IPolicy() = default;
-		virtual bool TransformFilter( Entry& ) = 0;
+		virtual bool TransformFilter(Entry&) = 0;
 	};
 }

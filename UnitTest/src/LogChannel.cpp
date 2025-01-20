@@ -12,7 +12,7 @@ using namespace std::string_literals;
 class MockDriver : public log::IDriver
 {
 public:
-	void Submit( const log::Entry& e ) override
+	void Submit(const log::Entry& e) override
 	{
 		entry_ = e;
 	}
@@ -21,35 +21,35 @@ public:
 
 namespace Log
 {
-	TEST( LogChannelTests, TestForwarding )
+	TEST(LogChannelTests, TestForwarding)
 	{
 		log::Channel chan;
 		auto pDriver1 = std::make_shared<MockDriver>();
 		auto pDriver2 = std::make_shared<MockDriver>();
 
-		chan.AttachDriver( pDriver1 );
-		chan.AttachDriver( pDriver2 );
+		chan.AttachDriver(pDriver1);
+		chan.AttachDriver(pDriver2);
 
-		hydrolog.info( L"HI" ).chan( &chan );
+		hydrolog.info(L"HI").chan(&chan);
 
-		EXPECT_EQ( L"HI"s, pDriver1->entry_.note_ );
-		EXPECT_EQ( log::Level::Info, pDriver1->entry_.level_ );
-		EXPECT_EQ( L"HI"s, pDriver2->entry_.note_ );
-		EXPECT_EQ( log::Level::Info, pDriver2->entry_.level_ );
+		EXPECT_EQ(L"HI"s, pDriver1->entry_.note_);
+		EXPECT_EQ(log::Level::Info, pDriver1->entry_.level_);
+		EXPECT_EQ(L"HI"s, pDriver2->entry_.note_);
+		EXPECT_EQ(log::Level::Info, pDriver2->entry_.level_);
 	}
 
-	TEST( LogChannelTests, TestPolicyFiltering )
+	TEST(LogChannelTests, TestPolicyFiltering)
 	{
 		log::Channel chan;
 		auto pDriver1 = std::make_shared<MockDriver>();
-		chan.AttachDriver( pDriver1 );
+		chan.AttachDriver(pDriver1);
 
-		chan.AttachPolicy( std::make_unique<log::SeverityLevelPolicy>( log::Level::Info ) );
-		hydrolog.info( L"HI" ).chan( &chan );
-		EXPECT_EQ( L"HI"s, pDriver1->entry_.note_ );
-		EXPECT_EQ( log::Level::Info, pDriver1->entry_.level_ );
-		hydrolog.debug( L"HELLO" ).chan( &chan );
-		EXPECT_EQ( L"HI"s, pDriver1->entry_.note_ );
-		EXPECT_EQ( log::Level::Info, pDriver1->entry_.level_ );
+		chan.AttachPolicy(std::make_unique<log::SeverityLevelPolicy>(log::Level::Info));
+		hydrolog.info(L"HI").chan(&chan);
+		EXPECT_EQ(L"HI"s, pDriver1->entry_.note_);
+		EXPECT_EQ(log::Level::Info, pDriver1->entry_.level_);
+		hydrolog.debug(L"HELLO").chan(&chan);
+		EXPECT_EQ(L"HI"s, pDriver1->entry_.note_);
+		EXPECT_EQ(log::Level::Info, pDriver1->entry_.level_);
 	}
 }

@@ -25,22 +25,22 @@ namespace hydro::ioc
 		template<class T>
 		using Generator = std::function<std::shared_ptr<T>()>;
 		template<class T>
-		using ParameterizedGenerator = std::function<std::shared_ptr<T>( typename T::IocParams )>;
+		using ParameterizedGenerator = std::function<std::shared_ptr<T>(typename T::IocParams)>;
 		// functions
 		template<Parameterized T>
-		void Register( ParameterizedGenerator<T> gen )
+		void Register(ParameterizedGenerator<T> gen)
 		{
 			serviceMap_[typeid(T)] = gen;
 		}
 		template<NotParameterized T>
-		void Register( Generator<T> gen )
+		void Register(Generator<T> gen)
 		{
 			serviceMap_[typeid(T)] = gen;
 		}
 		template<Parameterized T>
-		std::shared_ptr<T> Resolve( typename T::IocParams&& params = {} ) const
+		std::shared_ptr<T> Resolve(typename T::IocParams&& params = {}) const
 		{
-			return Resolve_<T, ParameterizedGenerator<T>>( std::forward<typename T::IocParams>( params ) );
+			return Resolve_<T, ParameterizedGenerator<T>>(std::forward<typename T::IocParams>(params));
 		}
 		template<NotParameterized T>
 		std::shared_ptr<T> Resolve() const
@@ -50,15 +50,14 @@ namespace hydro::ioc
 	private:
 		// functions
 		template<class T, class G, typename...Ps>
-		std::shared_ptr<T> Resolve_( Ps&&...arg ) const
+		std::shared_ptr<T> Resolve_(Ps&&...arg) const
 		{
-			if( const auto i = serviceMap_.find( typeid(T) ); i != serviceMap_.end() )
-			{
+			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
 				const auto& entry = i->second;
 				try {
-					return std::any_cast<G>(entry)(std::forward<Ps>( arg )...);
+					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
 				}
-				catch( const std::bad_any_cast& ) {
+				catch (const std::bad_any_cast&) {
 					// TODO: make this an assert
 					throw std::logic_error{ std::format(
 						"Could not resolve IoC mapped type\nfrom: [{}]\n  to: [{}]\n",
@@ -66,9 +65,8 @@ namespace hydro::ioc
 					) };
 				}
 			}
-			else
-			{
-				throw std::runtime_error{ std::format( "Could not find generator for type [{}] in IoC container", typeid(T).name() ) };
+			else {
+				throw std::runtime_error{ std::format("Could not find generator for type [{}] in IoC container", typeid(T).name()) };
 			}
 		}
 		// data

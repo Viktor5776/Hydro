@@ -2,10 +2,9 @@
 
 namespace hydro::log
 {
-	std::wstring GetLevelName( Level lv )
+	std::wstring GetLevelName(Level lv)
 	{
-		switch( lv )
-		{
+		switch (lv) {
 		case Level::Verbose: return L"Verbose";
 		case Level::Debug: return L"Debug";
 		case Level::Info: return L"Info";

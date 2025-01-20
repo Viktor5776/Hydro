@@ -3,6 +3,6 @@
 
 namespace hydro::utl
 {
-	std::wstring ToWide( const std::string& str );
-	std::string ToNarrow( const std::wstring& str );
+	std::wstring ToWide(const std::string& str);
+	std::string ToNarrow(const std::wstring& str);
 }

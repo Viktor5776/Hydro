@@ -3,13 +3,15 @@
 
 namespace hydro::log
 {
-	class MsvcDebugDriver : public ITextDriver
+	class IMsvcDebugDriver : public ITextDriver {};
+
+	class MsvcDebugDriver : public IMsvcDebugDriver
 	{
 	public:
-		MsvcDebugDriver(std::unique_ptr<ITextFormatter> pFormatter_ = {});
+		MsvcDebugDriver(std::shared_ptr<ITextFormatter> pFormatter_ = {});
 		void Submit(const Entry& e) override;
-		void SetFormmater(std::unique_ptr<ITextFormatter> pFormatter) override;
+		void SetFormatter(std::shared_ptr<ITextFormatter> pFormatter) override;
 	private:
-		std::unique_ptr<ITextFormatter> pFormatter_;
+		std::shared_ptr<ITextFormatter> pFormatter_;
 	};
 }

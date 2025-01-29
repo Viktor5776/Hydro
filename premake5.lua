@@ -59,7 +59,7 @@ project "Engine"
         defines "HYDRO_DEBUG"
         symbols "On"
 
-    filter "configurations:Realse"
+    filter "configurations:Release"
         defines "HYDRO_RELEASE"
         optimize "On"     
 
@@ -115,7 +115,7 @@ project "Editor"
         defines "HYDRO_DEBUG"
         symbols "On"
 
-    filter "configurations:Realse"
+    filter "configurations:Release"
         defines "HYDRO_RELEASE"
         optimize "On"
  
@@ -172,7 +172,7 @@ project "Sandbox"
         defines "HYDRO_DEBUG"
         symbols "On"
 
-    filter "configurations:Realse"
+    filter "configurations:Release"
         defines "HYDRO_RELEASE"
         optimize "On"
 

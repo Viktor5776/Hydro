@@ -12,9 +12,11 @@ namespace hydro::utl
 	class StackTrace
 	{
 	public:
-		StackTrace();
+		StackTrace(size_t skip = 0);
 		StackTrace(const StackTrace&);
+		StackTrace(StackTrace&&) noexcept;
 		StackTrace& operator=(const StackTrace&);
+		StackTrace& operator=(StackTrace&&) noexcept;
 		~StackTrace();
 		std::wstring Print() const;
 	private:

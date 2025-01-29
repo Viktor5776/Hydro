@@ -63,12 +63,17 @@ namespace hydro::log
 		pDest_ = pChan;
 		return *this;
 	}
+	EntryBuilder& EntryBuilder::trace_skip(int depth)
+	{
+		traceSkipDepth = depth;
+		return *this;
+	}
 	EntryBuilder::~EntryBuilder()
 	{
 		if (pDest_) {
 
 			if ((int)level_ <= (int)Level::Error) {
-				trace_.emplace();
+				trace_.emplace(traceSkipDepth);
 			}
 
 			pDest_->Submit(*this);

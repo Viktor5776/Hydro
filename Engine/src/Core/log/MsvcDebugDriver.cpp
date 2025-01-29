@@ -6,7 +6,7 @@
 namespace hydro::log
 {
 
-	MsvcDebugDriver::MsvcDebugDriver(std::unique_ptr<ITextFormatter> pFormatter_)
+	MsvcDebugDriver::MsvcDebugDriver(std::shared_ptr<ITextFormatter> pFormatter_)
 		:
 		pFormatter_(std::move(pFormatter_))
 	{}
@@ -18,7 +18,7 @@ namespace hydro::log
 		}
 	}
 
-	void MsvcDebugDriver::SetFormmater(std::unique_ptr<ITextFormatter> pFormatter)
+	void MsvcDebugDriver::SetFormatter(std::shared_ptr<ITextFormatter> pFormatter)
 	{
 		pFormatter_ = std::move(pFormatter);
 	}

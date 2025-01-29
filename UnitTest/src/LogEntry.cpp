@@ -16,7 +16,7 @@ public:
 		entry_ = e;
 	}
 	void AttachDriver(std::shared_ptr<log::IDriver>) override {}
-	void AttachPolicy(std::unique_ptr<log::IPolicy>) override {}
+	void AttachPolicy(std::shared_ptr<log::IPolicy>) override {}
 	log::Entry entry_;
 };
 

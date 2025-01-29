@@ -1,6 +1,7 @@
 #include "TextFormatter.h"
 #include "Entry.h"
 #include <format>
+#include <sstream>
 
 
 namespace hydro::log
@@ -8,7 +9,8 @@ namespace hydro::log
 
 	std::wstring TextFormatter::Format(const Entry& e)
 	{
-		return std::format(L"@{} {{{}}} {}\n  >> at {}\n     {}({})\n",
+		std::wostringstream oss;
+		oss << std::format(L"@{} {{{}}} {}\n  >> at {}\n     {}({})\n",
 			GetLevelName(e.level_),
 			std::chrono::zoned_time{ std::chrono::current_zone(), e.timestamp_ },
 			e.note_,
@@ -16,6 +18,10 @@ namespace hydro::log
 			e.sourceFile_,
 			e.sourceLine_
 		);
+		if (e.trace_) {
+			oss << e.trace_->Print() << std::endl;
+		}
+		return oss.str();
 	}
 
 }

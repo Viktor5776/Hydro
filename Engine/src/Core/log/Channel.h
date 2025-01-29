@@ -15,7 +15,7 @@ namespace hydro::log
 		virtual ~IChannel() = default;
 		virtual void Submit(Entry&) = 0;
 		virtual void AttachDriver(std::shared_ptr<IDriver>) = 0;
-		virtual void AttachPolicy(std::unique_ptr<IPolicy>) = 0;
+		virtual void AttachPolicy(std::shared_ptr<IPolicy>) = 0;
 	};
 
 	class Channel : public IChannel
@@ -25,9 +25,9 @@ namespace hydro::log
 		~Channel();
 		virtual void Submit(Entry&) override;
 		virtual void AttachDriver(std::shared_ptr<IDriver>) override;
-		virtual void AttachPolicy(std::unique_ptr<IPolicy>) override;
+		virtual void AttachPolicy(std::shared_ptr<IPolicy>) override;
 	private:
 		std::vector<std::shared_ptr<IDriver>> driverPtrs_;
-		std::vector<std::unique_ptr<IPolicy>> policyPtrs_;
+		std::vector<std::shared_ptr<IPolicy>> policyPtrs_;
 	};
 }

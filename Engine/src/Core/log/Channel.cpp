@@ -30,7 +30,7 @@ namespace hydro::log
 		driverPtrs_.push_back(std::move(pDriver));
 	}
 
-	void Channel::AttachPolicy(std::unique_ptr<IPolicy> pPolicy)
+	void Channel::AttachPolicy(std::shared_ptr<IPolicy> pPolicy)
 	{
 		policyPtrs_.push_back(std::move(pPolicy));
 	}

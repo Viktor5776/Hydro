@@ -1,0 +1,82 @@
+@Fatal {2025-01-29 21:22:19.5405385 GMT+1} Hello There!
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(15)
+Stack trace (most recent call last):
+#2    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 15, in main
+         12: {
+         13: 	Boot();
+         14: 
+      >  15: 	hydrolog.fatal(L"Hello There!");
+         16: 	hydrolog.warn(L"huh");
+         17: 	hydrolog.error(L"oops!");
+
+@Error {2025-01-29 21:22:19.5944456 GMT+1} oops!
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(17)
+Stack trace (most recent call last):
+#2    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 17, in main
+         15: 	hydrolog.fatal(L"Hello There!");
+         16: 	hydrolog.warn(L"huh");
+      >  17: 	hydrolog.error(L"oops!");
+         18: 
+         19: 	return 0;
+         20: }
+
+@Fatal {2025-01-29 21:35:08.8943852 GMT+1} Hello There!
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(21)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 21, in main
+         18: {
+         19: 	Boot();
+         20: 
+      >  21: 	hydrolog.fatal(L"Hello There!");
+         22: 	hydrolog.warn(L"huh");
+         23: 	hydrolog.error(L"oops!");
+
+@Fatal {2025-01-29 21:35:19.4502618 GMT+1} Hello There!
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(21)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 21, in main
+         18: {
+         19: 	Boot();
+         20: 
+      >  21: 	hydrolog.fatal(L"Hello There!");
+         22: 	hydrolog.warn(L"huh");
+         23: 	hydrolog.error(L"oops!");
+
+@Warning {2025-01-29 21:35:19.5151356 GMT+1} huh
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(22)
+@Error {2025-01-29 21:35:19.5155884 GMT+1} oops!
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(23)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 23, in main
+         21: 	hydrolog.fatal(L"Hello There!");
+         22: 	hydrolog.warn(L"huh");
+      >  23: 	hydrolog.error(L"oops!");
+         24: 
+         25: 	return 0;
+         26: }
+

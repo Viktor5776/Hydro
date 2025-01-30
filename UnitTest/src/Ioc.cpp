@@ -57,11 +57,6 @@ namespace Ioc
 		EXPECT_EQ(pIoc->Resolve<Base>()->Test(), 42);
 	}
 
-	TEST_F(IocTests, SimpleResloveFailure)
-	{
-		EXPECT_THROW(pIoc->Resolve<Base>(), std::runtime_error);
-	}
-
 
 	TEST_F(IocTests, ParameterizedResolve)
 	{

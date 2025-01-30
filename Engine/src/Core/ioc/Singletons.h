@@ -7,6 +7,9 @@
 #include <stdexcept>
 #include <format>
 #include "Container.h"
+#include "Exception.h"
+#include "../utl/Assert.h"
+#include "../utl/String.h"
 
 namespace hydro::ioc
 {
@@ -44,14 +47,14 @@ namespace hydro::ioc
 					return pInstance;
 				}
 				catch (const std::bad_any_cast&) {
-					throw std::logic_error{ std::format(
-						"Could not resolve Singleton mapped type\nfrom: [{}]\n  to: [{}]\n",
-						entry.type().name(), typeid(Generator<T>).name()
-					) };
+					hchk_fail.msg(std::format(
+						L"Could not resolve Singleton mapped type\nfrom: [{}]\n  to: [{}]\n",
+						utl::ToWide(entry.type().name()), utl::ToWide(typeid(Generator<T>).name())
+					)).ex();
 				}
 			}
 			else {
-				throw std::runtime_error{ std::format("Could not find entry for type [{}] in singleton container", typeid(T).name()) };
+				throw ServiceNotFound{ std::format("Could not find entry for type [{}] in singleton container", typeid(T).name()) };
 			}
 		}
 	private:

@@ -11,6 +11,7 @@ namespace hydro::log
 	public:
 		virtual ~IDriver() = default;
 		virtual void Submit(const Entry&) = 0;
+		virtual void Flush() = 0;
 	};
 
 	class ITextDriver : public IDriver

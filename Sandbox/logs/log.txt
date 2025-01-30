@@ -80,3 +80,365 @@ Stack trace (most recent call last):
          25: 	return 0;
          26: }
 
+@Error {2025-01-30 09:40:38.3113665 GMT+1} Assertion Failed! x > y
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(25)
+Stack trace (most recent call last):
+
+@Error {2025-01-30 09:40:38.3638174 GMT+1} Assertion Failed! x > y
+   x => 0
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(28)
+Stack trace (most recent call last):
+#19   Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#18   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#17   Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 28, in main
+         25: 	hchk(x > y);
+         26: 
+         27: 	try {
+      >  28: 		hchk(x > y).ass_watch(x).ex();
+         29: 	}
+         30: 	catch (const std::exception& e) {
+         31: 		std::cout << e.what() << std::endl;
+#16   Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Engine\src\Core\utl\Assert.cpp", line 34, in hydro::utl::Assertion::ex
+         31: 	void Assertion::ex()
+         32: 	{
+         33: 		consequence_ = Consequence::Exception;
+      >  34: 		throw FailedAssertion{};
+         35: 	}
+         36: }
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcruntime\src\eh\throw.cpp", line 82, in _CxxThrowException
+#14   Object "", at 00007FF98389FB4C, in RaiseException
+#13   Object "", at 00007FF98605443E, in KiUserExceptionDispatcher
+#12   Object "", at 00007FF985FCE886, in RtlFindCharInUnicodeString
+#11   Object "", at 00007FF98605543F, in _chkstk
+#10   Source "D:\a\_work\1\s\src\vctools\crt\vcruntime\src\eh\risctrnsctrl.cpp", line 306, in __CxxFrameHandler4
+#9    Source "D:\a\_work\1\s\src\vctools\crt\vcruntime\src\eh\frame.cpp", line 236, in __InternalCxxFrameHandlerWrapper<__FrameHandler4>
+#8    Source "D:\a\_work\1\s\src\vctools\crt\vcruntime\src\eh\frame.cpp", line 403, in __InternalCxxFrameHandler<__FrameHandler4>
+#7    Source "D:\a\_work\1\s\src\vctools\crt\vcruntime\src\eh\frame.cpp", line 629, in FindHandler<__FrameHandler4>
+#6    Source "D:\a\_work\1\s\src\vctools\crt\vcruntime\src\eh\frame.cpp", line 1374, in CatchIt<__FrameHandler4>
+#5    Source "D:\a\_work\1\s\src\vctools\crt\vcruntime\src\eh\risctrnsctrl.cpp", line 688, in __FrameHandler4::UnwindNestedFrames
+#4    Object "", at 00007FF985FD0174, in RtlUnwindEx
+#3    Object "", at 00007FF9860554BF, in _chkstk
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcruntime\src\eh\risctrnsctrl.cpp", line 306, in __CxxFrameHandler4
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcruntime\src\eh\frame.cpp", line 236, in __InternalCxxFrameHandlerWrapper<__FrameHandler4>
+#0    Source "D:\a\_work\1\s\src\vctools\crt\vcruntime\src\eh\frame.cpp", line 403, in __InternalCxxFrameHandler<__FrameHandler4>
+
+@Fatal {2025-01-30 10:32:42.6250213 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   x => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").ass_watch(x, y, rand());
+         25: 
+         26: 	return 0;
+         27: }
+
+@Fatal {2025-01-30 10:34:18.9592910 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   x => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").ass_watch(x, y, rand());
+         25: 
+         26: 	return 0;
+         27: }
+
+@Fatal {2025-01-30 10:58:19.6915982 GMT+1} Assertion Failed! x > y
+  Msg: Butts
+   x => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Butts").ass_watch(x, y, rand());
+         25: 
+         26: 	return 0;
+         27: }
+
+@Fatal {2025-01-30 11:07:58.9685529 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   x => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").ass_watch(x, y, rand());
+         25: 
+         26: 	return 0;
+         27: }
+
+@Fatal {2025-01-30 11:19:32.8209886 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   x => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(25)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 25, in main
+         24: 	int x = 0, y = 1;
+      >  25: 	hass(x > y).msg(L"Test").ass_watch(x, y, rand());
+         26: 
+         27: 	return 0;
+         28: }
+
+@Fatal {2025-01-30 11:23:50.6458261 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   x => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(25)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 25, in main
+         24: 	int x = 0, y = 1;
+      >  25: 	hass(x > y).msg(L"Test").ass_watch(x, y, rand());
+         26: 
+         27: 	return 0;
+         28: }
+
+@Fatal {2025-01-30 11:31:38.0134853 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   x => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").ass_watch(x, y, rand());
+         25: 
+         26: 	return 0;
+         27: }
+
+@Fatal {2025-01-30 11:31:42.1629834 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   x => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").ass_watch(x, y, rand());
+         25: 
+         26: 	return 0;
+         27: }
+
+@Fatal {2025-01-30 11:33:28.0772182 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   x => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").ass_watch(x, y, rand());
+         25: 
+         26: 	return 0;
+         27: }
+
+@Fatal {2025-01-30 14:06:44.5016284 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   #args => 0
+   #args => 1
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").watch(x, y);
+         25: 	return 0;
+         26: }
+
+@Fatal {2025-01-30 14:07:06.8694483 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   #args => 0
+   #args => 1
+   #args => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").watch(x, y, rand());
+         25: 	return 0;
+         26: }
+
+@Fatal {2025-01-30 14:12:19.4370825 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   #args => 0
+   #args => 1
+   #args => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").watch(x, y, rand());
+         25: 	return 0;
+         26: }
+
+@Fatal {2025-01-30 14:18:37.1990085 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   name => 0
+   name => 1
+   name => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").watch(x, y, rand());
+         25: 	return 0;
+         26: }
+
+@Fatal {2025-01-30 14:19:14.8019691 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   args => 0
+   args => 1
+   args => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").watch(x, y, rand());
+         25: 	return 0;
+         26: }
+
+@Fatal {2025-01-30 14:27:57.5799462 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   arg1 => 0
+   arg2 => 1
+   arg3 => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(24)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 24, in main
+         21: 	Boot();
+         22: 
+         23: 	int x = 0, y = 1;
+      >  24: 	hass(x > y).msg(L"Test").watch(x, y, rand());
+         25: 	return 0;
+         26: }
+

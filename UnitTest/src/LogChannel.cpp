@@ -16,6 +16,7 @@ public:
 	{
 		entry_ = e;
 	}
+	void Flush() override {}
 	log::Entry entry_;
 };
 

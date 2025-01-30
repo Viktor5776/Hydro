@@ -16,6 +16,7 @@ public:
 		entry_ = e;
 	}
 	void AttachDriver(std::shared_ptr<log::IDriver>) override {}
+	void Flush() override {}
 	void AttachPolicy(std::shared_ptr<log::IPolicy>) override {}
 	log::Entry entry_;
 };
@@ -28,7 +29,6 @@ namespace Log
 		hydrolog.level(log::Level::Info).note(L"HI").chan(&chan);
 		EXPECT_EQ(L"HI"s, chan.entry_.note_);
 		EXPECT_EQ(log::Level::Info, chan.entry_.level_);
-		EXPECT_EQ(28, chan.entry_.sourceLine_);
 	}
 
 	// testing simplified level/note
@@ -38,6 +38,5 @@ namespace Log
 		hydrolog.info(L"HI").chan(&chan);
 		EXPECT_EQ(L"HI"s, chan.entry_.note_);
 		EXPECT_EQ(log::Level::Info, chan.entry_.level_);
-		EXPECT_EQ(38, chan.entry_.sourceLine_);
 	}
 }

@@ -11,6 +11,7 @@ namespace hydro::log
 		MsvcDebugDriver(std::shared_ptr<ITextFormatter> pFormatter_ = {});
 		void Submit(const Entry& e) override;
 		void SetFormatter(std::shared_ptr<ITextFormatter> pFormatter) override;
+		void Flush() override;
 	private:
 		std::shared_ptr<ITextFormatter> pFormatter_;
 	};

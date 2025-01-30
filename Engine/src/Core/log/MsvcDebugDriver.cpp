@@ -23,4 +23,5 @@ namespace hydro::log
 		pFormatter_ = std::move(pFormatter);
 	}
 
+	void MsvcDebugDriver::Flush() {}
 }

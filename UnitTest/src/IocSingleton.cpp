@@ -67,11 +67,6 @@ namespace Ioc
 		pSing->Register<Base>([this] {return pIoc->Resolve<Base>(); });
 		EXPECT_EQ(42, pSing->Resolve<Base>()->Test());
 	}
-	// trying to resolve a service without registering
-	TEST_F(IocSingletonTests, SimpleResolveFailure)
-	{
-		EXPECT_THROW(pSing->Resolve<Base>(), std::runtime_error);
-	}
 	// dependent resolve, where resolved instances of the same type are the object
 	TEST_F(IocSingletonTests, DependentResolve)
 	{

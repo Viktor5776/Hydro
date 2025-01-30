@@ -25,6 +25,13 @@ namespace hydro::log
 		}
 	}
 
+	void Channel::Flush()
+	{
+		for (auto& pDriver : driverPtrs_) {
+			pDriver->Flush();
+		}
+	}
+
 	void Channel::AttachDriver(std::shared_ptr<IDriver> pDriver)
 	{
 		driverPtrs_.push_back(std::move(pDriver));

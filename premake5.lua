@@ -45,7 +45,7 @@ project "Engine"
     }
 
     filter "system:windows"
-        cppdialect "C++20"
+        cppdialect "C++latest"
         staticruntime "On"
         systemversion "latest"
 
@@ -95,7 +95,7 @@ project "Editor"
     }
 
     filter "system:windows"
-        cppdialect "C++20"
+        cppdialect "C++latest"
         staticruntime "On"
         systemversion "latest"
 
@@ -152,7 +152,7 @@ project "Sandbox"
     }
 
     filter "system:windows"
-        cppdialect "C++20"
+        cppdialect "C++latest"
         staticruntime "On"
         systemversion "latest"
 
@@ -210,7 +210,7 @@ project "UnitTest"
     }
 
     filter "system:windows"
-        cppdialect "C++20"
+        cppdialect "C++latest"
         staticruntime "On"
         systemversion "latest"
 

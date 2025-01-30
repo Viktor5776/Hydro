@@ -2,8 +2,10 @@
 #include <Core/log/Log.h>
 #include <Core/ioc/Container.h>
 #include <Core/log/SeverityLevelPolicy.h>
+#include <Core/utl/Assert.h>
 
 using namespace hydro;
+using namespace std::string_literals;
 
 void Boot()
 {
@@ -18,9 +20,7 @@ int main()
 {
 	Boot();
 
-	hydrolog.fatal(L"Hello There!");
-	hydrolog.warn(L"huh");
-	hydrolog.error(L"oops!");
-
+	int x = 0, y = 1;
+	hass(x > y).msg(L"Test").watch(x, y, rand());
 	return 0;
 }

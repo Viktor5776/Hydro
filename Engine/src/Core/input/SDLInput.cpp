@@ -1,4 +1,5 @@
 #include "SDLInput.h"
+#include "../utl/Assert.h"
 #include <nlohmann\json.hpp>
 #include <fstream>
 
@@ -35,6 +36,7 @@ namespace hydro::input
     using json = nlohmann::json;
 
     SDLInput::SDLInput() {
+
         // Initialize keyboard states
         for (int i = 0; i < SDL_SCANCODE_COUNT; ++i) {
             keyStates_[static_cast<KeyCode>(i)] = false;
@@ -181,11 +183,87 @@ namespace hydro::input
     }
 
     bool SDLInput::LoadBindingsFromFile(const std::string& path) {
-        return false;
+        std::ifstream in(path);
+        hass(in.is_open()).msg(L"Failed to open input bindings file: {}" + utl::ToWide(path.c_str()));
+
+        json j;
+        in >> j;
+
+        auto& bindingsJson = j["bindings"];
+        hass(bindingsJson.is_object()).msg(L"Invalid format: 'bidings' must be object.");
+
+        for (auto& [action, bindingArray] : bindingsJson.items()) {
+            if (!bindingArray.is_array()) continue;
+
+            for (const auto& bindingJson : bindingArray) {
+                if (!bindingJson.contains("type") || !bindingJson.contains("code")) continue;
+
+                std::string type = bindingJson["type"];
+                std::string code = bindingJson["code"];
+
+                if (type == "Keyboard") {
+                    KeyCode c = GetKeyCodeFromName(code);
+                    
+                    if (c != SDL_SCANCODE_UNKNOWN) {
+                        BindAction(action, InputBinding{ c });
+                    }
+                    else {
+                        hass(false).msg(L"Unknown key code: {}" + utl::ToWide(code.c_str()));
+                    }
+                }
+                else if (type == "Mouse") {
+                    MouseButton btn = MouseButtonFromString(code);
+
+                    if (btn != (MouseButton)-1) {
+                        BindAction(action, InputBinding{ btn });
+                    }
+                    else {
+                        hass(false).msg(L"Unknown mouse button: {}" + utl::ToWide(code.c_str()));
+                    }
+                }
+                else {
+                    hass(false).msg(L"Unknown binding type: {}" + utl::ToWide(type.c_str()));
+                }
+            }
+        }
+
+        return true;
     }
 
     bool SDLInput::SaveBindingsToFile(const std::string& path) const {
-        return false;
+        json j;
+
+        for (const auto& [action, bindings] : actionBindings_) {
+            for (const auto& binding : bindings) {
+                switch (binding.device) {
+                case InputDeviceType::Keyboard: {
+                    std::string name = GetKeyName(binding.key);
+                    j["bindings"][action].push_back({
+                        { "type", "Keyboard" },
+                        { "code", name }
+                        });
+                    break;
+                }
+                case InputDeviceType::MouseButton: {
+                    std::string name = MouseButtonToString(binding.mouseBtn);
+                    j["bindings"][action].push_back({
+                        { "type", "Mouse" },
+                        { "code", name }
+                        });
+                    break;
+                }
+                default:
+                    // Skip unknown input device types
+                    break;
+                }
+            }
+        }
+
+        std::ofstream out(path);
+        hass(out.is_open()).msg(L"Failed to open file for writing: {}" + utl::ToWide(path.c_str()));
+
+        out << j.dump(4);
+        return true;
     }
 
     void SDLInput::ProcessKeyboardEvent(const SDL_Event& event) {

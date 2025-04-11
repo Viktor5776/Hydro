@@ -1,0 +1,694 @@
+{
+    "bindings": {
+        "#": [
+            {
+                "code": "#",
+                "type": "Keyboard"
+            }
+        ],
+        "'": [
+            {
+                "code": "'",
+                "type": "Keyboard"
+            }
+        ],
+        ",": [
+            {
+                "code": ",",
+                "type": "Keyboard"
+            }
+        ],
+        "-": [
+            {
+                "code": "-",
+                "type": "Keyboard"
+            }
+        ],
+        ".": [
+            {
+                "code": ".",
+                "type": "Keyboard"
+            }
+        ],
+        "/": [
+            {
+                "code": "/",
+                "type": "Keyboard"
+            }
+        ],
+        "0": [
+            {
+                "code": "0",
+                "type": "Keyboard"
+            }
+        ],
+        "1": [
+            {
+                "code": "1",
+                "type": "Keyboard"
+            }
+        ],
+        "2": [
+            {
+                "code": "2",
+                "type": "Keyboard"
+            }
+        ],
+        "3": [
+            {
+                "code": "3",
+                "type": "Keyboard"
+            }
+        ],
+        "4": [
+            {
+                "code": "4",
+                "type": "Keyboard"
+            }
+        ],
+        "5": [
+            {
+                "code": "5",
+                "type": "Keyboard"
+            }
+        ],
+        "6": [
+            {
+                "code": "6",
+                "type": "Keyboard"
+            }
+        ],
+        "7": [
+            {
+                "code": "7",
+                "type": "Keyboard"
+            }
+        ],
+        "8": [
+            {
+                "code": "8",
+                "type": "Keyboard"
+            }
+        ],
+        "9": [
+            {
+                "code": "9",
+                "type": "Keyboard"
+            }
+        ],
+        ";": [
+            {
+                "code": ";",
+                "type": "Keyboard"
+            }
+        ],
+        "=": [
+            {
+                "code": "=",
+                "type": "Keyboard"
+            }
+        ],
+        "A": [
+            {
+                "code": "A",
+                "type": "Keyboard"
+            }
+        ],
+        "B": [
+            {
+                "code": "B",
+                "type": "Keyboard"
+            }
+        ],
+        "Backspace": [
+            {
+                "code": "Backspace",
+                "type": "Keyboard"
+            }
+        ],
+        "C": [
+            {
+                "code": "C",
+                "type": "Keyboard"
+            }
+        ],
+        "CapsLock": [
+            {
+                "code": "CapsLock",
+                "type": "Keyboard"
+            }
+        ],
+        "D": [
+            {
+                "code": "D",
+                "type": "Keyboard"
+            }
+        ],
+        "Delete": [
+            {
+                "code": "Delete",
+                "type": "Keyboard"
+            }
+        ],
+        "Down": [
+            {
+                "code": "Down",
+                "type": "Keyboard"
+            }
+        ],
+        "E": [
+            {
+                "code": "E",
+                "type": "Keyboard"
+            }
+        ],
+        "End": [
+            {
+                "code": "End",
+                "type": "Keyboard"
+            }
+        ],
+        "Escape": [
+            {
+                "code": "Escape",
+                "type": "Keyboard"
+            }
+        ],
+        "F": [
+            {
+                "code": "F",
+                "type": "Keyboard"
+            }
+        ],
+        "F1": [
+            {
+                "code": "F1",
+                "type": "Keyboard"
+            }
+        ],
+        "F10": [
+            {
+                "code": "F10",
+                "type": "Keyboard"
+            }
+        ],
+        "F11": [
+            {
+                "code": "F11",
+                "type": "Keyboard"
+            }
+        ],
+        "F12": [
+            {
+                "code": "F12",
+                "type": "Keyboard"
+            }
+        ],
+        "F2": [
+            {
+                "code": "F2",
+                "type": "Keyboard"
+            }
+        ],
+        "F3": [
+            {
+                "code": "F3",
+                "type": "Keyboard"
+            }
+        ],
+        "F4": [
+            {
+                "code": "F4",
+                "type": "Keyboard"
+            }
+        ],
+        "F5": [
+            {
+                "code": "F5",
+                "type": "Keyboard"
+            }
+        ],
+        "F6": [
+            {
+                "code": "F6",
+                "type": "Keyboard"
+            }
+        ],
+        "F7": [
+            {
+                "code": "F7",
+                "type": "Keyboard"
+            }
+        ],
+        "F8": [
+            {
+                "code": "F8",
+                "type": "Keyboard"
+            }
+        ],
+        "F9": [
+            {
+                "code": "F9",
+                "type": "Keyboard"
+            }
+        ],
+        "G": [
+            {
+                "code": "G",
+                "type": "Keyboard"
+            }
+        ],
+        "H": [
+            {
+                "code": "H",
+                "type": "Keyboard"
+            }
+        ],
+        "Home": [
+            {
+                "code": "Home",
+                "type": "Keyboard"
+            }
+        ],
+        "I": [
+            {
+                "code": "I",
+                "type": "Keyboard"
+            }
+        ],
+        "Insert": [
+            {
+                "code": "Insert",
+                "type": "Keyboard"
+            }
+        ],
+        "J": [
+            {
+                "code": "J",
+                "type": "Keyboard"
+            }
+        ],
+        "K": [
+            {
+                "code": "K",
+                "type": "Keyboard"
+            }
+        ],
+        "L": [
+            {
+                "code": "L",
+                "type": "Keyboard"
+            }
+        ],
+        "Left": [
+            {
+                "code": "Left",
+                "type": "Keyboard"
+            }
+        ],
+        "LeftMouse": [
+            {
+                "code": "Left",
+                "type": "Mouse"
+            }
+        ],
+        "M": [
+            {
+                "code": "M",
+                "type": "Keyboard"
+            }
+        ],
+        "Mouse0": [
+            {
+                "code": "Left",
+                "type": "Mouse"
+            }
+        ],
+        "Mouse1": [
+            {
+                "code": "Right",
+                "type": "Mouse"
+            }
+        ],
+        "Mouse2": [
+            {
+                "code": "Middle",
+                "type": "Mouse"
+            }
+        ],
+        "Mouse3": [
+            {
+                "code": "Side1",
+                "type": "Mouse"
+            }
+        ],
+        "Mouse4": [
+            {
+                "code": "Side2",
+                "type": "Mouse"
+            }
+        ],
+        "MouseMiddle": [
+            {
+                "code": "Middle",
+                "type": "Mouse"
+            }
+        ],
+        "MouseSide1": [
+            {
+                "code": "Side1",
+                "type": "Mouse"
+            }
+        ],
+        "MouseSide2": [
+            {
+                "code": "Side2",
+                "type": "Mouse"
+            }
+        ],
+        "N": [
+            {
+                "code": "N",
+                "type": "Keyboard"
+            }
+        ],
+        "O": [
+            {
+                "code": "O",
+                "type": "Keyboard"
+            }
+        ],
+        "P": [
+            {
+                "code": "P",
+                "type": "Keyboard"
+            }
+        ],
+        "PageDown": [
+            {
+                "code": "PageDown",
+                "type": "Keyboard"
+            }
+        ],
+        "PageUp": [
+            {
+                "code": "PageUp",
+                "type": "Keyboard"
+            }
+        ],
+        "Pause": [
+            {
+                "code": "Pause",
+                "type": "Keyboard"
+            }
+        ],
+        "PrintScreen": [
+            {
+                "code": "PrintScreen",
+                "type": "Keyboard"
+            }
+        ],
+        "Q": [
+            {
+                "code": "Q",
+                "type": "Keyboard"
+            }
+        ],
+        "R": [
+            {
+                "code": "R",
+                "type": "Keyboard"
+            }
+        ],
+        "Return": [
+            {
+                "code": "Return",
+                "type": "Keyboard"
+            }
+        ],
+        "Right": [
+            {
+                "code": "Right",
+                "type": "Keyboard"
+            }
+        ],
+        "RightMouse": [
+            {
+                "code": "Right",
+                "type": "Mouse"
+            }
+        ],
+        "S": [
+            {
+                "code": "S",
+                "type": "Keyboard"
+            }
+        ],
+        "ScrollLock": [
+            {
+                "code": "ScrollLock",
+                "type": "Keyboard"
+            }
+        ],
+        "Space": [
+            {
+                "code": "Space",
+                "type": "Keyboard"
+            }
+        ],
+        "T": [
+            {
+                "code": "T",
+                "type": "Keyboard"
+            }
+        ],
+        "Tab": [
+            {
+                "code": "Tab",
+                "type": "Keyboard"
+            }
+        ],
+        "U": [
+            {
+                "code": "U",
+                "type": "Keyboard"
+            }
+        ],
+        "Up": [
+            {
+                "code": "Up",
+                "type": "Keyboard"
+            }
+        ],
+        "V": [
+            {
+                "code": "V",
+                "type": "Keyboard"
+            }
+        ],
+        "W": [
+            {
+                "code": "W",
+                "type": "Keyboard"
+            }
+        ],
+        "X": [
+            {
+                "code": "X",
+                "type": "Keyboard"
+            }
+        ],
+        "Y": [
+            {
+                "code": "Y",
+                "type": "Keyboard"
+            }
+        ],
+        "Z": [
+            {
+                "code": "Z",
+                "type": "Keyboard"
+            }
+        ],
+        "[": [
+            {
+                "code": "[",
+                "type": "Keyboard"
+            }
+        ],
+        "\\": [
+            {
+                "code": "\\",
+                "type": "Keyboard"
+            }
+        ],
+        "]": [
+            {
+                "code": "]",
+                "type": "Keyboard"
+            }
+        ],
+        "`": [
+            {
+                "code": "`",
+                "type": "Keyboard"
+            }
+        ],
+        "a": [
+            {
+                "code": "A",
+                "type": "Keyboard"
+            }
+        ],
+        "b": [
+            {
+                "code": "B",
+                "type": "Keyboard"
+            }
+        ],
+        "c": [
+            {
+                "code": "C",
+                "type": "Keyboard"
+            }
+        ],
+        "d": [
+            {
+                "code": "D",
+                "type": "Keyboard"
+            }
+        ],
+        "e": [
+            {
+                "code": "E",
+                "type": "Keyboard"
+            }
+        ],
+        "f": [
+            {
+                "code": "F",
+                "type": "Keyboard"
+            }
+        ],
+        "g": [
+            {
+                "code": "G",
+                "type": "Keyboard"
+            }
+        ],
+        "h": [
+            {
+                "code": "H",
+                "type": "Keyboard"
+            }
+        ],
+        "i": [
+            {
+                "code": "I",
+                "type": "Keyboard"
+            }
+        ],
+        "j": [
+            {
+                "code": "J",
+                "type": "Keyboard"
+            }
+        ],
+        "k": [
+            {
+                "code": "K",
+                "type": "Keyboard"
+            }
+        ],
+        "l": [
+            {
+                "code": "L",
+                "type": "Keyboard"
+            }
+        ],
+        "m": [
+            {
+                "code": "M",
+                "type": "Keyboard"
+            }
+        ],
+        "n": [
+            {
+                "code": "N",
+                "type": "Keyboard"
+            }
+        ],
+        "o": [
+            {
+                "code": "O",
+                "type": "Keyboard"
+            }
+        ],
+        "p": [
+            {
+                "code": "P",
+                "type": "Keyboard"
+            }
+        ],
+        "q": [
+            {
+                "code": "Q",
+                "type": "Keyboard"
+            }
+        ],
+        "r": [
+            {
+                "code": "R",
+                "type": "Keyboard"
+            }
+        ],
+        "s": [
+            {
+                "code": "S",
+                "type": "Keyboard"
+            }
+        ],
+        "t": [
+            {
+                "code": "T",
+                "type": "Keyboard"
+            }
+        ],
+        "u": [
+            {
+                "code": "U",
+                "type": "Keyboard"
+            }
+        ],
+        "v": [
+            {
+                "code": "V",
+                "type": "Keyboard"
+            }
+        ],
+        "w": [
+            {
+                "code": "W",
+                "type": "Keyboard"
+            }
+        ],
+        "x": [
+            {
+                "code": "X",
+                "type": "Keyboard"
+            }
+        ],
+        "y": [
+            {
+                "code": "Y",
+                "type": "Keyboard"
+            }
+        ],
+        "z": [
+            {
+                "code": "Z",
+                "type": "Keyboard"
+            }
+        ]
+    }
+}

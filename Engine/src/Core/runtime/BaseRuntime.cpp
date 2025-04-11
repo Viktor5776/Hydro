@@ -24,9 +24,8 @@ namespace hydro::runtime
         auto pWin = ioc::Get().Resolve<win::IWindow>();
         auto pInput = std::dynamic_pointer_cast<input::SDLInput>(ioc::Get().Resolve<input::IInput>());
 
-        pInput->BindAction("Action", input::MouseButton::Side1);
+        pInput->LoadBindingsFromFile("BaseInputBindings.json");
 
-        
         bool quiting = false;
         while (!quiting) {
             
@@ -41,7 +40,6 @@ namespace hydro::runtime
 
                 pInput->UpdateEvent(event);
             }
-
 
             //Test
             std::ostringstream ss;
@@ -63,7 +61,7 @@ namespace hydro::runtime
 
             pWin->SetName(ss.str());
 
-            if (pInput->IsActionPressed("Action")) {
+            if (pInput->IsActionPressed("Mouse4")) {
                 pWin->SetPos({ 1,1 });
             }
         }

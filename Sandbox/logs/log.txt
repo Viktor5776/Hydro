@@ -442,3 +442,1830 @@ Stack trace (most recent call last):
          25: 	return 0;
          26: }
 
+@Fatal {2025-01-30 17:58:55.3935149 GMT+1} Assertion Failed! x > y
+  Msg: Test
+   arg1 => 0
+   arg2 => 1
+   arg3 => 41
+
+  >> at main
+     C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp(25)
+Stack trace (most recent call last):
+#5    Object "", at 00007FF985BA259D, in BaseThreadInitThunk
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#2    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#1    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#0    Source "C:\Users\vikto\OneDrive\Skrivbord\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: 	Boot();
+         23: 
+         24: 	int x = 0, y = 1;
+      >  25: 	hass(x > y).msg(L"Test").watch(x, y, rand());
+         26: 
+         27: 	while (1) {};
+
+@Fatal {2025-04-09 15:40:54.6354414 GMT+2} Assertion Failed! pWindow != nullptr
+  Msg: Faild to create window: Conflicting window flags specified
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(20)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 18, in hydro::runtime::BaseRuntime::Run
+         16:     int BaseRuntime::Run()
+         17:     {
+      >  18:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         19: 
+         20:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 12, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+          9:     {
+         10:         //Init with SDL Window manager
+         11:         ioc::Get().Register<win::IWindow>([=] {
+      >  12:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name);
+         13:         });
+         14:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 20, in hydro::win::SDLWindow::SDLWindow
+         18: 		pWindow = SDL_CreateWindow(name.c_str(), size.first, size.second, (Uint32)flags);
+         19: 
+      >  20: 		hass(pWindow != nullptr).msg(L"Faild to create window: " + std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>>().from_bytes(SDL_GetError()));
+         21: 
+         22: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:41:35.4133702 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(19)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 18, in hydro::runtime::BaseRuntime::Run
+         16:     int BaseRuntime::Run()
+         17:     {
+      >  18:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         19: 
+         20:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 12, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+          9:     {
+         10:         //Init with SDL Window manager
+         11:         ioc::Get().Register<win::IWindow>([=] {
+      >  12:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name);
+         13:         });
+         14:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 19, in hydro::win::SDLWindow::SDLWindow
+         17: 		pWindow = SDL_CreateWindow(name.c_str(), size.first, size.second, (Uint32)flags);
+         18: 
+      >  19: 		hass(pWindow).msg(L"Faild to create window: ");
+         20: 
+         21: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:44:16.6938471 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(19)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name, SDL_WINDOW_VULKAN);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 19, in hydro::win::SDLWindow::SDLWindow
+         17: 		pWindow = SDL_CreateWindow(name.c_str(), size.first, size.second, (Uint32)flags);
+         18: 
+      >  19: 		hass(pWindow).msg(L"Faild to create window: ");
+         20: 
+         21: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:47:01.8626348 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(23)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name, SDL_WINDOW_VULKAN);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 23, in hydro::win::SDLWindow::SDLWindow
+         21: 		std::cout << SDL_GetError();
+         22: 
+      >  23: 		hass(pWindow).msg(L"Faild to create window: ");
+         24: 
+         25: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:47:15.5131029 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(23)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 23, in hydro::win::SDLWindow::SDLWindow
+         21: 		std::cout << SDL_GetError();
+         22: 
+      >  23: 		hass(pWindow).msg(L"Faild to create window: ");
+         24: 
+         25: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:49:25.5406692 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(23)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 23, in hydro::win::SDLWindow::SDLWindow
+         21: 		std::cout << SDL_GetError();
+         22: 
+      >  23: 		hass(pWindow).msg(L"Faild to create window: ");
+         24: 
+         25: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:49:56.4937358 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(23)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 23, in hydro::win::SDLWindow::SDLWindow
+         21: 		std::cout << SDL_GetError();
+         22: 
+      >  23: 		hass(pWindow).msg(L"Faild to create window: ");
+         24: 
+         25: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:52:02.1785130 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(23)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name, SDL_WINDOW_OPENGL);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 23, in hydro::win::SDLWindow::SDLWindow
+         21: 		std::cout << SDL_GetError();
+         22: 
+      >  23: 		hass(pWindow).msg(L"Faild to create window: ");
+         24: 
+         25: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:52:21.6484126 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(23)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name, SDL_WINDOW_OPENGL);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 23, in hydro::win::SDLWindow::SDLWindow
+         21: 		std::cout << SDL_GetError();
+         22: 
+      >  23: 		hass(pWindow).msg(L"Faild to create window: ");
+         24: 
+         25: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:54:21.2197247 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(23)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name, SDL_WINDOW_OPENGL);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 23, in hydro::win::SDLWindow::SDLWindow
+         21: 		std::cout << SDL_GetError();
+         22: 
+      >  23: 		hass(pWindow).msg(L"Faild to create window: ");
+         24: 
+         25: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:54:29.7991591 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(23)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name, SDL_WINDOW_OPENGL);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 23, in hydro::win::SDLWindow::SDLWindow
+         21: 		std::cout << SDL_GetError();
+         22: 
+      >  23: 		hass(pWindow).msg(L"Faild to create window: ");
+         24: 
+         25: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:55:14.7202008 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(23)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name, SDL_WINDOW_OPENGL);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 23, in hydro::win::SDLWindow::SDLWindow
+         21: 		std::cout << SDL_GetError();
+         22: 
+      >  23: 		hass(pWindow).msg(L"Faild to create window: ");
+         24: 
+         25: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:55:31.0299155 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(21)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name, SDL_WINDOW_OPENGL);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 21, in hydro::win::SDLWindow::SDLWindow
+         19: 		pWindow = SDL_CreateWindow(name.c_str(), size.first, size.second, SDL_WINDOW_OPENGL);
+         20: 
+      >  21: 		hass(pWindow).msg(L"Faild to create window: ");
+         22: 
+         23: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 15:56:31.0983786 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(21)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name, SDL_WINDOW_OPENGL);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 21, in hydro::win::SDLWindow::SDLWindow
+         19: 		pWindow = SDL_CreateWindow(name.c_str(), size.first, size.second, SDL_WINDOW_OPENGL);
+         20: 
+      >  21: 		hass(pWindow).msg(L"Faild to create window: ");
+         22: 
+         23: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 16:04:39.3087905 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(23)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         while (true) {
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1080,720 }, name, SDL_WINDOW_OPENGL);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 23, in hydro::win::SDLWindow::SDLWindow
+         21: 		std::cout << SDL_GetError();
+         22: 
+      >  23: 		hass(pWindow).msg(L"Faild to create window: ");
+         24: 
+         25: 		hass(SDL_SetWindowPosition(pWindow, pos.first, pos.second));
+
+@Fatal {2025-04-09 18:39:49.5009471 GMT+2} Assertion Failed! !SDL_SetWindowTitle(pWindow, name.c_str())
+  Msg: Failed to set window name. SDL Error: 
+
+  >> at hydro::win::SDLWindow::SetName
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(42)
+Stack trace (most recent call last):
+#7    Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#6    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#5    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#2    Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#1    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 21, in hydro::runtime::BaseRuntime::Run
+         18:     {
+         19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+      >  21:         pWin->SetName("sdhfoisdhf");
+         22:             
+         23:         bool quiting = false;
+         24:         while (!quiting) {
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 42, in hydro::win::SDLWindow::SetName
+         40: 	void SDLWindow::SetName(const std::string& name)
+         41: 	{
+      >  42: 		hass(!SDL_SetWindowTitle(pWindow, name.c_str())).msg(std::format(L"Failed to set window name. SDL Error: {}", std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(SDL_GetError())));
+         43: 	}
+         44: 
+         45: 	void SDLWindow::SetPos(std::pair<int, int> pos)
+
+@Fatal {2025-04-09 18:44:46.0088861 GMT+2} Assertion Failed! !SDL_SetWindowTitle(pWindow, name.c_str())
+  Msg: Failed to set window name. SDL Error: 
+
+  >> at hydro::win::SDLWindow::SetName
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(41)
+Stack trace (most recent call last):
+#7    Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#6    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#5    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#2    Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#1    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 21, in hydro::runtime::BaseRuntime::Run
+         18:     {
+         19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+      >  21:         pWin->SetName("sdhfoisdhf");
+         22:             
+         23:         bool quiting = false;
+         24:         while (!quiting) {
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 41, in hydro::win::SDLWindow::SetName
+         39: 	void SDLWindow::SetName(const std::string& name)
+         40: 	{
+      >  41: 		hass(!SDL_SetWindowTitle(pWindow, name.c_str())).msg(std::format(L"Failed to set window name. SDL Error: {}", utl::ToWide(SDL_GetError())));
+         42: 	}
+         43: 
+         44: 	void SDLWindow::SetPos(std::pair<int, int> pos)
+
+@Fatal {2025-04-09 18:45:44.1166453 GMT+2} Assertion Failed! !SDL_SetWindowTitle(pWindow, name.c_str())
+  Msg: Failed to set window name. SDL Error: 
+
+  >> at hydro::win::SDLWindow::SetName
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(41)
+Stack trace (most recent call last):
+#7    Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#6    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#5    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#2    Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#1    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 21, in hydro::runtime::BaseRuntime::Run
+         18:     {
+         19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+      >  21:         pWin->SetName("sdhfoisdhf");
+         22:             
+         23:         bool quiting = false;
+         24:         while (!quiting) {
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 41, in hydro::win::SDLWindow::SetName
+         39: 	void SDLWindow::SetName(const std::string& name)
+         40: 	{
+      >  41: 		hass(!SDL_SetWindowTitle(pWindow, name.c_str())).msg(std::format(L"Failed to set window name. SDL Error: {}", utl::ToWide(SDL_GetError())));
+         42: 	}
+         43: 
+         44: 	void SDLWindow::SetPos(std::pair<int, int> pos)
+
+@Fatal {2025-04-09 18:54:43.3198853 GMT+2} Assertion Failed! !pWindow
+  Msg: Faild to create window. SDL Error: 
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(21)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         pWin->SetName("sdhfoisdhf");
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 640,360 }, name);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 21, in hydro::win::SDLWindow::SDLWindow
+         19: 		pWindow = SDL_CreateWindow(name.c_str(), -1,-1, (SDL_WindowFlags)flags);
+         20: 
+      >  21: 		hass(!pWindow).msg(std::format(L"Faild to create window. SDL Error: {}", utl::ToWide(SDL_GetError())));
+         22: 
+         23: 		pSurface = SDL_GetWindowSurface(pWindow);
+
+@Fatal {2025-04-09 18:56:29.2105738 GMT+2} Assertion Failed! pWindow
+  Msg: Faild to create window. SDL Error: Vulkan support is either not configured in SDL or not available in current SDL video driver (windows) or platform
+
+  >> at hydro::win::SDLWindow::SDLWindow
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp(21)
+Stack trace (most recent call last):
+#16   Object "", at 00007FFC72B1259D, in BaseThreadInitThunk
+#15   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#14   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#13   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#12   Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#11   Source "C:\Users\vikto\Desktop\Hydro\Sandbox\src\App.cpp", line 25, in main
+         22: {
+         23: 	Boot();
+         24: 
+      >  25: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         26: 
+         27: 	return 0;
+         28: }
+#10   Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 19, in hydro::runtime::BaseRuntime::Run
+         17:     int BaseRuntime::Run()
+         18:     {
+      >  19:         auto pWin = ioc::Get().Resolve<win::IWindow>();
+         20: 
+         21:         pWin->SetName("sdhfoisdhf");
+#9    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 51, in hydro::ioc::Container::Resolve<hydro::win::IWindow>
+         48: 		template<NotParameterized T>
+         49: 		std::shared_ptr<T> Resolve() const
+         50: 		{
+      >  51: 			return Resolve_<T, Generator<T>>();
+         52: 		}
+         53: 	private:
+         54: 		// functions
+#8    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\ioc\Container.h", line 61, in hydro::ioc::Container::Resolve_<hydro::win::IWindow,std::function<std::shared_ptr<hydro::win::IWindow> __cdecl(void)> >
+         58: 			if (const auto i = serviceMap_.find(typeid(T)); i != serviceMap_.end()) {
+         59: 				const auto& entry = i->second;
+         60: 				try {
+      >  61: 					return std::any_cast<G>(entry)(std::forward<Ps>(arg)...);
+         62: 				}
+         63: 				catch (const std::bad_any_cast&) {
+         64: 					hchk_fail.msg(std::format(
+#7    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 920, in std::_Func_class<std::shared_ptr<hydro::win::IWindow> >::operator()
+        917:             _Xbad_function_call();
+        918:         }
+        919:         const auto _Impl = _Getimpl();
+      > 920:         return _Impl->_Do_call(_STD forward<_Types>(_Args)...);
+        921:     }
+        922: 
+        923:     ~_Func_class() noexcept {
+#6    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\functional", line 876, in std::_Func_impl_no_alloc<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>,std::shared_ptr<hydro::win::IWindow> >::_Do_call
+        873:         if constexpr (is_void_v<_Rx>) {
+        874:             (void) _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        875:         } else {
+      > 876:             return _STD invoke(_Callee, _STD forward<_Types>(_Args)...);
+        877:         }
+        878:     }
+#5    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits", line 1695, in std::invoke<`hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1> &>
+       1692: _EXPORT_STD template <class _Callable>
+       1693: constexpr auto invoke(_Callable&& _Obj) noexcept(noexcept(static_cast<_Callable&&>(_Obj)()))
+       1694:     -> decltype(static_cast<_Callable&&>(_Obj)()) {
+      >1695:     return static_cast<_Callable&&>(_Obj)();
+       1696: }
+       1697: 
+       1698: _EXPORT_STD template <class _Callable, class _Ty1, class... _Types2>
+#4    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\runtime\BaseRuntime.cpp", line 13, in `hydro::runtime::BaseRuntime::BaseRuntime'::`2'::<lambda_1>::operator()
+         10:     {
+         11:         //Init with SDL Window manager
+         12:         ioc::Get().Register<win::IWindow>([=] {
+      >  13:             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 640,360 }, name, SDL_WINDOW_VULKAN);
+         14:         });
+         15:     }
+#3    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2906, in std::make_shared<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2903: template <class _Ty, class... _Types>
+       2904: #endif // ^^^ !_HAS_CXX20 ^^^
+       2905: _NODISCARD_SMART_PTR_ALLOC shared_ptr<_Ty> make_shared(_Types&&... _Args) { // make a shared_ptr to non-array object
+      >2906:     const auto _Rx = new _Ref_count_obj2<_Ty>(_STD forward<_Types>(_Args)...);
+       2907:     shared_ptr<_Ty> _Ret;
+       2908:     _Ret._Set_ptr_rep_and_enable_shared(_STD addressof(_Rx->_Storage._Value), _Rx);
+       2909:     return _Ret;
+#2    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory", line 2095, in std::_Ref_count_obj2<hydro::win::SDLWindow>::_Ref_count_obj2<hydro::win::SDLWindow><std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+       2092:         } else
+       2093: #endif // _HAS_CXX20
+       2094:         {
+      >2095:             _STD _Construct_in_place(_Storage._Value, _STD forward<_Types>(_Args)...);
+       2096:         }
+       2097:     }
+#1    Source "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility", line 406, in std::_Construct_in_place<hydro::win::SDLWindow,std::pair<int,int>,std::pair<int,int>,std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &,unsigned __int64>
+        403:     } else
+        404: #endif // _HAS_CXX20
+        405:     {
+      > 406:         ::new (static_cast<void*>(_STD addressof(_Obj))) _Ty(_STD forward<_Types>(_Args)...);
+        407:     }
+        408: }
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\win\SDLWindow.cpp", line 21, in hydro::win::SDLWindow::SDLWindow
+         19: 		pWindow = SDL_CreateWindow(name.c_str(), size.first, size.second, (SDL_WindowFlags)flags);
+         20: 
+      >  21: 		hass(pWindow).msg(std::format(L"Faild to create window. SDL Error: {}", utl::ToWide(SDL_GetError())));
+         22: 
+         23: 		pSurface = SDL_GetWindowSurface(pWindow);
+

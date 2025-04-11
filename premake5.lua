@@ -38,8 +38,8 @@ project "Engine"
 
     links
     {
-        -- Add the libraries you need here SDL2 glm etc
-        "SDL2",
+        -- Add the libraries you need here SDL3 glm etc
+        "SDL3",
         "GLM",
         "backward"
     }
@@ -108,7 +108,7 @@ project "Editor"
 	postbuildcommands
         {
    	    --copy library dll to bin folder
-            "{COPY} " .. "%{wks.location}vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL2.dll" .. " %{wks.location}bin/" .. outputdir .. "/Editor/"        
+            "{COPY} " .. "%{wks.location}vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL3.dll" .. " %{wks.location}bin/" .. outputdir .. "/Editor/"        
         }
 
     filter "configurations:Debug"
@@ -162,10 +162,10 @@ project "Sandbox"
             --preprocessor definitions
         }
 
-	postbuildcommands
+	    postbuildcommands
         {
-   	    --copy library dll to bin folder
-            "{COPY} " .. "%{wks.location}vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL2.dll" .. " %{wks.location}bin/" .. outputdir .. "/Sandbox/"        
+   	        --copy library dll to bin folder
+            "{COPY} " .. "%{wks.location}vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL3.dll" .. " %{wks.location}bin/" .. outputdir .. "/Sandbox/"        
         }
 
     filter "configurations:Debug"

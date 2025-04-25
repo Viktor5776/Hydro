@@ -3,10 +3,16 @@
 #include "../ioc/Container.h"
 #include "../win/SDLWindow.h"
 #include "../input/SDLInput.h"
+#include  "../ioc/Singletons.h"
+#include "../ecs/Ecs.h"
 #include "SDL3/SDL.h"
 
 namespace hydro::runtime
 {
+    struct Transform {
+        float x = 0, y = 0;
+    };
+
     BaseRuntime::BaseRuntime(const std::string& name)
     {
         //Init with SDL Window manager
@@ -16,6 +22,10 @@ namespace hydro::runtime
 
         ioc::Get().Register<input::IInput>([] {
             return std::make_shared<input::SDLInput>();
+        });
+
+        ioc::Sing().Register<ecs::Ecs>([] {
+            return std::make_shared<ecs::Ecs>();
         });
     }
 
@@ -41,29 +51,15 @@ namespace hydro::runtime
                 pInput->UpdateEvent(event);
             }
 
-            //Test
-            std::ostringstream ss;
-            ss << std::fixed << std::setprecision(2); // 2 decimal places
+            //Run systems
 
-            auto mouse = pInput->GetMouseState();
+           
+            auto e = ioc::Sing().Resolve<ecs::Ecs>()->createEntity();
+            e.addComponent(Transform{ 1.0f, 2.0f });
 
-            // Position
-            ss << "Position: [" << mouse.position.x << ", " << mouse.position.y << "] ";
+            auto t = e.getComponent<Transform>();
 
-            // Delta (movement)
-            ss << "Delta: [" << mouse.delta.x << ", " << mouse.delta.y << "] ";
 
-            // Scroll
-            ss << "Scroll: [" << mouse.scroll.x << ", " << mouse.scroll.y << "] ";
-
-            // Window state
-            ss << (mouse.isInWindow ? "(In Window)" : "(Out of Window)");
-
-            pWin->SetName(ss.str());
-
-            if (pInput->IsActionPressed("Mouse4")) {
-                pWin->SetPos({ 1,1 });
-            }
         }
 
         return 0;

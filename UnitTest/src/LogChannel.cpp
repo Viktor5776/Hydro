@@ -27,12 +27,12 @@ namespace Log
 		log::Channel chan;
 		auto pDriver1 = std::make_shared<MockDriver>();
 		auto pDriver2 = std::make_shared<MockDriver>();
-
+	
 		chan.AttachDriver(pDriver1);
 		chan.AttachDriver(pDriver2);
-
+	
 		hydrolog.info(L"HI").chan(&chan);
-
+	
 		EXPECT_EQ(L"HI"s, pDriver1->entry_.note_);
 		EXPECT_EQ(log::Level::Info, pDriver1->entry_.level_);
 		EXPECT_EQ(L"HI"s, pDriver2->entry_.note_);
@@ -44,7 +44,7 @@ namespace Log
 		log::Channel chan;
 		auto pDriver1 = std::make_shared<MockDriver>();
 		chan.AttachDriver(pDriver1);
-
+	
 		chan.AttachPolicy(std::make_unique<log::SeverityLevelPolicy>(log::Level::Info));
 		hydrolog.info(L"HI").chan(&chan);
 		EXPECT_EQ(L"HI"s, pDriver1->entry_.note_);

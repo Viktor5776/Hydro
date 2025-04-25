@@ -30,7 +30,7 @@ namespace Log
 		EXPECT_EQ(L"HI"s, chan.entry_.note_);
 		EXPECT_EQ(log::Level::Info, chan.entry_.level_);
 	}
-
+	
 	// testing simplified level/note
 	TEST(LogEntryTests, SimplifiedLevelNote)
 	{

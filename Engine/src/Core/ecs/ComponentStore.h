@@ -18,6 +18,10 @@ namespace hydro::ecs
 			components[e.getId()] = component;
 		}
 
+		void add(Entity e) {
+			components[e.getId()] = T();
+		}
+
 		std::shared_ptr<T> get(Entity e) {
 			auto it = components.find(e.getId());
 			return it != components.end() ? std::make_shared<T>(it->second) : nullptr;

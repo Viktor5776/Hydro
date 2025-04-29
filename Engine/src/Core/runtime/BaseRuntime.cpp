@@ -7,10 +7,16 @@
 #include "../ecs/Ecs.h"
 #include "SDL3/SDL.h"
 
+#include <iostream>
+
 namespace hydro::runtime
 {
     struct Transform {
         float x = 0, y = 0;
+    };
+
+    struct Hp {
+        int hp = 100;
     };
 
     BaseRuntime::BaseRuntime(const std::string& name)
@@ -52,14 +58,7 @@ namespace hydro::runtime
             }
 
             //Run systems
-
-           
-            auto e = ioc::Sing().Resolve<ecs::Ecs>()->createEntity();
-            e.addComponent(Transform{ 1.0f, 2.0f });
-
-            auto t = e.getComponent<Transform>();
-
-
+            
         }
 
         return 0;

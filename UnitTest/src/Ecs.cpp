@@ -80,4 +80,50 @@ namespace Ecs
         EXPECT_EQ(id1, id2); // Should reuse ID
     }
 
+    TEST_F(ECSTests, SingleView) {
+        auto reg = ioc::Sing().Resolve<ecs::Ecs>();  // Get registry
+
+        // Create entities with components
+        auto e1 = reg->createEntity();
+        e1.addComponent(Transform{ 1.0f, 2.0f }); //e1: Transform only
+
+        auto e2 = reg->createEntity();
+        e2.addComponent<Health>();  // e2: Health only
+
+        auto e3 = reg->createEntity();
+        e3.addComponent<Transform>();  // e3: Transform only
+
+        auto e4 = reg->createEntity();  // e4: No components
+
+        // Get entities with Transform
+        auto match = reg->view<Transform>();
+
+        // Verify results
+        EXPECT_EQ(match.front(), e1);
+        EXPECT_EQ(match.back(), e3);
+    }
+
+    TEST_F(ECSTests, MultipleView) {
+        auto reg = ioc::Sing().Resolve<ecs::Ecs>();  // Get registry
+
+        // Create entities with components
+        auto e1 = reg->createEntity();
+        e1.addComponent(Transform{ 1.0f, 2.0f });
+        e1.addComponent<Health>();  // e1: Transform + Health
+
+        auto e2 = reg->createEntity();
+        e2.addComponent<Health>();  // e2: Health only
+
+        auto e3 = reg->createEntity();
+        e3.addComponent<Transform>();  // e3: Transform only
+
+        auto e4 = reg->createEntity();  // e4: No components
+
+        // Get entities with BOTH Transform and Health
+        auto match = reg->view<Transform, Health>();
+
+        // Verify results
+        EXPECT_EQ(match.front(), e1);
+    }
+
 }

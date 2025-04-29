@@ -7,6 +7,8 @@
 #include <unordered_set>
 #include <typeindex>
 #include <typeinfo>
+#include <algorithm>
+#include <ranges>
 
 namespace hydro::ecs
 {
@@ -91,6 +93,11 @@ namespace hydro::ecs
 			auto it = componentStores.find(typeId);
 			if (it == componentStores.end()) return false;
 			return it->second->has(e);
+		}
+
+		template<typename... Ts>
+		auto view() {
+			return entitys | std::ranges::views::filter([](Entity e) {return (e.hasComponent<Ts>() && ...); });
 		}
 	private:
 		uint32_t nextId = 1;

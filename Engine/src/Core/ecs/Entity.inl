@@ -1,6 +1,6 @@
 #pragma once
 #include "Ecs.h"
-#include "../ioc/Singletons.h"<
+#include "../ioc/Singletons.h"
 
 namespace hydro::ecs
 {

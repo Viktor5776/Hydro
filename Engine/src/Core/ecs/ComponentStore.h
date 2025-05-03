@@ -1,6 +1,8 @@
 #pragma once
 #include "Entity.h"
 #include <unordered_map>
+#include <concepts>
+#include "Component.h"
 
 namespace hydro::ecs
 {
@@ -12,19 +14,22 @@ namespace hydro::ecs
 	};
 
 	template<typename T>
+	concept IsComponent = std::derived_from<T, IComponent>;
+
+	template<IsComponent T>
 	class ComponentStore : public IComponentStore {
 	public:
 		void add(Entity e, const T& component) {
-			components[e.getId()] = component;
+			components[e.getId()] = std::make_shared<T>(component);
 		}
 
 		void add(Entity e) {
-			components[e.getId()] = T();
+			components[e.getId()] = std::make_shared<T>();
 		}
 
 		std::shared_ptr<T> get(Entity e) {
 			auto it = components.find(e.getId());
-			return it != components.end() ? std::make_shared<T>(it->second) : nullptr;
+			return it != components.end() ? std::static_pointer_cast<T>(it->second) : nullptr;
 		}
 
 		void remove(Entity e) override {
@@ -35,6 +40,6 @@ namespace hydro::ecs
 			return components.contains(e.getId());
 		}
 	private:
-		std::unordered_map<uint32_t, T> components;
+		std::unordered_map<uint32_t, std::shared_ptr<IComponent>> components;
 	};
 }

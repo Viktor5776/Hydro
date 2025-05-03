@@ -5,12 +5,16 @@
 namespace Ecs
 {
 
-    struct Transform {
+    struct Transform : public hydro::ecs::IComponent {
         float x = 0, y = 0;
+        Transform() = default;
+        Transform(float x, float y) : x(x), y(y) {};
     };
 
-    struct Health {
+    struct Health : public hydro::ecs::IComponent {
         int hp = 0;
+        Health() = default;
+        Health(int hp) : hp(hp) {};
     };
 
     using namespace hydro;

@@ -43,7 +43,7 @@ namespace hydro::ecs
 			freeIds.push_back(e.getId());
 		}
 
-		template<typename T>
+		template<IsComponent T>
 		void addComponent(Entity e, T c)
 		{
 			auto typeId = std::type_index(typeid(T));
@@ -51,11 +51,17 @@ namespace hydro::ecs
 				componentStores[typeId] = std::make_unique<ComponentStore<T>>();
 			}
 
-			static_cast<ComponentStore<T>*>(componentStores[typeId].get())->add(Entity{ e.getId() }, c);
+			auto store = static_cast<ComponentStore<T>*>(componentStores[typeId].get());
+			store->add(e, c);
+			
 			entityComponentMap[e.getId()].insert(typeId);
+
+			if constexpr (std::is_base_of_v<IScript, T>) {
+				scripts.push_back(store->get(e).get());
+			}
 		}
 
-		template<typename T>
+		template<IsComponent T>
 		void addComponent(Entity e)
 		{
 			auto typeId = std::type_index(typeid(T));
@@ -63,11 +69,17 @@ namespace hydro::ecs
 				componentStores[typeId] = std::make_unique<ComponentStore<T>>();
 			}
 
-			static_cast<ComponentStore<T>*>(componentStores[typeId].get())->add(Entity{ e.getId() });
+			ComponentStore<T>* store = static_cast<ComponentStore<T>*>(componentStores[typeId].get());
+			store->add(e);
+
 			entityComponentMap[e.getId()].insert(typeId);
+
+			if constexpr (std::is_base_of_v<IScript, T>) {
+				scripts.push_back(store->get(e).get());
+			}
 		}
 
-		template<typename T>
+		template<IsComponent T>
 		std::shared_ptr<T> getComponent(Entity e)
 		{
 			auto typeId = std::type_index(typeid(T));
@@ -76,7 +88,7 @@ namespace hydro::ecs
 			return static_cast<ComponentStore<T>*>(it->second.get())->get(Entity{ e.getId() });
 		}
 
-		template<typename T>
+		template<IsComponent T>
 		void removeComponent(Entity e)
 		{
 			auto typeId = std::type_index(typeid(T));
@@ -85,9 +97,14 @@ namespace hydro::ecs
 				it->second->remove(Entity{ e.getId() });
 				entityComponentMap[e.getId()].erase(typeId);
 			}
+
+			if constexpr (std::is_base_of_v<IScript, T>) {
+				auto ptr = static_cast<ComponentStore<T>*>(it->second.get())->get(e).get();
+				std::erase(scripts, ptr);
+			}
 		}
 
-		template<typename T>
+		template<IsComponent T>
 		bool hasComponent(Entity e) const {
 			auto typeId = std::type_index(typeid(T));
 			auto it = componentStores.find(typeId);
@@ -95,14 +112,19 @@ namespace hydro::ecs
 			return it->second->has(e);
 		}
 
-		template<typename... Ts>
+		template<IsComponent... Ts>
 		auto view() {
 			return entitys | std::ranges::views::filter([](Entity e) {return (e.hasComponent<Ts>() && ...); });
+		}
+
+		std::vector<IScript*> GetScripts() {
+			return scripts;
 		}
 	private:
 		uint32_t nextId = 1;
 		std::vector<uint32_t> freeIds;
 		std::vector<Entity> entitys;
+		std::vector<IScript*> scripts;
 
 		std::unordered_map<std::type_index, std::unique_ptr<IComponentStore>> componentStores;
 		std::unordered_map<uint32_t, std::unordered_set<std::type_index>> entityComponentMap;

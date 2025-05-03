@@ -11,12 +11,19 @@
 
 namespace hydro::runtime
 {
-    struct Transform {
-        float x = 0, y = 0;
-    };
+    class Player : public ecs::IScript
+    {
+        int t = 0;
 
-    struct Hp {
-        int hp = 100;
+        void Start() override
+        {
+            t = 10;
+        }
+
+        void Update() override
+        {
+            t--;
+        }
     };
 
     BaseRuntime::BaseRuntime(const std::string& name)
@@ -42,6 +49,19 @@ namespace hydro::runtime
 
         pInput->LoadBindingsFromFile("BaseInputBindings.json");
 
+
+
+
+        auto ecs = ioc::Sing().Resolve<ecs::Ecs>();
+
+        auto e = ecs->createEntity();
+        e.addComponent<Player>();
+
+
+        for (auto script : ecs->GetScripts()) {
+            script->Start();
+        }
+
         bool quiting = false;
         while (!quiting) {
             
@@ -58,7 +78,10 @@ namespace hydro::runtime
             }
 
             //Run systems
-            
+            for (auto script : ecs->GetScripts()) {
+                script->Update();
+            }
+
         }
 
         return 0;

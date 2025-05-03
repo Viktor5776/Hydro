@@ -4,6 +4,7 @@
 #include <Core/log/SeverityLevelPolicy.h>
 #include <Core/utl/Assert.h>
 #include <Core/runtime/BaseRuntime.h>
+#include <Core/ecs/Ecs.h>
 
 using namespace hydro;
 using namespace std::string_literals;
@@ -18,11 +19,13 @@ void Boot()
 	
 }
 
+
+
 int main()
 {
 	Boot();
 
 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
-	
+
 	return 0;
 }

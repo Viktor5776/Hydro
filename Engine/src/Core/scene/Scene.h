@@ -16,11 +16,11 @@ namespace hydro::scene
 		Entity CreateEntity(const std::string& name = "");
 
 		template<typename... Components>
-		auto GetAllEntitysWith()
+		auto GetAllEntitiesWith()
 		{
 			return registry_.view<Components...>();
 		}
-	private:
+
 		void Serialize(std::filesystem::path path);
 		bool Deserialize(std::filesystem::path path);
 	private:

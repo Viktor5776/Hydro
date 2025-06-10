@@ -14,6 +14,8 @@ namespace hydro::runtime
         scene_("Scene")
     {
 
+        scene_.Deserialize("firstScene.json");
+
         //Init with SDL Window manager
         ioc::Get().Register<win::IWindow>([=] {
             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 640,360 }, name);
@@ -30,6 +32,12 @@ namespace hydro::runtime
         auto pInput = std::dynamic_pointer_cast<input::SDLInput>(ioc::Get().Resolve<input::IInput>());
 
         pInput->LoadBindingsFromFile("BaseInputBindings.json");
+
+        auto v = scene_.GetAllEntitiesWith<TagComponent>();
+        for (auto e : v) {
+            auto t = v.get<TagComponent>(e);
+        }
+        
 
         bool quiting = false;
         while (!quiting) {

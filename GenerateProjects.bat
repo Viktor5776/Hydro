@@ -15,6 +15,7 @@ vcpkg.exe install glm --triplet x64-windows
 vcpkg.exe install gtest --triplet x64-windows
 vcpkg.exe install backward-cpp --triplet x64-windows
 vcpkg.exe install nlohmann-json --triplet x64-windows
+vcpkg.exe install entt --triplet x64-windows
 
 cd ../../
 

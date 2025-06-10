@@ -3,12 +3,17 @@
 #include "../ioc/Container.h"
 #include "../win/SDLWindow.h"
 #include "../input/SDLInput.h"
+#include "../scene/Components.h"
+#include "../scene/Entity.h"
 #include "SDL3/SDL.h"
 
 namespace hydro::runtime
 {
     BaseRuntime::BaseRuntime(const std::string& name)
+        :
+        scene_("Scene")
     {
+
         //Init with SDL Window manager
         ioc::Get().Register<win::IWindow>([=] {
             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 640,360 }, name);

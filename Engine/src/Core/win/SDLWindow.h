@@ -15,6 +15,7 @@ namespace hydro::win
 		void SetName(const std::string& name) override;
 		void SetPos(std::pair<int, int> pos) override;
 		void SetSize(std::pair<int, int> size) override;
+		SDL_Window* GetWindow();
 	private:
 		std::string name_;
 		std::pair<int, int> pos_;

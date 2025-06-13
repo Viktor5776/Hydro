@@ -31,13 +31,7 @@ namespace hydro::runtime
         auto pWin = ioc::Get().Resolve<win::IWindow>();
         auto pInput = std::dynamic_pointer_cast<input::SDLInput>(ioc::Get().Resolve<input::IInput>());
 
-        pInput->LoadBindingsFromFile("BaseInputBindings.json");
-
-        auto v = scene_.GetAllEntitiesWith<TagComponent>();
-        for (auto e : v) {
-            auto t = v.get<TagComponent>(e);
-        }
-        
+        pInput->LoadBindingsFromFile("BaseInputBindings.json");        
 
         bool quiting = false;
         while (!quiting) {

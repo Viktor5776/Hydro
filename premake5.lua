@@ -46,7 +46,6 @@ project "Engine"
 
     filter "system:windows"
         cppdialect "C++latest"
-        staticruntime "On"
         systemversion "latest"
 
         defines
@@ -57,10 +56,12 @@ project "Engine"
 
     filter "configurations:Debug"
         defines "HYDRO_DEBUG"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "HYDRO_RELEASE"
+        runtime "Release"
         optimize "On"     
 
 project "Editor"
@@ -96,7 +97,6 @@ project "Editor"
 
     filter "system:windows"
         cppdialect "C++latest"
-        staticruntime "On"
         systemversion "latest"
 
         defines
@@ -105,18 +105,29 @@ project "Editor"
             --preprocessor definitions
         }
 
-	postbuildcommands
+        links
         {
-   	    --copy library dll to bin folder
+            -- Add the libraries you need here SDL3 glm etc
+            "SDL3",
+            "imgui",
+            "OpenGL32",
+            "glad"
+        }
+
+	    postbuildcommands
+        {
+   	        --copy library dll to bin folder
             "{COPY} " .. "%{wks.location}vendor/vcpkg/installed/%{vcpkgTriplet}/bin/SDL3.dll" .. " %{wks.location}bin/" .. outputdir .. "/Editor/"        
         }
 
     filter "configurations:Debug"
         defines "HYDRO_DEBUG"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "HYDRO_RELEASE"
+        runtime "Release"
         optimize "On"
  
 
@@ -153,7 +164,6 @@ project "Sandbox"
 
     filter "system:windows"
         cppdialect "C++latest"
-        staticruntime "On"
         systemversion "latest"
 
         defines
@@ -170,10 +180,12 @@ project "Sandbox"
 
     filter "configurations:Debug"
         defines "HYDRO_DEBUG"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "HYDRO_RELEASE"
+        runtime "Release"
         optimize "On"
 
 project "UnitTest"
@@ -211,7 +223,6 @@ project "UnitTest"
 
     filter "system:windows"
         cppdialect "C++latest"
-        staticruntime "On"
         systemversion "latest"
 
         defines
@@ -228,8 +239,10 @@ project "UnitTest"
 
     filter "configurations:Debug"
         defines "HYDRO_DEBUG"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "HYDRO_RELEASE"
+        runtime "Release"
         optimize "On"

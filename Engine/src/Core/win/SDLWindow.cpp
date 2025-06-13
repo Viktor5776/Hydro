@@ -51,4 +51,9 @@ namespace hydro::win
 		hass(SDL_SetWindowSize(pWindow_, size.first, size.second)).msg(std::format(L"Failed to set window size. SDL Error: {}", utl::ToWide(SDL_GetError())));
 	}
 
+	SDL_Window* SDLWindow::GetWindow()
+	{
+		return pWindow_;
+	}
+
 }

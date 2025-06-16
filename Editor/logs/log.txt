@@ -1,0 +1,65 @@
+@Fatal {2025-06-16 22:51:41.6070820 GMT+2} Assertion Failed! glad_glCheckFramebufferStatus(0x8D40) == 0x8CD5
+
+  >> at hydro::runtime::OPENGL
+     C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp(122)
+Stack trace (most recent call last):
+#7    Object "", at 00007FFDD9FC259D, in BaseThreadInitThunk
+#6    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#5    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#2    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\App.cpp", line 26, in main
+         23: {
+         24: 	Boot();
+         25: 
+      >  26: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         27: 
+         28: 	return 0;
+         29: }
+#1    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp", line 195, in hydro::runtime::EditorRuntime::Run
+        193:             ImVec2 viewportSize;
+        194:             ImGui::SetNextWindowContentSize(viewportSize);
+      > 195:             OPENGL(viewportSize.x,viewportSize.y);
+        196: 
+        197:             pContext->SwapBuffers();
+#0    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp", line 122, in hydro::runtime::OPENGL
+        119:         unsigned int drawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
+        120:         glDrawBuffers(1, drawBuffers);
+        121: 
+      > 122:         hass(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+        123: 
+        124:         glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+
+@Fatal {2025-06-16 23:12:36.6992438 GMT+2} Assertion Failed! glad_glCheckFramebufferStatus(0x8D40) != 0x8CD5
+
+  >> at hydro::runtime::OPENGL
+     C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp(122)
+Stack trace (most recent call last):
+#7    Object "", at 00007FFDD9FC259D, in BaseThreadInitThunk
+#6    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#5    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#2    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\App.cpp", line 26, in main
+         23: {
+         24: 	Boot();
+         25: 
+      >  26: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         27: 
+         28: 	return 0;
+         29: }
+#1    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp", line 191, in hydro::runtime::EditorRuntime::Run
+        188:             //Viewport
+        189:             ImGui::Begin("Viewport");
+        190:             ImVec2 viewportSize = ImGui::GetContentRegionAvail();
+      > 191:             OPENGL(viewportSize.x,viewportSize.y);
+        192:             ImGui::Image((ImTextureID)(intptr_t)renderedTexture, ImVec2(viewportSize.x, viewportSize.y), ImVec2(0, 1), ImVec2(1, 0));
+        193:             ImGui::End();
+#0    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp", line 122, in hydro::runtime::OPENGL
+        119:         unsigned int drawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
+        120:         glDrawBuffers(1, drawBuffers);
+        121: 
+      > 122:         hass(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE);
+        123: 
+        124:         glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+

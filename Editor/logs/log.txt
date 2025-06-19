@@ -63,3 +63,17 @@ Stack trace (most recent call last):
         123: 
         124:         glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
 
+@Fatal {2025-06-18 22:19:11.5276298 GMT+2} Assertion Failed! glad_glCheckFramebufferStatus(0x8D40) == 0x8CD5
+
+  >> at hydro::runtime::EditorRuntime::OPENGL
+     C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp(98)
+Stack trace (most recent call last):
+#7    Object "", at 00007FFE6FD3259D, in BaseThreadInitThunk
+#6    Object "", at 00007FF65044212E, in mainCRTStartup
+#5    Object "", at 00007FF650441E3E, in __ArrayUnwind
+#4    Object "", at 00007FF650441F82, in __ArrayUnwind
+#3    Object "", at 00007FF650442099, in __ArrayUnwind
+#2    Object "", at 00007FF65021D2ED, in  ?? 
+#1    Object "", at 00007FF650226AC0, in  ?? 
+#0    Object "", at 00007FF6502262AE, in  ?? 
+

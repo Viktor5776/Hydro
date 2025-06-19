@@ -3,7 +3,7 @@
 
 namespace hydro::gfx
 {
-	class OpenGLVertexBuffer : public VertexBuffer
+	class OpenGLVertexBuffer : public IVertexBuffer
 	{
 	public:
 		void Create(const void* data, size_t size, const std::vector<LayoutElement>&) override;

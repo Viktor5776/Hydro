@@ -7,6 +7,7 @@
 
 //Temp
 #include <Core/gfx/API/OpenGl/OpenGLVertexBuffer.h>
+#include <Core/gfx/API/OpenGl/OpenGLShader.h>
 
 namespace hydro::runtime
 {
@@ -19,7 +20,9 @@ namespace hydro::runtime
 
 
 		//Temporary
-		std::shared_ptr<gfx::VertexBuffer> vertexBuffer;
+		std::shared_ptr<gfx::IVertexBuffer> vertexBuffer;
+		std::shared_ptr<gfx::IShader> shader;
+
 		void OPENGL(int width, int height);
 	};
 }

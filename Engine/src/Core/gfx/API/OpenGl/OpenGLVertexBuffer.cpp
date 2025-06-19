@@ -40,55 +40,61 @@ namespace hydro::gfx
 	constexpr GLenum OpenGLVertexBuffer::Type(LayoutElement elem)
 	{
 		switch (elem.type) {
-		case VertexBuffer::FLOAT:
+		case FLOAT:
 			return GL_FLOAT;
 			break;
-		case VertexBuffer::VEC2:
+		case VEC2:
 			return GL_FLOAT;
 			break;
-		case VertexBuffer::VEC3:
+		case VEC3:
 			return GL_FLOAT;
 			break;
-		case VertexBuffer::VEC4:
+		case VEC4:
 			return GL_FLOAT;
 			break;
 		}
+
+		return 0;
 	}
 
 	constexpr unsigned int OpenGLVertexBuffer::Normalized(LayoutElement elem)
 	{
 		switch (elem.type) {
-		case VertexBuffer::FLOAT:
+		case FLOAT:
 			return GL_FALSE;
 			break;
-		case VertexBuffer::VEC2:
+		case VEC2:
 			return GL_FALSE;
 			break;
-		case VertexBuffer::VEC3:
+		case VEC3:
 			return GL_FALSE;
 			break;
-		case VertexBuffer::VEC4:
+		case VEC4:
 			return GL_FALSE;
 			break;
 		}
+
+		return 0;
 	}
 
 	constexpr unsigned int OpenGLVertexBuffer::Stride(LayoutElement elem)
 	{
 		switch (elem.type) {
-		case VertexBuffer::FLOAT:
+		case FLOAT:
 			return sizeof(float);
 			break;
-		case VertexBuffer::VEC2:
+		case VEC2:
 			return sizeof(glm::vec2);
 			break;
-		case VertexBuffer::VEC3:
+		case VEC3:
 			return sizeof(glm::vec3);
 			break;
-		case VertexBuffer::VEC4:
+		case VEC4:
 			return sizeof(glm::vec4);
 			break;
 		}
+
+		return 0;
 	}
 
 }

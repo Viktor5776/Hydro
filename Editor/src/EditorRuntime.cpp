@@ -43,34 +43,6 @@ namespace hydro::runtime
     unsigned int renderedTexture;
     void EditorRuntime::OPENGL(int width, int height)
     {
-        // === Shaders ===
-        const char* vertexShaderSource = "#version 330 core\n"
-            "layout (location = 0) in vec3 aPos;\n"
-            "layout (location = 1) in vec3 color;\n"
-            "out vec3 ourColor;\n"
-            "void main() { gl_Position = vec4(aPos, 1.0);\n"
-            "ourColor = color; }\0";
-
-        const char* fragmentShaderSource = "#version 330 core\n"
-            "out vec4 color;\n"
-            "in vec3 ourColor;"
-            "void main() { color = vec4(ourColor, 1.0); }\0";
-
-        unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-        glCompileShader(vertexShader);
-
-        unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
-        glCompileShader(fragmentShader);
-
-        unsigned int shaderProgram = glCreateProgram();
-        glAttachShader(shaderProgram, vertexShader);
-        glAttachShader(shaderProgram, fragmentShader);
-        glLinkProgram(shaderProgram);
-        glDeleteShader(vertexShader);
-        glDeleteShader(fragmentShader);
-
         // === Framebuffer + Texture ===
         unsigned int frameBuffer;
         glGenFramebuffers(1, &frameBuffer);
@@ -103,7 +75,7 @@ namespace hydro::runtime
         glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        glUseProgram(shaderProgram);
+        shader->Bind();
         vertexBuffer->Bind();
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -129,7 +101,9 @@ namespace hydro::runtime
         auto glContext = std::dynamic_pointer_cast<gfx::OpenGLContext>(ioc::Sing().Resolve<gfx::GraphicsContext>());
 
         vertexBuffer = std::make_shared<gfx::OpenGLVertexBuffer>();
-        
+        shader = std::make_shared<gfx::OpenGLShader>();
+
+
 
         glContext->Init();
 
@@ -144,9 +118,24 @@ namespace hydro::runtime
         vertexBuffer->Create(
            vertices, 
            sizeof(vertices), 
-           std::vector<gfx::VertexBuffer::LayoutElement>{ {gfx::VertexBuffer::VEC3, "pos"}, { gfx::VertexBuffer::VEC3, "color" } }
+           std::vector<gfx::IVertexBuffer::LayoutElement>{ {gfx::IVertexBuffer::VEC3, "pos"}, { gfx::IVertexBuffer::VEC3, "color" } }
         );
         
+        //Shaders
+        std::string vertexShaderSource = "#version 330 core\n"
+            "layout (location = 0) in vec3 aPos;\n"
+            "layout (location = 1) in vec3 color;\n"
+            "out vec3 ourColor;\n"
+            "void main() { gl_Position = vec4(aPos, 1.0);\n"
+            "ourColor = color; }\0";
+
+        std::string fragmentShaderSource = "#version 330 core\n"
+            "out vec4 color;\n"
+            "in vec3 ourColor;"
+            "void main() { color = vec4(ourColor, 1.0); }\0";
+
+        shader->Create(vertexShaderSource, fragmentShaderSource);
+
         //Init ImGui with openGL
         ioc::Get().Resolve<ImGuiManager>()->Init(pWindow,&glContext);
         ImGuiIO& io = ImGui::GetIO();

@@ -8,10 +8,6 @@
 #include <Core/scene/Entity.h>
 #include <Core/ImGui/ImGuiOpenGL.h>
 
-#include <Core/gfx/API/OpenGl/OpenGLContext.h>
-#include <Core/gfx/API/OpenGl/OpenGLVertexBuffer.h>
-#include <iostream>
-
 #include <SDL3/SDL.h>
 #include <imgui.h>
 #include <imgui_impl_opengl3.h>
@@ -92,20 +88,9 @@ namespace hydro::runtime
 
         SDL_Window* pWindow = dynamic_cast<win::SDLWindow*>(pWin.get())->GetWindow();
 
-        //OpenGL Boot Function 
-        ioc::Sing().Register<gfx::GraphicsContext>([&] {
-            return std::make_shared<gfx::OpenGLContext>(pWindow);
-        });
-
-        //Needed for initilizeing ImGui with OpenGL
-        auto glContext = std::dynamic_pointer_cast<gfx::OpenGLContext>(ioc::Sing().Resolve<gfx::GraphicsContext>());
-
-        vertexBuffer = std::make_shared<gfx::OpenGLVertexBuffer>();
-        shader = std::make_shared<gfx::OpenGLShader>();
-
-
-
-        glContext->Init();
+        //Context
+        context = gfx::GraphicsContext::Create(pWindow);
+        context->Init();
 
         //Vertex Data
         float vertices[] = {
@@ -115,17 +100,17 @@ namespace hydro::runtime
         };
 
         //Vetex Buffer
-        vertexBuffer->Create(
+        vertexBuffer = gfx::VertexBuffer::Create(
             vertices,
             sizeof(vertices),
-            std::vector<gfx::IVertexBuffer::LayoutElement>{ {gfx::IVertexBuffer::VEC3, "pos"}, { gfx::IVertexBuffer::VEC3, "color" } }
+            std::vector<gfx::VertexBuffer::LayoutElement>{ {gfx::VertexBuffer::VEC3, "pos"}, { gfx::VertexBuffer::VEC3, "color" } }
         );
 
         //Shaders
-        shader->Create(std::filesystem::path{"Shaders/vertexShader.glsl"}, "Shaders/fragmentShader.glsl");
+        shader = gfx::Shader::Create(std::filesystem::path{"Shaders/vertexShader.glsl"}, "Shaders/fragmentShader.glsl");
 
         //Init ImGui with openGL
-        ioc::Get().Resolve<ImGuiManager>()->Init(pWindow,&glContext);
+        ioc::Get().Resolve<ImGuiManager>()->Init(pWindow,&context);
         ImGuiIO& io = ImGui::GetIO();
 
         bool quiting = false;
@@ -165,7 +150,7 @@ namespace hydro::runtime
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-            glContext->SwapBuffers();
+            context->SwapBuffers();
             
         }
 

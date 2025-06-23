@@ -3,11 +3,11 @@
 
 namespace hydro::gfx
 {
-	class OpenGLShader : public IShader
+	class OpenGLShader : public Shader
 	{
 	public:
-		void Create(std::filesystem::path vertSrc, std::filesystem::path fragSrc) override;
-		void Create(std::string vertSrc, std::string fragSrc) override;
+		OpenGLShader(std::filesystem::path vertSrc, std::filesystem::path fragSrc);
+		OpenGLShader(std::string vertSrc, std::string fragSrc);
 		void Bind() override;
 	private:
 		void CreateProgram(unsigned int vertexShader, unsigned int fragmentShader);

@@ -1,4 +1,7 @@
 #pragma once
+#include <SDL3\SDL.h>
+
+#include <memory>
 
 namespace hydro::gfx
 {
@@ -9,5 +12,7 @@ namespace hydro::gfx
 
 		virtual void Init() = 0;
 		virtual void SwapBuffers() = 0;
+
+		static std::shared_ptr<GraphicsContext> Create(SDL_Window* window);
 	};
 }

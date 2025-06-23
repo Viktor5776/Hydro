@@ -1,10 +1,19 @@
 #pragma once
+#include <memory>
 
 namespace hydro::gfx
 {
 	class RendererAPI
 	{
 	public:
-		virtual ~RendererAPI() = default;
+		enum class APIType
+		{
+			None,
+			OpenGL
+		};
+	public:
+		static APIType GetAPI() { return sAPI; }
+	private:
+		static APIType sAPI; 
 	};
 }

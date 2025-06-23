@@ -7,7 +7,7 @@
 
 namespace hydro::gfx
 {
-	class IVertexBuffer
+	class VertexBuffer
 	{
 	public:
 		enum VertexTypes
@@ -25,16 +25,16 @@ namespace hydro::gfx
 		static constexpr unsigned int Size(VertexTypes type)
 		{
 			switch (type) {
-			case IVertexBuffer::FLOAT:
+			case FLOAT:
 				return 1;
 				break;
-			case IVertexBuffer::VEC2:
+			case VEC2:
 				return 2;
 				break;
-			case IVertexBuffer::VEC3:
+			case VEC3:
 				return 3;
 				break;
-			case IVertexBuffer::VEC4:
+			case VEC4:
 				return 4;
 				break;
 			}
@@ -45,8 +45,8 @@ namespace hydro::gfx
 			return Size(elem.type);
 		}
 	public:
-		virtual ~IVertexBuffer() = default;
-		virtual void Create(const void* data, size_t size, const std::vector<LayoutElement>&) = 0;
+		virtual ~VertexBuffer() = default;
 		virtual void Bind() = 0;
+		static std::shared_ptr<VertexBuffer> Create(const void* data, size_t size, const std::vector<LayoutElement>&);
 	};
 }

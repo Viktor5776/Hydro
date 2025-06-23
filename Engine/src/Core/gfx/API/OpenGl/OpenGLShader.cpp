@@ -11,12 +11,12 @@
 namespace hydro::gfx
 {
 
-	void OpenGLShader::Create(std::filesystem::path vertSrc, std::filesystem::path fragSrc)
-	{
-		Create(LoadShader(vertSrc), LoadShader(fragSrc));
-	}
+	OpenGLShader::OpenGLShader(std::filesystem::path vertSrc, std::filesystem::path fragSrc)
+		:
+		OpenGLShader(LoadShader(vertSrc), LoadShader(fragSrc))
+	{}
 
-	void OpenGLShader::Create(std::string vertSrc, std::string fragSrc)
+	OpenGLShader::OpenGLShader(std::string vertSrc, std::string fragSrc)
 	{
 		unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 		const char* shaderSrc = vertSrc.c_str();

@@ -7,7 +7,7 @@
 namespace hydro::gfx
 {
 
-	void OpenGLVertexBuffer::Create(const void* data, size_t size, const std::vector<LayoutElement>& layout)
+	OpenGLVertexBuffer::OpenGLVertexBuffer(const void* data, size_t size, const std::vector<LayoutElement>& layout)
 	{
 		glGenBuffers(1, &VBO);
 		glGenVertexArrays(1, &VAO);
@@ -29,7 +29,6 @@ namespace hydro::gfx
 			glEnableVertexAttribArray(i);
 			offset += Stride(elem);
 		}
-		
 	}
 
 	void OpenGLVertexBuffer::Bind()

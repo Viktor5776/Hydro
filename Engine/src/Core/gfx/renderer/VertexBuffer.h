@@ -38,7 +38,7 @@ namespace hydro::gfx
 				return 4;
 				break;
 			}
-
+			return 0;
 		}
 		static constexpr unsigned int Size(LayoutElement elem)
 		{

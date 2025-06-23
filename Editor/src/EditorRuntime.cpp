@@ -89,7 +89,7 @@ namespace hydro::runtime
         auto pInput = std::dynamic_pointer_cast<input::SDLInput>(ioc::Get().Resolve<input::IInput>());
 
         pInput->LoadBindingsFromFile("BaseInputBindings.json");
-       
+
         SDL_Window* pWindow = dynamic_cast<win::SDLWindow*>(pWin.get())->GetWindow();
 
         //OpenGL Boot Function 
@@ -116,25 +116,13 @@ namespace hydro::runtime
 
         //Vetex Buffer
         vertexBuffer->Create(
-           vertices, 
-           sizeof(vertices), 
-           std::vector<gfx::IVertexBuffer::LayoutElement>{ {gfx::IVertexBuffer::VEC3, "pos"}, { gfx::IVertexBuffer::VEC3, "color" } }
+            vertices,
+            sizeof(vertices),
+            std::vector<gfx::IVertexBuffer::LayoutElement>{ {gfx::IVertexBuffer::VEC3, "pos"}, { gfx::IVertexBuffer::VEC3, "color" } }
         );
-        
+
         //Shaders
-        std::string vertexShaderSource = "#version 330 core\n"
-            "layout (location = 0) in vec3 aPos;\n"
-            "layout (location = 1) in vec3 color;\n"
-            "out vec3 ourColor;\n"
-            "void main() { gl_Position = vec4(aPos, 1.0);\n"
-            "ourColor = color; }\0";
-
-        std::string fragmentShaderSource = "#version 330 core\n"
-            "out vec4 color;\n"
-            "in vec3 ourColor;"
-            "void main() { color = vec4(ourColor, 1.0); }\0";
-
-        shader->Create(vertexShaderSource, fragmentShaderSource);
+        shader->Create(std::filesystem::path{"Shaders/vertexShader.glsl"}, "Shaders/fragmentShader.glsl");
 
         //Init ImGui with openGL
         ioc::Get().Resolve<ImGuiManager>()->Init(pWindow,&glContext);

@@ -1,14 +1,18 @@
-@Fatal {2025-06-16 22:51:41.6070820 GMT+2} Assertion Failed! glad_glCheckFramebufferStatus(0x8D40) == 0x8CD5
+@Fatal {2025-06-23 14:43:09.2071488 GMT+2} Assertion Failed! false
+  Msg: Error in shader compilation of type: FRAGMENT
+0(1) : error C0000: syntax error, unexpected integer constant, expecting "::" at token "<int-const>"
+0(8) : warning C1503: undefined variable "color"
 
-  >> at hydro::runtime::OPENGL
-     C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp(122)
+
+  >> at hydro::gfx::OpenGLShader::CheckCompileErrors
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\gfx\API\OpenGl\OpenGLShader.cpp(66)
 Stack trace (most recent call last):
-#7    Object "", at 00007FFDD9FC259D, in BaseThreadInitThunk
-#6    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
-#5    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
-#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
-#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
-#2    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\App.cpp", line 26, in main
+#9    Object "", at 00007FFE6FD3259D, in BaseThreadInitThunk
+#8    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#7    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#6    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#5    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#4    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\App.cpp", line 26, in main
          23: {
          24: 	Boot();
          25: 
@@ -16,64 +20,35 @@ Stack trace (most recent call last):
          27: 
          28: 	return 0;
          29: }
-#1    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp", line 195, in hydro::runtime::EditorRuntime::Run
-        193:             ImVec2 viewportSize;
-        194:             ImGui::SetNextWindowContentSize(viewportSize);
-      > 195:             OPENGL(viewportSize.x,viewportSize.y);
-        196: 
-        197:             pContext->SwapBuffers();
-#0    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp", line 122, in hydro::runtime::OPENGL
-        119:         unsigned int drawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
-        120:         glDrawBuffers(1, drawBuffers);
-        121: 
-      > 122:         hass(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+#3    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp", line 125, in hydro::runtime::EditorRuntime::Run
+        122:         );
         123: 
-        124:         glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-
-@Fatal {2025-06-16 23:12:36.6992438 GMT+2} Assertion Failed! glad_glCheckFramebufferStatus(0x8D40) != 0x8CD5
-
-  >> at hydro::runtime::OPENGL
-     C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp(122)
-Stack trace (most recent call last):
-#7    Object "", at 00007FFDD9FC259D, in BaseThreadInitThunk
-#6    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
-#5    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
-#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
-#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
-#2    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\App.cpp", line 26, in main
-         23: {
-         24: 	Boot();
-         25: 
-      >  26: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
-         27: 
-         28: 	return 0;
-         29: }
-#1    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp", line 191, in hydro::runtime::EditorRuntime::Run
-        188:             //Viewport
-        189:             ImGui::Begin("Viewport");
-        190:             ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-      > 191:             OPENGL(viewportSize.x,viewportSize.y);
-        192:             ImGui::Image((ImTextureID)(intptr_t)renderedTexture, ImVec2(viewportSize.x, viewportSize.y), ImVec2(0, 1), ImVec2(1, 0));
-        193:             ImGui::End();
-#0    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp", line 122, in hydro::runtime::OPENGL
-        119:         unsigned int drawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
-        120:         glDrawBuffers(1, drawBuffers);
-        121: 
-      > 122:         hass(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE);
-        123: 
-        124:         glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-
-@Fatal {2025-06-18 22:19:11.5276298 GMT+2} Assertion Failed! glad_glCheckFramebufferStatus(0x8D40) == 0x8CD5
-
-  >> at hydro::runtime::EditorRuntime::OPENGL
-     C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp(98)
-Stack trace (most recent call last):
-#7    Object "", at 00007FFE6FD3259D, in BaseThreadInitThunk
-#6    Object "", at 00007FF65044212E, in mainCRTStartup
-#5    Object "", at 00007FF650441E3E, in __ArrayUnwind
-#4    Object "", at 00007FF650441F82, in __ArrayUnwind
-#3    Object "", at 00007FF650442099, in __ArrayUnwind
-#2    Object "", at 00007FF65021D2ED, in  ?? 
-#1    Object "", at 00007FF650226AC0, in  ?? 
-#0    Object "", at 00007FF6502262AE, in  ?? 
+        124:         //Shaders
+      > 125:         shader->Create(std::filesystem::path{"Shaders/vertexShader.glsl"}, "Shaders/fragmentShader.glsl");
+        126: 
+        127:         //Init ImGui with openGL
+        128:         ioc::Get().Resolve<ImGuiManager>()->Init(pWindow,&glContext);
+#2    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\gfx\API\OpenGl\OpenGLShader.cpp", line 16, in hydro::gfx::OpenGLShader::Create
+         14: 	void OpenGLShader::Create(std::filesystem::path vertSrc, std::filesystem::path fragSrc)
+         15: 	{
+      >  16: 		Create(LoadShader(vertSrc), LoadShader(fragSrc));
+         17: 	}
+         18: 
+         19: 	void OpenGLShader::Create(std::string vertSrc, std::string fragSrc)
+#1    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\gfx\API\OpenGl\OpenGLShader.cpp", line 31, in hydro::gfx::OpenGLShader::Create
+         28: 		shaderSrc = fragSrc.c_str();
+         29: 		glShaderSource(fragmentShader, 1, &shaderSrc, nullptr);
+         30: 		glCompileShader(fragmentShader);
+      >  31: 		CheckCompileErrors(fragmentShader, "FRAGMENT");
+         32: 
+         33: 		CreateProgram(vertexShader, fragmentShader);
+         34: 	}
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\gfx\API\OpenGl\OpenGLShader.cpp", line 66, in hydro::gfx::OpenGLShader::CheckCompileErrors
+         63: 			glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+         64: 			if (!success) {
+         65: 				glGetShaderInfoLog(shader, 1024, nullptr, infoLog);
+      >  66: 				hass(false).msg(L"Error in shader compilation of type: " + utl::ToWide(type) + L"\n" + utl::ToWide({ infoLog }));
+         67: 			}
+         68: 		}
+         69: 		else {
 

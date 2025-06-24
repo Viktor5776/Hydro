@@ -9,12 +9,12 @@ namespace hydro::gfx
 
 	OpenGLVertexBuffer::OpenGLVertexBuffer(const void* data, size_t size, const std::vector<LayoutElement>& layout)
 	{
-		glGenBuffers(1, &VBO);
-		glGenVertexArrays(1, &VAO);
+		glGenBuffers(1, &VBO_);
+		glGenVertexArrays(1, &VAO_);
 
 
-		glBindVertexArray(VAO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBindVertexArray(VAO_);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO_);
 		glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 
 		unsigned int totalStride = 0;
@@ -33,7 +33,7 @@ namespace hydro::gfx
 
 	void OpenGLVertexBuffer::Bind()
 	{
-		glBindVertexArray(VAO);
+		glBindVertexArray(VAO_);
 	}
 
 	constexpr GLenum OpenGLVertexBuffer::Type(LayoutElement elem)

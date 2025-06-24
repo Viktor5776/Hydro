@@ -13,7 +13,7 @@ namespace hydro::gfx
 		static constexpr unsigned int Normalized(LayoutElement elem);
 		static constexpr unsigned int Stride(LayoutElement elem);
 	private:
-		unsigned int VBO = 0;
-		unsigned int VAO = 0;
+		unsigned int VBO_ = 0;
+		unsigned int VAO_ = 0;
 	};
 }

@@ -35,11 +35,11 @@ namespace hydro::gfx
 
 	void OpenGLShader::CreateProgram(unsigned int vertexShader, unsigned int fragmentShader)
 	{
-		shaderProgram = glCreateProgram();
-		glAttachShader(shaderProgram, vertexShader);
-		glAttachShader(shaderProgram, fragmentShader);
-		glLinkProgram(shaderProgram);
-		CheckCompileErrors(shaderProgram, "PROGRAM");
+		shaderProgram_ = glCreateProgram();
+		glAttachShader(shaderProgram_, vertexShader);
+		glAttachShader(shaderProgram_, fragmentShader);
+		glLinkProgram(shaderProgram_);
+		CheckCompileErrors(shaderProgram_, "PROGRAM");
 
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
@@ -77,7 +77,7 @@ namespace hydro::gfx
 
 	void OpenGLShader::Bind()
 	{
-		glUseProgram(shaderProgram);
+		glUseProgram(shaderProgram_);
 	}
 
 

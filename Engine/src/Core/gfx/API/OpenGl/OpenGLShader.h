@@ -14,6 +14,6 @@ namespace hydro::gfx
 		std::string LoadShader(std::filesystem::path path);
 		void CheckCompileErrors(unsigned int shader, const std::string& type);
 	private:
-		unsigned int shaderProgram = 0;
+		unsigned int shaderProgram_ = 0;
 	};
 }

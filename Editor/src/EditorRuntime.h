@@ -9,6 +9,7 @@
 #include <Core/gfx/API/OpenGl/OpenGLVertexBuffer.h>
 #include <Core/gfx/API/OpenGl/OpenGLShader.h>
 #include <Core/gfx/API/OpenGl/OpenGLContext.h>
+#include <Core/gfx/API/OpenGl/OpenGLFramebuffer.h>
 
 namespace hydro::runtime
 {
@@ -24,6 +25,7 @@ namespace hydro::runtime
 		std::shared_ptr<gfx::GraphicsContext> context;
 		std::shared_ptr<gfx::VertexBuffer> vertexBuffer;
 		std::shared_ptr<gfx::Shader> shader;
+		std::shared_ptr<gfx::Framebuffer> frameBuffer;
 
 		void OPENGL(int width, int height);
 	};

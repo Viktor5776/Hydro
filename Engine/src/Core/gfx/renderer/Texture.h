@@ -41,6 +41,7 @@ namespace hydro::gfx
 		virtual void SetWrap(Wrap s, Wrap t) = 0;
 		virtual void SetSamples(unsigned int samples) = 0;
 
+		virtual void* GetNativeHandle() const = 0;
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
 		virtual Format GetFormat() const = 0;

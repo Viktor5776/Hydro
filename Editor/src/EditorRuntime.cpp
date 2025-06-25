@@ -36,38 +36,13 @@ namespace hydro::runtime
 
     }
 
-    unsigned int renderedTexture;
     void EditorRuntime::OPENGL(int width, int height)
     {
-        // === Framebuffer + Texture ===
-        unsigned int frameBuffer;
-        glGenFramebuffers(1, &frameBuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
 
-        glGenTextures(1, &renderedTexture);
-        glBindTexture(GL_TEXTURE_2D, renderedTexture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderedTexture, 0);
-
-        // === Depth Renderbuffer ===
-        unsigned int depthBuffer;
-        glGenRenderbuffers(1, &depthBuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
-
-        // Set draw buffers (optional for single target)
-        GLenum drawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
-        glDrawBuffers(1, drawBuffers);
-
-        hass(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE); // Your own assert macro
+        frameBuffer->Resize(width, height);
 
         // === Draw to the framebuffer ===
-        glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-        glViewport(0, 0, width, height);
+        frameBuffer->Bind();
         glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
@@ -109,6 +84,10 @@ namespace hydro::runtime
         //Shaders
         shader = gfx::Shader::Create(std::filesystem::path{"Shaders/vertexShader.glsl"}, "Shaders/fragmentShader.glsl");
 
+        frameBuffer = gfx::Framebuffer::Create(1524, 832);
+        frameBuffer->AddColorAttachment(gfx::Framebuffer::AttachmentType::Texture, gfx::Texture::Format::RGBA8);
+        frameBuffer->SetDepthAttachment(gfx::Framebuffer::AttachmentType::Renderbuffer, gfx::Texture::Format::None);
+
         //Init ImGui with openGL
         ioc::Get().Resolve<ImGuiManager>()->Init(pWindow,&context);
         ImGuiIO& io = ImGui::GetIO();
@@ -143,7 +122,7 @@ namespace hydro::runtime
             ImGui::Begin("Viewport");
             ImVec2 viewportSize = ImGui::GetContentRegionAvail();
             OPENGL(viewportSize.x,viewportSize.y);
-            ImGui::Image((ImTextureID)(intptr_t)renderedTexture, ImVec2(viewportSize.x, viewportSize.y), ImVec2(0, 1), ImVec2(1, 0));
+            ImGui::Image((ImTextureID)frameBuffer->GetColorAttachment(0)->GetNativeHandle(), ImVec2(viewportSize.x, viewportSize.y), ImVec2(0, 1), ImVec2(1, 0));
             ImGui::End();
             ImGui::PopStyleVar(2);
 

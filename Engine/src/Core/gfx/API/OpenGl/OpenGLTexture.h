@@ -26,6 +26,9 @@ namespace hydro::gfx
 		Format GetFormat() const override;
 		Type GetType() const override;
 
+		unsigned int GetID() const;
+		void* GetNativeHandle() const override;
+
 		static constexpr GLenum GetGLInternalFormat(Format format);
 		static constexpr GLenum GetGLPixelFormat(Format format);
 		static constexpr GLenum GetGLPixelType(Format format);

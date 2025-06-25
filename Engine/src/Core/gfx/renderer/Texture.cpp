@@ -7,7 +7,7 @@
 namespace hydro::gfx
 {
 
-    std::shared_ptr<Texture> Texture::Create(unsigned int width, unsigned int height, Type type, Format format, const void* data = nullptr)
+    std::shared_ptr<Texture> Texture::Create(unsigned int width, unsigned int height, Type type, Format format, const void* data)
     {
         switch (RendererAPI::GetAPI()) {
         case RendererAPI::APIType::OpenGL: return std::make_shared<OpenGLTexture>(width, height, type, format, data);

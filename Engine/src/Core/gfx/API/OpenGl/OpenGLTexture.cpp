@@ -141,6 +141,16 @@ namespace hydro::gfx
 		return type_;
 	}
 
+	unsigned int OpenGLTexture::GetID() const
+	{
+		return texture_;
+	}
+
+	void* OpenGLTexture::GetNativeHandle() const
+	{
+		return reinterpret_cast<void*>((uintptr_t)texture_);
+	}
+
 	constexpr GLenum OpenGLTexture::GetGLInternalFormat(Format format)
 	{
 		switch (format) {

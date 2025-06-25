@@ -93,6 +93,9 @@ namespace hydro::gfx
 
 	void OpenGLTexture::SetFilter(Filter min, Filter mag)
 	{
+		min_ = min;
+		mag_ = mag;
+
 		glBindTexture(GetGLType(type_), texture_);
 		glTexParameteri(GetGLType(type_), GL_TEXTURE_MIN_FILTER, ConvertFilter(min));
 		glTexParameteri(GetGLType(type_), GL_TEXTURE_MAG_FILTER, ConvertFilter(mag));
@@ -101,6 +104,9 @@ namespace hydro::gfx
 
 	void OpenGLTexture::SetWrap(Wrap s, Wrap t)
 	{
+		s_ = s;
+		t_ = t;
+
 		glBindTexture(GetGLType(type_), texture_);
 		glTexParameteri(GetGLType(type_), GL_TEXTURE_WRAP_S, ConvertWrap(s));
 		glTexParameteri(GetGLType(type_), GL_TEXTURE_WRAP_T, ConvertWrap(t));

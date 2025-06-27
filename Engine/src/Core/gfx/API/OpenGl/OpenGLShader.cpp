@@ -33,6 +33,11 @@ namespace hydro::gfx
 		CreateProgram(vertexShader, fragmentShader);
 	}
 
+	OpenGLShader::~OpenGLShader()
+	{
+		glDeleteProgram(shaderProgram_);
+	}
+
 	void OpenGLShader::CreateProgram(unsigned int vertexShader, unsigned int fragmentShader)
 	{
 		shaderProgram_ = glCreateProgram();

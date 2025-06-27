@@ -8,6 +8,7 @@ namespace hydro::gfx
 	public:
 		OpenGLShader(std::filesystem::path vertSrc, std::filesystem::path fragSrc);
 		OpenGLShader(std::string vertSrc, std::string fragSrc);
+		~OpenGLShader();
 		void Bind() override;
 	private:
 		void CreateProgram(unsigned int vertexShader, unsigned int fragmentShader);

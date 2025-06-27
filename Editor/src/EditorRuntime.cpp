@@ -51,7 +51,7 @@ namespace hydro::runtime
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // === Done rendering to framebuffer ===
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        frameBuffer->Unbind();
     }
 
     int EditorRuntime::Run()
@@ -84,7 +84,7 @@ namespace hydro::runtime
         //Shaders
         shader = gfx::Shader::Create(std::filesystem::path{"Shaders/vertexShader.glsl"}, "Shaders/fragmentShader.glsl");
 
-        frameBuffer = gfx::Framebuffer::Create(1524, 832);
+        frameBuffer = gfx::Framebuffer::Create(1,1);
         frameBuffer->AddColorAttachment(gfx::Framebuffer::AttachmentType::Texture, gfx::Texture::Format::RGBA8);
         frameBuffer->SetDepthAttachment(gfx::Framebuffer::AttachmentType::Renderbuffer, gfx::Texture::Format::None);
 

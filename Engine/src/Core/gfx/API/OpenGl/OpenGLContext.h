@@ -10,6 +10,7 @@ namespace hydro::gfx
 	{
 	public:
 		OpenGLContext(SDL_Window* pWindow);
+		~OpenGLContext();
 
 		virtual void Init() override;
 		virtual void SwapBuffers() override;

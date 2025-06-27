@@ -12,6 +12,11 @@ namespace hydro::gfx
 		context_ = SDL_GL_CreateContext(pWindow_);
 	}
 
+	OpenGLContext::~OpenGLContext()
+	{
+		SDL_GL_DestroyContext(context_);
+	}
+
 	void OpenGLContext::Init()
 	{
 		SDL_GL_MakeCurrent(pWindow_, context_);

@@ -1,10 +1,12 @@
 #pragma once
+#include "Bindable.h"
 #include <memory>
+
 
 namespace hydro::gfx
 {
 
-	class Texture
+	class Texture : public Bindable
 	{
 	public:
 		enum class Format
@@ -33,8 +35,6 @@ namespace hydro::gfx
 	public:
 		virtual ~Texture() = default;
 
-		virtual void Bind(unsigned int slot = 0) const = 0;
-		virtual void Unbind() const = 0;
 		virtual void Resize(unsigned int width, unsigned int height) = 0;
 		virtual void SetData(const void* data, size_t size) = 0;
 		virtual void SetFilter(Filter min, Filter mag) = 0;
@@ -47,6 +47,6 @@ namespace hydro::gfx
 		virtual Format GetFormat() const = 0;
 		virtual Type GetType() const = 0;
 
-		static std::shared_ptr<Texture> Create(unsigned int width, unsigned int height, Type type, Format format, const void* data = nullptr);
+		static std::shared_ptr<Texture> Create(unsigned int width, unsigned int height, Type type, Format format, unsigned int slot = 0, const void* data = nullptr);
 	};
 }

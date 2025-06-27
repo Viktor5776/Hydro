@@ -1,5 +1,5 @@
 #pragma once
-#include "../../renderer/Shader.h"
+#include "../../Shader/Shader.h"
 
 namespace hydro::gfx
 {

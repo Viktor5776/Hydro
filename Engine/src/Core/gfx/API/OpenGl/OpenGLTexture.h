@@ -1,5 +1,5 @@
 #pragma once
-#include "../../renderer/Texture.h"
+#include "../../Bindable/Texture.h"
 
 #include <glad\glad.h>
 
@@ -8,13 +8,13 @@ namespace hydro::gfx
 	class OpenGLTexture : public Texture
 	{
 	public:
-		OpenGLTexture(unsigned int width, unsigned int height, Type type, Format format, const void* data = nullptr);
+		OpenGLTexture(unsigned int width, unsigned int height, Type type, Format format, unsigned int slot = 0, const void* data = nullptr);
 		~OpenGLTexture();
 
 		void CreateTexture(const void* data = nullptr);
 
-		void Bind(unsigned int slot) const override;
-		void Unbind() const override;
+		void Bind() override;
+		void Unbind() const;
 		void Resize(unsigned int width, unsigned int height) override;
 		void SetData(const void* data, size_t size) override;
 		void SetFilter(Filter min, Filter mag) override;
@@ -29,6 +29,7 @@ namespace hydro::gfx
 		unsigned int GetID() const;
 		void* GetNativeHandle() const override;
 
+
 		static constexpr GLenum GetGLInternalFormat(Format format);
 		static constexpr GLenum GetGLPixelFormat(Format format);
 		static constexpr GLenum GetGLPixelType(Format format);
@@ -39,6 +40,7 @@ namespace hydro::gfx
 	private:
 		unsigned int texture_ = 0;
 		unsigned int width_, height_;
+		unsigned int slot_;
 		Type type_;
 		Format format_;
 

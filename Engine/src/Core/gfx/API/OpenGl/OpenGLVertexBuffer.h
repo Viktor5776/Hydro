@@ -1,5 +1,5 @@
 #pragma once
-#include "../../renderer/VertexBuffer.h"
+#include "../../Bindable/Buffer/VertexBuffer.h"
 
 namespace hydro::gfx
 {

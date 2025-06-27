@@ -1,8 +1,8 @@
 #include "VertexBuffer.h"
-#include "RendererAPI.h"
-#include "../../utl/Assert.h"
+#include "../../renderer/RendererAPI.h"
+#include "../../../utl/Assert.h"
 
-#include "../API/OpenGl/OpenGLVertexBuffer.h"
+#include "../../API/OpenGl/OpenGLVertexBuffer.h"
 
 namespace hydro::gfx
 {

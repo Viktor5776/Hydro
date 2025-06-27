@@ -1,5 +1,5 @@
 #pragma once
-#include "../../renderer/Framebuffer.h"
+#include "../../Bindable/Framebuffer.h"
 #include "OpenGLTexture.h"
 
 #include <glad/glad.h>
@@ -12,7 +12,7 @@ namespace hydro::gfx
 		OpenGLFramebuffer(unsigned int width, unsigned int height);
 		~OpenGLFramebuffer();
 
-		void Bind() const override;
+		void Bind() override;
 		void Unbind() const override;
 		void Resize(unsigned int width, unsigned int height) override;
 

@@ -27,7 +27,7 @@ namespace hydro::gfx
         glDeleteFramebuffers(1, &fbo_);
     }
 
-    void OpenGLFramebuffer::Bind() const
+    void OpenGLFramebuffer::Bind()
     {
         glBindFramebuffer(GL_FRAMEBUFFER, fbo_);
         glViewport(0, 0, width_, height_);

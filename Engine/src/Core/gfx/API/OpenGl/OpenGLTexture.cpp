@@ -5,12 +5,13 @@
 namespace hydro::gfx
 {
 
-	OpenGLTexture::OpenGLTexture(unsigned int width, unsigned int height, Type type, Format format, const void* data)
+	OpenGLTexture::OpenGLTexture(unsigned int width, unsigned int height, Type type, Format format, unsigned int slot, const void* data)
 		:
 		type_(type),
 		format_(format),
 		width_(width),
-		height_(height)
+		height_(height),
+		slot_(slot)
 	{
 		CreateTexture(data);
 	}
@@ -59,9 +60,9 @@ namespace hydro::gfx
 		Unbind();
 	}
 
-	void OpenGLTexture::Bind(unsigned int slot) const
+	void OpenGLTexture::Bind()
 	{
-		glActiveTexture(GL_TEXTURE0 + slot);
+		glActiveTexture(GL_TEXTURE0 + slot_);
 		glBindTexture(GetGLType(type_), texture_);
 	}
 

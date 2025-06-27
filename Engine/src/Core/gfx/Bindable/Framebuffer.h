@@ -5,7 +5,7 @@
 
 namespace hydro::gfx {
 
-	class Framebuffer {
+	class Framebuffer : public Bindable {
 	public:
 		enum class AttachmentType {
 			Texture,
@@ -19,7 +19,6 @@ namespace hydro::gfx {
 	public:
 		virtual ~Framebuffer() = default;
 
-		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
 		virtual void Resize(unsigned int width, unsigned int height) = 0;

@@ -50,7 +50,6 @@ namespace hydro::runtime
         vertexBuffer->Bind();
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
-        // === Done rendering to framebuffer ===
         frameBuffer->Unbind();
     }
 
@@ -121,7 +120,7 @@ namespace hydro::runtime
             ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
             ImGui::Begin("Viewport");
             ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-            OPENGL(viewportSize.x,viewportSize.y);
+            OPENGL((int)viewportSize.x,(int)viewportSize.y);
             ImGui::Image((ImTextureID)frameBuffer->GetColorAttachment(0)->GetNativeHandle(), ImVec2(viewportSize.x, viewportSize.y), ImVec2(0, 1), ImVec2(1, 0));
             ImGui::End();
             ImGui::PopStyleVar(2);

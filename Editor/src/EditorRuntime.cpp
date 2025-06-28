@@ -26,7 +26,7 @@ namespace hydro::runtime
             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1280,720 }, name, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
         });
 
-        ioc::Get().Register<input::IInput>([] {
+        ioc::Sing().Register<input::IInput>([] {
             return std::make_shared<input::SDLInput>();
         });
 
@@ -46,9 +46,39 @@ namespace hydro::runtime
         glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        shader->Bind();
+        //TEMP Use RenderCommands in future
+        GLuint vao;
+        glGenVertexArrays(1, &vao);
+        glBindVertexArray(vao);
+
         vertexBuffer->Bind();
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        indexBuffer->Bind();
+
+        // Set up attributes
+        const auto& attrs = vertexLayout.GetAttributes();
+        for (const auto& attr : attrs) {
+            glEnableVertexAttribArray(attr.location);
+            glVertexAttribPointer(
+                attr.location,
+                gfx::ShaderDataTypeComponentCount(attr.type),
+                GL_FLOAT,
+                attr.normalized ? GL_TRUE : GL_FALSE,
+                vertexLayout.GetStride(),
+                (const void*)(uintptr_t)attr.offset
+            );
+        }
+        
+        shader->Bind();
+        if (ioc::Sing().Resolve<input::IInput>()->IsActionHeld("Mouse4")) {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        }
+        else {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
+        glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+
+        glBindVertexArray(0);
+        glDeleteVertexArrays(1, &vao);
 
         frameBuffer->Unbind();
     }
@@ -56,7 +86,7 @@ namespace hydro::runtime
     int EditorRuntime::Run()
     {
         auto pWin = ioc::Get().Resolve<win::IWindow>();
-        auto pInput = std::dynamic_pointer_cast<input::SDLInput>(ioc::Get().Resolve<input::IInput>());
+        auto pInput = std::dynamic_pointer_cast<input::SDLInput>(ioc::Sing().Resolve<input::IInput>());
 
         pInput->LoadBindingsFromFile("BaseInputBindings.json");
 
@@ -68,17 +98,28 @@ namespace hydro::runtime
 
         //Vertex Data
         float vertices[] = {
-            -1.0f, -1.0f, 0.0f,1.0f,0.0f,0.0f,
-             1.0f, -1.0f, 0.0f,0.0f,1.0f,0.0f,
-             0.0f,  1.0f, 0.0f,0.0f,0.0f,1.0f
+            -.5f, -.5f, 0.0f,1.0f,0.0f,0.0f,
+             .5f, -.5f, 0.0f,0.0f,1.0f,0.0f,
+             .5f,  .5f, 0.0f,0.0f,0.0f,1.0f,
+             -.5f, .5f, 0.0f,1.0f,0.0f,1.0f
         };
+
+        vertexLayout.AddAttribute("pos", gfx::ShaderDataType::Float3);
+        vertexLayout.AddAttribute("color", gfx::ShaderDataType::Float3);
 
         //Vetex Buffer
         vertexBuffer = gfx::VertexBuffer::Create(
             vertices,
-            sizeof(vertices),
-            std::vector<gfx::VertexBuffer::LayoutElement>{ {gfx::VertexBuffer::VEC3, "pos"}, { gfx::VertexBuffer::VEC3, "color" } }
+            sizeof(vertices)
         );
+
+        //Index buffer
+        std::vector<unsigned int> indices = { 
+            0,1,2,
+            0,2,3
+        };
+
+        indexBuffer = gfx::IndexBuffer::Create(indices.data(), indices.size());
 
         //Shaders
         shader = gfx::Shader::Create(std::filesystem::path{"Shaders/vertexShader.glsl"}, "Shaders/fragmentShader.glsl");
@@ -129,7 +170,6 @@ namespace hydro::runtime
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
             context->SwapBuffers();
-            
         }
 
         // Cleanup

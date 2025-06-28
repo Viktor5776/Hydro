@@ -1,52 +1,15 @@
 #pragma once
-#include <filesystem>
-#include <string>
-#include <vector>
+#include "../Bindable.h"
 
-#include <glm\glm.hpp>
+#include <memory>
 
 namespace hydro::gfx
 {
-	class VertexBuffer
+	class VertexBuffer : public Bindable
 	{
 	public:
-		enum VertexTypes
-		{
-			FLOAT,
-			VEC2,
-			VEC3,
-			VEC4,
-		};
-		struct LayoutElement
-		{
-			VertexTypes type;
-			std::string name;
-		};
-		static constexpr unsigned int Size(VertexTypes type)
-		{
-			switch (type) {
-			case FLOAT:
-				return 1;
-				break;
-			case VEC2:
-				return 2;
-				break;
-			case VEC3:
-				return 3;
-				break;
-			case VEC4:
-				return 4;
-				break;
-			}
-			return 0;
-		}
-		static constexpr unsigned int Size(LayoutElement elem)
-		{
-			return Size(elem.type);
-		}
-	public:
 		virtual ~VertexBuffer() = default;
-		virtual void Bind() = 0;
-		static std::shared_ptr<VertexBuffer> Create(const void* data, size_t size, const std::vector<LayoutElement>&);
+		virtual void SetData(const void* data, size_t size) = 0;
+		static std::shared_ptr<VertexBuffer> Create(const void* data, size_t size);
 	};
 }

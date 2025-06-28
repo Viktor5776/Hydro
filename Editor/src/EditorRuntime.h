@@ -7,9 +7,11 @@
 
 //Temp
 #include <Core/gfx/API/OpenGl/OpenGLVertexBuffer.h>
+#include <Core/gfx/API/OpenGl/OpenGLIndexBuffer.h>
 #include <Core/gfx/API/OpenGl/OpenGLShader.h>
 #include <Core/gfx/API/OpenGl/OpenGLContext.h>
 #include <Core/gfx/API/OpenGl/OpenGLFramebuffer.h>
+#include <Core/gfx/Bindable/Buffer/VertexLayout.h>
 
 namespace hydro::runtime
 {
@@ -24,6 +26,8 @@ namespace hydro::runtime
 		//Temporary
 		std::shared_ptr<gfx::GraphicsContext> context;
 		std::shared_ptr<gfx::VertexBuffer> vertexBuffer;
+		gfx::VertexLayout vertexLayout;
+		std::shared_ptr<gfx::IndexBuffer> indexBuffer;
 		std::shared_ptr<gfx::Shader> shader;
 		std::shared_ptr<gfx::Framebuffer> frameBuffer;
 

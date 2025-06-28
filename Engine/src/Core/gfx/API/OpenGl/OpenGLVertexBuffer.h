@@ -6,14 +6,11 @@ namespace hydro::gfx
 	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:
-		OpenGLVertexBuffer(const void* data, size_t size, const std::vector<LayoutElement>& layout);
+		OpenGLVertexBuffer(const void* data, size_t size);
+		~OpenGLVertexBuffer();
+		void SetData(const void* data, size_t size) override;
 		void Bind() override;
 	private:
-		static constexpr unsigned int Type(LayoutElement elem);
-		static constexpr unsigned int Normalized(LayoutElement elem);
-		static constexpr unsigned int Stride(LayoutElement elem);
-	private:
 		unsigned int VBO_ = 0;
-		unsigned int VAO_ = 0;
 	};
 }

@@ -24,7 +24,9 @@ namespace hydro::gfx
         if (depthRenderbuffer_)
             glDeleteRenderbuffers(1, &depthRenderbuffer_);
 
-        glDeleteFramebuffers(1, &fbo_);
+        if (fbo_ != 0) {
+            glDeleteFramebuffers(1, &fbo_);
+        }
     }
 
     void OpenGLFramebuffer::Bind()

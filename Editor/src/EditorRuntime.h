@@ -12,6 +12,7 @@
 #include <Core/gfx/API/OpenGl/OpenGLContext.h>
 #include <Core/gfx/API/OpenGl/OpenGLFramebuffer.h>
 #include <Core/gfx/Bindable/Buffer/VertexLayout.h>
+#include <Core/gfx/renderer/RendererCommand.h>
 
 namespace hydro::runtime
 {

@@ -12,7 +12,6 @@
 #include <imgui.h>
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_sdl3.h>
-#include <glad/glad.h>
 
 namespace hydro::runtime
 {
@@ -41,45 +40,16 @@ namespace hydro::runtime
 
         frameBuffer->Resize(width, height);
 
-        // === Draw to the framebuffer ===
         frameBuffer->Bind();
-        glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        gfx::RenderCommand::SetClearColor({ 0.2f,0.2f,0.3f,1.0f });
+        gfx::RenderCommand::Clear();
         
-        //TEMP Use RenderCommands in future
-        GLuint vao;
-        glGenVertexArrays(1, &vao);
-        glBindVertexArray(vao);
-
-        vertexBuffer->Bind();
-        indexBuffer->Bind();
-
-        // Set up attributes
-        const auto& attrs = vertexLayout.GetAttributes();
-        for (const auto& attr : attrs) {
-            glEnableVertexAttribArray(attr.location);
-            glVertexAttribPointer(
-                attr.location,
-                gfx::ShaderDataTypeComponentCount(attr.type),
-                GL_FLOAT,
-                attr.normalized ? GL_TRUE : GL_FALSE,
-                vertexLayout.GetStride(),
-                (const void*)(uintptr_t)attr.offset
-            );
-        }
-        
-        shader->Bind();
-        if (ioc::Sing().Resolve<input::IInput>()->IsActionHeld("Mouse4")) {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        if (ioc::Sing().Resolve<input::IInput>()->IsActionHeld("A")) {
+            gfx::RenderCommand::DrawLines(vertexBuffer, indexBuffer, vertexLayout, shader);
         }
         else {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            gfx::RenderCommand::DrawIndexed(vertexBuffer, indexBuffer, vertexLayout, shader);
         }
-        glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
-
-        glBindVertexArray(0);
-        glDeleteVertexArrays(1, &vao);
-
         frameBuffer->Unbind();
     }
 
@@ -116,7 +86,7 @@ namespace hydro::runtime
         //Index buffer
         std::vector<unsigned int> indices = { 
             0,1,2,
-            0,2,3
+            0,3,2
         };
 
         indexBuffer = gfx::IndexBuffer::Create(indices.data(), indices.size());

@@ -19,7 +19,7 @@ namespace hydro::runtime
     {
 
         //Init with SDL Window manager
-        ioc::Get().Register<win::IWindow>([=] {
+        ioc::Sing().Register<win::IWindow>([=] {
             return std::make_shared<win::SDLWindow>(std::pair{ 100,100 }, std::pair{ 1280,720 }, name, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
         });
 
@@ -27,7 +27,7 @@ namespace hydro::runtime
             return std::make_shared<input::SDLInput>();
         });
 
-        ioc::Get().Register<ImGuiManager>([] {
+        ioc::Sing().Register<ImGuiManager>([] {
             return ImGuiManager::Create();
         });
 
@@ -51,7 +51,7 @@ namespace hydro::runtime
 
     void EditorRuntime::InitGFX()
     {
-        auto pWin = ioc::Get().Resolve<win::IWindow>();
+        auto pWin = ioc::Sing().Resolve<win::IWindow>();
         SDL_Window* pWindow = dynamic_cast<win::SDLWindow*>(pWin.get())->GetWindow();
 
         //Context
@@ -96,18 +96,19 @@ namespace hydro::runtime
         scene_.Deserialize("TestScene.json");
 
 
-        auto pWin = ioc::Get().Resolve<win::IWindow>();
+        auto pWin = ioc::Sing().Resolve<win::IWindow>();
         auto pInput = std::dynamic_pointer_cast<input::SDLInput>(ioc::Sing().Resolve<input::IInput>());
-        auto pImGuiManager = ioc::Get().Resolve<ImGuiManager>();
+        auto pImGuiManager = ioc::Sing().Resolve<ImGuiManager>();
 
         pInput->LoadBindingsFromFile("BaseInputBindings.json");
         
-        InitGFX();
-
 
         SDL_Window* pWindow = dynamic_cast<win::SDLWindow*>(pWin.get())->GetWindow();
-        SDL_GLContext oContext = (SDL_GLContext)context->GetNativeHandle();
+        
+        InitGFX();
+        
         //Init ImGui with openGL
+        SDL_GLContext oContext = (SDL_GLContext)context->GetNativeHandle();
         pImGuiManager->Init(pWindow,oContext);
         
         //Add Panels

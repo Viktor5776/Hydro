@@ -1,6 +1,6 @@
 #include "PanelManager.h"
 
-#include <Core/ioc/Container.h>
+#include <Core/ioc/Singletons.h>
 
 #include <imgui.h>
 
@@ -8,7 +8,7 @@ namespace hydro::editor
 {
 	void PanelManager::Init()
 	{
-		pImGuiManager_ = ioc::Get().Resolve<ImGuiManager>();
+		pImGuiManager_ = ioc::Sing().Resolve<ImGuiManager>();
 	}
 
 	void PanelManager::Render()

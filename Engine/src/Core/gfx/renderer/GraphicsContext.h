@@ -12,6 +12,7 @@ namespace hydro::gfx
 
 		virtual void Init() = 0;
 		virtual void SwapBuffers() = 0;
+		virtual void* GetNativeHandle() = 0;
 
 		static std::shared_ptr<GraphicsContext> Create(SDL_Window* window);
 	};

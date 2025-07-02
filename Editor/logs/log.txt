@@ -178,3 +178,37 @@ Stack trace (most recent call last):
         183:             return nullptr;
         184:         return colorAttachments_[index].texture;
 
+@Fatal {2025-06-30 12:51:21.4702322 GMT+2} Assertion Failed! !HasComponents<T>()
+  Msg: Entity has component!
+
+  >> at hydro::scene::Entity::AddComponent
+     C:\Users\vikto\Desktop\Hydro\Engine\src\Core\scene\Entity.h(18)
+Stack trace (most recent call last):
+#7    Object "", at 00007FFE6FD3259D, in BaseThreadInitThunk
+#6    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp", line 17, in mainCRTStartup
+#5    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 331, in __scrt_common_main
+#4    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 288, in __scrt_common_main_seh
+#3    Source "D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl", line 79, in invoke_main
+#2    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\App.cpp", line 26, in main
+         23: {
+         24: 	Boot();
+         25: 
+      >  26: 	ioc::Get().Resolve<runtime::IRuntime>()->Run();
+         27: 
+         28: 	return 0;
+         29: }
+#1    Source "C:\Users\vikto\Desktop\Hydro\Editor\src\EditorRuntime.cpp", line 71, in hydro::runtime::EditorRuntime::Run
+         68:             glm::vec3{ 4.4f,5.5f,6.6f},
+         69:             glm::vec3{ 7.7f,8.8f,9.9f});
+         70: 
+      >  71:         e2.AddComponent<Transform>();
+         72: 
+         73:         scene_.Serialize("TestScene.json");
+#0    Source "C:\Users\vikto\Desktop\Hydro\Engine\src\Core\scene\Entity.h", line 18, in hydro::scene::Entity::AddComponent<hydro::Transform>
+         15: 		template<typename T, typename... Args>
+         16: 		T& AddComponent(Args&&... args)
+         17: 		{
+      >  18: 			hass(!HasComponents<T>()).msg(L"Entity has component!");
+         19: 			return scene_->registry_.emplace<T>(entityHandle_, std::forward<Args>(args)...);
+         20: 		}
+

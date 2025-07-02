@@ -29,7 +29,7 @@ namespace hydro::gfx
 		SDL_GL_SwapWindow(pWindow_);
 	}
 
-	SDL_GLContext& OpenGLContext::GetContext()
+	void* OpenGLContext::GetNativeHandle()
 	{
 		return context_;
 	}

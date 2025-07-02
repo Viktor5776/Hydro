@@ -12,10 +12,9 @@ namespace hydro::gfx
 		OpenGLContext(SDL_Window* pWindow);
 		~OpenGLContext();
 
-		virtual void Init() override;
-		virtual void SwapBuffers() override;
-
-		SDL_GLContext& GetContext();
+		void Init() override;
+		void SwapBuffers() override;
+		void* GetNativeHandle() override;
 	private:
 		SDL_GLContext context_;
 		SDL_Window* pWindow_;

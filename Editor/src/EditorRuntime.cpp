@@ -6,12 +6,10 @@
 #include <Core/input/SDLInput.h>
 #include <Core/scene/Components.h>
 #include <Core/scene/Entity.h>
-#include <Core/ImGui/ImGuiOpenGL.h>
+
+#include "Panels\ViewportPanel.h"
 
 #include <SDL3/SDL.h>
-#include <imgui.h>
-#include <imgui_impl_opengl3.h>
-#include <imgui_impl_sdl3.h>
 
 namespace hydro::runtime
 {
@@ -30,16 +28,14 @@ namespace hydro::runtime
         });
 
         ioc::Get().Register<ImGuiManager>([] {
-            return std::make_shared<ImGuiOpenGL>();
+            return ImGuiManager::Create();
         });
 
+        
     }
 
-    void EditorRuntime::OPENGL(int width, int height)
+    void EditorRuntime::DrawTest()
     {
-
-        frameBuffer->Resize(width, height);
-
         frameBuffer->Bind();
         gfx::RenderCommand::SetClearColor({ 0.2f,0.2f,0.3f,1.0f });
         gfx::RenderCommand::Clear();
@@ -53,13 +49,9 @@ namespace hydro::runtime
         frameBuffer->Unbind();
     }
 
-    int EditorRuntime::Run()
+    void EditorRuntime::InitGFX()
     {
         auto pWin = ioc::Get().Resolve<win::IWindow>();
-        auto pInput = std::dynamic_pointer_cast<input::SDLInput>(ioc::Sing().Resolve<input::IInput>());
-
-        pInput->LoadBindingsFromFile("BaseInputBindings.json");
-
         SDL_Window* pWindow = dynamic_cast<win::SDLWindow*>(pWin.get())->GetWindow();
 
         //Context
@@ -84,7 +76,7 @@ namespace hydro::runtime
         );
 
         //Index buffer
-        std::vector<unsigned int> indices = { 
+        std::vector<unsigned int> indices = {
             0,1,2,
             0,3,2
         };
@@ -92,15 +84,35 @@ namespace hydro::runtime
         indexBuffer = gfx::IndexBuffer::Create(indices.data(), indices.size());
 
         //Shaders
-        shader = gfx::Shader::Create(std::filesystem::path{"Shaders/vertexShader.glsl"}, "Shaders/fragmentShader.glsl");
+        shader = gfx::Shader::Create(std::filesystem::path{ "Shaders/vertexShader.glsl" }, "Shaders/fragmentShader.glsl");
 
-        frameBuffer = gfx::Framebuffer::Create(1,1);
+        frameBuffer = gfx::Framebuffer::Create(1, 1);
         frameBuffer->AddColorAttachment(gfx::Framebuffer::AttachmentType::Texture, gfx::Texture::Format::RGBA8);
         frameBuffer->SetDepthAttachment(gfx::Framebuffer::AttachmentType::Renderbuffer, gfx::Texture::Format::None);
+    }
 
+    int EditorRuntime::Run()
+    {
+        scene_.Deserialize("TestScene.json");
+
+
+        auto pWin = ioc::Get().Resolve<win::IWindow>();
+        auto pInput = std::dynamic_pointer_cast<input::SDLInput>(ioc::Sing().Resolve<input::IInput>());
+        auto pImGuiManager = ioc::Get().Resolve<ImGuiManager>();
+
+        pInput->LoadBindingsFromFile("BaseInputBindings.json");
+        
+        InitGFX();
+
+
+        SDL_Window* pWindow = dynamic_cast<win::SDLWindow*>(pWin.get())->GetWindow();
+        SDL_GLContext oContext = (SDL_GLContext)context->GetNativeHandle();
         //Init ImGui with openGL
-        ioc::Get().Resolve<ImGuiManager>()->Init(pWindow,&context);
-        ImGuiIO& io = ImGui::GetIO();
+        pImGuiManager->Init(pWindow,oContext);
+        
+        //Add Panels
+        panelManager_.Init();
+        panelManager_.AddPanel(std::make_shared<editor::ViewportPanel>(frameBuffer));
 
         bool quiting = false;
         while (!quiting) {
@@ -108,44 +120,21 @@ namespace hydro::runtime
             pInput->Update();
 
             SDL_Event event;
-
+            
             while (SDL_PollEvent(&event)) {
                 if (event.type == SDL_EVENT_QUIT) {
                     quiting = true;
                 }
 
-                ImGui_ImplSDL3_ProcessEvent(&event);
+                pImGuiManager->ProcessEvent(&event);
                 pInput->UpdateEvent(event);
             }
 
-            ImGui_ImplOpenGL3_NewFrame();
-            ImGui_ImplSDL3_NewFrame();
-            ImGui::NewFrame();
-
-            // Docking space
-            ImGui::DockSpaceOverViewport(0,ImGui::GetMainViewport());
-
-
-            //Viewport
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-            ImGui::Begin("Viewport");
-            ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-            OPENGL((int)viewportSize.x,(int)viewportSize.y);
-            ImGui::Image((ImTextureID)frameBuffer->GetColorAttachment(0)->GetNativeHandle(), ImVec2(viewportSize.x, viewportSize.y), ImVec2(0, 1), ImVec2(1, 0));
-            ImGui::End();
-            ImGui::PopStyleVar(2);
-
-            ImGui::Render();
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+            DrawTest();
+            panelManager_.Render();
 
             context->SwapBuffers();
         }
-
-        // Cleanup
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplSDL3_Shutdown();
-        ImGui::DestroyContext();
 
         return 0;
     }
